@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | MGS Communications</title>
+  <meta name="description" content="Privacy policy for MGS Communications. Learn how we collect, use, and protect your personal information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: #1a1a2e; line-height: 1.6; background: #fff; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; } ul { list-style: none; }
+    :root { --navy: #1b2e1b; --navy-light: #2a4a2a; --green: #2e7d32; --green-light: #43a047; --green-dark: #1b5e20; --yellow: #f9a825; --yellow-light: #fdd835; --yellow-dark: #f57f17; --orange: #e65100; --gray-50: #f8faf8; --gray-100: #f1f5f1; --gray-200: #e2e8e2; --gray-300: #cbd5cb; --gray-600: #475549; --gray-700: #334335; --gray-900: #0f170f; --white: #ffffff; --shadow-sm: 0 1px 3px rgba(0,0,0,.08); --shadow-md: 0 4px 12px rgba(0,0,0,.1); --shadow-lg: 0 8px 30px rgba(0,0,0,.12); --shadow-xl: 0 20px 50px rgba(0,0,0,.15); --radius: 12px; --radius-sm: 8px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow .3s; }
+    .header.scrolled { box-shadow: var(--shadow-md); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px; }
+    .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--navy); } .logo span { color: var(--green); }
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav a { padding: 8px 14px; font-size: .875rem; font-weight: 500; color: var(--gray-700); border-radius: var(--radius-sm); transition: background .2s, color .2s; }
+    .nav a:hover { background: var(--gray-100); color: var(--green); } .nav a.active { color: var(--green); font-weight: 600; }
+    .nav-dropdown { position: relative; } .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after { content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor; transition: transform .2s; }
+    .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); min-width: 240px; padding: 8px 0; z-index: 100; }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 18px; font-size: .875rem; color: var(--gray-700); transition: background .15s, color .15s; }
+    .dropdown-menu a:hover { background: var(--gray-100); color: var(--green); } .dropdown-menu svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
+    .header-cta { display: flex; align-items: center; gap: 12px; }
+    .header-phone { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: .95rem; color: var(--navy); } .header-phone svg { width: 18px; height: 18px; color: var(--green); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600; font-size: .9rem; border: none; cursor: pointer; transition: all .2s; text-align: center; }
+    .btn-green { background: var(--green); color: var(--white); } .btn-green:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-yellow { background: var(--yellow); color: var(--navy); font-weight: 700; } .btn-yellow:hover { background: var(--yellow-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-lg { padding: 16px 32px; font-size: 1rem; border-radius: var(--radius); }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 40px; height: 40px; align-items: center; justify-content: center; } .menu-toggle svg { width: 24px; height: 24px; color: var(--navy); }
+    section { padding: 80px 0; }
+    .footer { background: var(--navy); color: rgba(255,255,255,.8); padding: 60px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer h4 { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--white); margin-bottom: 18px; }
+    .footer-about p { font-size: .875rem; line-height: 1.65; margin-bottom: 16px; }
+    .footer-brand { display: flex; align-items: center; gap: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--white); margin-bottom: 14px; } .footer-brand span { color: var(--green-light); }
+    .footer-links a { display: block; padding: 5px 0; font-size: .875rem; color: rgba(255,255,255,.7); transition: color .2s; } .footer-links a:hover { color: var(--white); }
+    .footer-contact-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: .875rem; } .footer-contact-item svg { width: 18px; height: 18px; color: var(--green-light); flex-shrink: 0; margin-top: 2px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-size: .8rem; color: rgba(255,255,255,.5); }
+    .footer-badges { display: flex; align-items: center; gap: 16px; }
+    .footer-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(255,255,255,.08); border-radius: 6px; font-size: .75rem; font-weight: 600; color: rgba(255,255,255,.7); }
+    .mobile-call { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: var(--green); padding: 14px 24px; text-align: center; color: var(--white); font-weight: 700; font-size: 1rem; box-shadow: 0 -4px 20px rgba(0,0,0,.2); } .mobile-call svg { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
+
+    .subpage-hero { margin-top: 72px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e4d2b 100%); padding: 60px 0 70px; }
+    .subpage-hero::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 50%; opacity: .06; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Ccircle cx='400' cy='300' r='250' fill='none' stroke='white' stroke-width='1'/%3E%3Ccircle cx='400' cy='300' r='180' fill='none' stroke='white' stroke-width='1'/%3E%3Ccircle cx='400' cy='300' r='110' fill='none' stroke='white' stroke-width='1'/%3E%3Cline x1='150' y1='300' x2='650' y2='300' stroke='white' stroke-width='.5'/%3E%3Cline x1='400' y1='50' x2='400' y2='550' stroke='white' stroke-width='.5'/%3E%3C/svg%3E") center/contain no-repeat; }
+    .subpage-hero .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .breadcrumb { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; color: rgba(255,255,255,.55); margin-bottom: 18px; }
+    .breadcrumb a { color: rgba(255,255,255,.55); transition: color .2s; } .breadcrumb a:hover { color: var(--white); } .breadcrumb .sep { margin: 0 2px; }
+    .subpage-hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 18px; }
+    .subpage-hero p { font-size: 1.08rem; color: rgba(255,255,255,.82); max-width: 560px; line-height: 1.7; }
+
+    /* ===== PRIVACY CONTENT ===== */
+    .privacy-content { max-width: 800px; margin: 0 auto; }
+    .privacy-content h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--navy); margin: 40px 0 14px; padding-top: 20px; border-top: 1px solid var(--gray-200); }
+    .privacy-content h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .privacy-content p { font-size: .92rem; color: var(--gray-700); line-height: 1.75; margin-bottom: 16px; }
+    .privacy-content ul { margin: 0 0 16px 20px; }
+    .privacy-content li { list-style: disc; font-size: .92rem; color: var(--gray-700); line-height: 1.75; margin-bottom: 6px; padding-left: 4px; }
+    .privacy-content a { color: var(--green); font-weight: 600; }
+    .privacy-content a:hover { text-decoration: underline; }
+    .privacy-meta { font-size: .82rem; color: var(--gray-600); margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200); }
+
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+      .nav { display: none; } .menu-toggle { display: flex; } .header-phone { display: none; }
+      .subpage-hero { padding: 40px 0 50px; } .subpage-hero h1 { font-size: 1.8rem; }
+      section { padding: 60px 0; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } .mobile-call { display: block; }
+      .nav.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md); }
+      .nav.open .nav-dropdown > a::after { display: none; }
+      .nav.open .dropdown-menu { display: block; position: static; border: none; box-shadow: none; padding: 0 0 0 12px; min-width: auto; } .nav.open .dropdown-menu a { padding: 8px 14px; }
+    }
+    @media (max-width: 480px) { .subpage-hero h1 { font-size: 1.55rem; } }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo">MGS <span>Communications</span></a>
+    <nav class="nav" id="mainNav">
+      <a href="/">Home</a>
+      <div class="nav-dropdown"><a href="#">Services</a><div class="dropdown-menu">
+        <a href="/two-way-radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M17 2l3-2"/><path d="M8 6h8"/></svg> Two-Way Radios</a>
+        <a href="/security-systems"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Security Systems</a>
+        <a href="/service-repair"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Service &amp; Repairs</a>
+        <a href="/service-areas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Service Areas</a>
+      </div></div>
+      <a href="/about-us">About</a>
+      <a href="/resources">Resources</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:5058882034" class="header-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (505) 888-2034</a>
+      <a href="/contact" class="btn btn-yellow">Get Free Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<section class="subpage-hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span style="color:rgba(255,255,255,.85);">Privacy Policy</span></div>
+      <h1>Privacy Policy</h1>
+      <p>Your privacy matters to us. This policy explains how MGS Communications collects, uses, and protects your information.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="privacy-content">
+      <p class="privacy-meta">Last updated: February 20, 2026 &bull; MGS Communications, Inc. &bull; Albuquerque, New Mexico</p>
+
+      <h2>Information We Collect</h2>
+      <p>When you use our website, contact us, or request a quote, we may collect the following information:</p>
+      <ul>
+        <li><strong>Contact Information:</strong> Name, phone number, email address, and mailing address that you provide through our forms or when calling us.</li>
+        <li><strong>Service Information:</strong> Details about the products or services you're interested in, including radio models, security system requirements, and repair needs.</li>
+        <li><strong>Website Usage Data:</strong> Standard web server logs including IP address, browser type, pages visited, and time spent on our site. This data is collected automatically and is not personally identifiable.</li>
+      </ul>
+
+      <h2>How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Respond to your inquiries and provide quotes for our products and services.</li>
+        <li>Process service requests, repairs, and rental agreements.</li>
+        <li>Communicate with you about your orders, repairs, or service appointments.</li>
+        <li>Improve our website and customer experience.</li>
+        <li>Send occasional updates about our services, promotions, or new products (you can opt out at any time).</li>
+      </ul>
+
+      <h2>How We Protect Your Information</h2>
+      <p>We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure. Our website uses HTTPS encryption for all form submissions. We limit access to your information to employees who need it to provide our services.</p>
+
+      <h2>Information Sharing</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:</p>
+      <ul>
+        <li><strong>Service Providers:</strong> We may share information with trusted service providers who assist us in operating our website and business (e.g., Netlify for form processing). These providers are bound to keep your information confidential.</li>
+        <li><strong>Legal Requirements:</strong> We may disclose information if required by law, regulation, or legal process.</li>
+        <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of the business.</li>
+      </ul>
+
+      <h2>Cookies and Tracking</h2>
+      <p>Our website may use cookies and similar technologies to improve your browsing experience. Cookies are small text files stored on your device that help us understand how you use our site. You can control cookies through your browser settings. Disabling cookies may affect some website functionality.</p>
+
+      <h2>Third-Party Links</h2>
+      <p>Our website may contain links to third-party websites (such as Google Maps). We are not responsible for the privacy practices or content of these external sites. We encourage you to review their privacy policies before providing any personal information.</p>
+
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Request access to the personal information we hold about you.</li>
+        <li>Request correction of any inaccurate information.</li>
+        <li>Request deletion of your personal information (subject to legal retention requirements).</li>
+        <li>Opt out of marketing communications at any time.</li>
+      </ul>
+
+      <h2>Children's Privacy</h2>
+      <p>Our website and services are not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us immediately.</p>
+
+      <h2>Changes to This Policy</h2>
+      <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have any questions about this privacy policy or how we handle your information, please contact us:</p>
+      <ul>
+        <li><strong>Phone:</strong> <a href="tel:5058882034">(505) 888-2034</a></li>
+        <li><strong>Email:</strong> <a href="mailto:team@mgscommunications.com">team@mgscommunications.com</a></li>
+        <li><strong>Mail:</strong> MGS Communications, Inc., 3505 Carlisle Blvd NE, Albuquerque, NM 87110</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about"><div class="footer-brand">MGS <span>Communications</span></div><p>Albuquerque's trusted provider of two-way radios and security systems since 1996. Real people, real service, real results.</p><div class="footer-badges"><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Kenwood Authorized</span><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Motorola Dealer</span></div></div>
+      <div><h4>Quick Links</h4><div class="footer-links"><a href="/">Home</a><a href="/two-way-radios">Two-Way Radios</a><a href="/security-systems">Security Systems</a><a href="/service-repair">Service &amp; Repairs</a><a href="/service-areas">Service Areas</a></div></div>
+      <div><h4>Company</h4><div class="footer-links"><a href="/about-us">About Us</a><a href="/why-us">Why Choose MGS</a><a href="/resources">Resources</a><a href="/contact">Contact &amp; Quote</a><a href="/privacy">Privacy Policy</a></div></div>
+      <div><h4>Contact Us</h4>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><a href="tel:5058882034" style="color:inherit">(505) 888-2034</a><br>Mon-Fri 9am&ndash;5pm</span></div>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>3505 Carlisle Blvd NE<br>Albuquerque, NM 87110<br><small>Office: Tue-Fri 9am&ndash;2pm</small></span></div>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span><a href="mailto:team@mgscommunications.com" style="color:inherit">team@mgscommunications.com</a></span></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 MGS Communications, Inc. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<a href="tel:5058882034" class="mobile-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now: (505) 888-2034</a>
+
+<script>
+  window.addEventListener('scroll', () => { document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10); });
+  document.getElementById('menuToggle').addEventListener('click', () => { document.getElementById('mainNav').classList.toggle('open'); });
+  document.querySelectorAll('#mainNav a').forEach(a => { if (!a.parentElement.classList.contains('nav-dropdown') || a.closest('.dropdown-menu')) { a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open')); } });
+  document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', (e) => { const target = document.querySelector(a.getAttribute('href')); if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } }); });
+</script>
+</body>
+</html>

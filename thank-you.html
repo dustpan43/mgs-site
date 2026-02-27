@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You! | MGS Communications</title>
+  <meta name="description" content="Thank you for contacting MGS Communications. We'll get back to you within 1 business hour.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: #1a1a2e; line-height: 1.6; background: #fff; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; } ul { list-style: none; }
+    :root { --navy: #1b2e1b; --navy-light: #2a4a2a; --green: #2e7d32; --green-light: #43a047; --green-dark: #1b5e20; --yellow: #f9a825; --yellow-light: #fdd835; --yellow-dark: #f57f17; --orange: #e65100; --gray-50: #f8faf8; --gray-100: #f1f5f1; --gray-200: #e2e8e2; --gray-300: #cbd5cb; --gray-600: #475549; --gray-700: #334335; --gray-900: #0f170f; --white: #ffffff; --shadow-sm: 0 1px 3px rgba(0,0,0,.08); --shadow-md: 0 4px 12px rgba(0,0,0,.1); --shadow-lg: 0 8px 30px rgba(0,0,0,.12); --shadow-xl: 0 20px 50px rgba(0,0,0,.15); --radius: 12px; --radius-sm: 8px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow .3s; }
+    .header.scrolled { box-shadow: var(--shadow-md); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px; }
+    .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--navy); } .logo span { color: var(--green); }
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav a { padding: 8px 14px; font-size: .875rem; font-weight: 500; color: var(--gray-700); border-radius: var(--radius-sm); transition: background .2s, color .2s; }
+    .nav a:hover { background: var(--gray-100); color: var(--green); } .nav a.active { color: var(--green); font-weight: 600; }
+    .nav-dropdown { position: relative; } .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after { content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor; transition: transform .2s; }
+    .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); min-width: 240px; padding: 8px 0; z-index: 100; }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 18px; font-size: .875rem; color: var(--gray-700); transition: background .15s, color .15s; }
+    .dropdown-menu a:hover { background: var(--gray-100); color: var(--green); } .dropdown-menu svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
+    .header-cta { display: flex; align-items: center; gap: 12px; }
+    .header-phone { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: .95rem; color: var(--navy); } .header-phone svg { width: 18px; height: 18px; color: var(--green); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600; font-size: .9rem; border: none; cursor: pointer; transition: all .2s; text-align: center; }
+    .btn-green { background: var(--green); color: var(--white); } .btn-green:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-yellow { background: var(--yellow); color: var(--navy); font-weight: 700; } .btn-yellow:hover { background: var(--yellow-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-outline-dark { background: transparent; border: 2px solid var(--gray-200); color: var(--navy); } .btn-outline-dark:hover { background: var(--gray-50); border-color: var(--green); color: var(--green); }
+    .btn-lg { padding: 16px 32px; font-size: 1rem; border-radius: var(--radius); }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 40px; height: 40px; align-items: center; justify-content: center; } .menu-toggle svg { width: 24px; height: 24px; color: var(--navy); }
+    .footer { background: var(--navy); color: rgba(255,255,255,.8); padding: 60px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer h4 { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--white); margin-bottom: 18px; }
+    .footer-about p { font-size: .875rem; line-height: 1.65; margin-bottom: 16px; }
+    .footer-brand { display: flex; align-items: center; gap: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--white); margin-bottom: 14px; } .footer-brand span { color: var(--green-light); }
+    .footer-links a { display: block; padding: 5px 0; font-size: .875rem; color: rgba(255,255,255,.7); transition: color .2s; } .footer-links a:hover { color: var(--white); }
+    .footer-contact-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: .875rem; } .footer-contact-item svg { width: 18px; height: 18px; color: var(--green-light); flex-shrink: 0; margin-top: 2px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-size: .8rem; color: rgba(255,255,255,.5); }
+    .footer-badges { display: flex; align-items: center; gap: 16px; }
+    .footer-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(255,255,255,.08); border-radius: 6px; font-size: .75rem; font-weight: 600; color: rgba(255,255,255,.7); }
+    .mobile-call { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: var(--green); padding: 14px 24px; text-align: center; color: var(--white); font-weight: 700; font-size: 1rem; box-shadow: 0 -4px 20px rgba(0,0,0,.2); } .mobile-call svg { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
+
+    /* ===== THANK YOU CONTENT ===== */
+    .thankyou-section { margin-top: 72px; padding: 100px 0 80px; text-align: center; min-height: 60vh; display: flex; align-items: center; }
+    .thankyou-icon { width: 90px; height: 90px; margin: 0 auto 28px; background: linear-gradient(135deg, var(--green), var(--green-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: pulse 2s ease-in-out infinite; }
+    .thankyou-icon svg { width: 44px; height: 44px; color: var(--white); }
+    @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,125,50,.4); } 50% { transform: scale(1.05); box-shadow: 0 0 0 16px rgba(46,125,50,0); } }
+    .thankyou-section h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+    .thankyou-section p { font-size: 1.1rem; color: var(--gray-600); max-width: 520px; margin: 0 auto 14px; line-height: 1.7; }
+    .thankyou-section .highlight { font-weight: 700; color: var(--green); }
+    .thankyou-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+    .thankyou-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 700px; margin: 48px auto 0; }
+    .thankyou-info-item { padding: 24px; background: var(--gray-50); border-radius: var(--radius); }
+    .thankyou-info-item svg { width: 28px; height: 28px; color: var(--green); margin: 0 auto 10px; display: block; }
+    .thankyou-info-item h3 { font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .thankyou-info-item p { font-size: .82rem; color: var(--gray-600); margin: 0; }
+
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+      .nav { display: none; } .menu-toggle { display: flex; } .header-phone { display: none; }
+      .thankyou-section { padding: 60px 0 40px; } .thankyou-section h1 { font-size: 1.8rem; }
+      .thankyou-info { grid-template-columns: 1fr; max-width: 320px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } .mobile-call { display: block; }
+      .nav.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md); }
+      .nav.open .nav-dropdown > a::after { display: none; }
+      .nav.open .dropdown-menu { display: block; position: static; border: none; box-shadow: none; padding: 0 0 0 12px; min-width: auto; } .nav.open .dropdown-menu a { padding: 8px 14px; }
+    }
+    @media (max-width: 480px) { .thankyou-section h1 { font-size: 1.55rem; } .thankyou-actions { flex-direction: column; } .thankyou-actions .btn { width: 100%; } }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo">MGS <span>Communications</span></a>
+    <nav class="nav" id="mainNav">
+      <a href="/">Home</a>
+      <div class="nav-dropdown"><a href="#">Services</a><div class="dropdown-menu">
+        <a href="/two-way-radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M17 2l3-2"/><path d="M8 6h8"/></svg> Two-Way Radios</a>
+        <a href="/security-systems"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Security Systems</a>
+        <a href="/service-repair"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Service &amp; Repairs</a>
+        <a href="/service-areas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Service Areas</a>
+      </div></div>
+      <a href="/about-us">About</a>
+      <a href="/resources">Resources</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:5058882034" class="header-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (505) 888-2034</a>
+      <a href="/contact" class="btn btn-yellow">Get Free Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<section class="thankyou-section">
+  <div class="container">
+    <div class="thankyou-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1>Thank You! Message Received.</h1>
+    <p>We got your request and will get back to you <span class="highlight">within 1 business hour</span> during our office hours (Mon&ndash;Fri, 9am&ndash;5pm).</p>
+    <p>Need an answer right now? Give us a call &mdash; a real person will pick up.</p>
+    <div class="thankyou-actions">
+      <a href="tel:5058882034" class="btn btn-green btn-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call (505) 888-2034</a>
+      <a href="/" class="btn btn-outline-dark btn-lg">Back to Homepage</a>
+    </div>
+    <div class="thankyou-info">
+      <div class="thankyou-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h3>Quick Response</h3>
+        <p>We respond within 1 business hour during office hours.</p>
+      </div>
+      <div class="thankyou-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <h3>Real People</h3>
+        <p>No phone trees. Call and talk to a real person today.</p>
+      </div>
+      <div class="thankyou-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3>Free Quotes</h3>
+        <p>All estimates are free with no obligation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about"><div class="footer-brand">MGS <span>Communications</span></div><p>Albuquerque's trusted provider of two-way radios and security systems since 1996. Real people, real service, real results.</p><div class="footer-badges"><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Kenwood Authorized</span><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Motorola Dealer</span></div></div>
+      <div><h4>Quick Links</h4><div class="footer-links"><a href="/">Home</a><a href="/two-way-radios">Two-Way Radios</a><a href="/security-systems">Security Systems</a><a href="/service-repair">Service &amp; Repairs</a><a href="/service-areas">Service Areas</a></div></div>
+      <div><h4>Company</h4><div class="footer-links"><a href="/about-us">About Us</a><a href="/why-us">Why Choose MGS</a><a href="/resources">Resources</a><a href="/contact">Contact &amp; Quote</a><a href="/privacy">Privacy Policy</a></div></div>
+      <div><h4>Contact Us</h4>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><a href="tel:5058882034" style="color:inherit">(505) 888-2034</a><br>Mon-Fri 9am&ndash;5pm</span></div>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>3505 Carlisle Blvd NE<br>Albuquerque, NM 87110<br><small>Office: Tue-Fri 9am&ndash;2pm</small></span></div>
+        <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span><a href="mailto:team@mgscommunications.com" style="color:inherit">team@mgscommunications.com</a></span></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 MGS Communications, Inc. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<a href="tel:5058882034" class="mobile-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now: (505) 888-2034</a>
+
+<script>
+  window.addEventListener('scroll', () => { document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10); });
+  document.getElementById('menuToggle').addEventListener('click', () => { document.getElementById('mainNav').classList.toggle('open'); });
+  document.querySelectorAll('#mainNav a').forEach(a => { if (!a.parentElement.classList.contains('nav-dropdown') || a.closest('.dropdown-menu')) { a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open')); } });
+  document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', (e) => { const target = document.querySelector(a.getAttribute('href')); if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } }); });
+</script>
+</body>
+</html>
