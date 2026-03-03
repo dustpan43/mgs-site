@@ -224,14 +224,14 @@
     .why-card p { font-size: .875rem; color: var(--gray-600); }
 
     /* ===== TESTIMONIALS ===== */
-    .testimonials-wrapper { position: relative; overflow: hidden; }
+    .testimonials-wrapper { position: relative; overflow: hidden; padding: 8px 4px; margin: -8px -4px; }
     .testimonials-track {
       display: flex; gap: 24px; transition: transform .5s ease;
     }
     .testimonial-card {
-      min-width: calc(33.333% - 16px); flex-shrink: 0;
+      min-width: 280px; max-width: 360px; flex: 1 1 280px; flex-shrink: 0;
       background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: var(--radius); padding: 28px;
+      border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm);
     }
     .testimonial-stars { display: flex; gap: 2px; margin-bottom: 14px; }
     .testimonial-stars svg { width: 18px; height: 18px; color: var(--yellow); fill: var(--yellow); }
@@ -241,6 +241,13 @@
     }
     .testimonial-author { font-size: .85rem; font-weight: 700; color: var(--navy); }
     .testimonial-role { font-size: .8rem; color: var(--gray-600); }
+    .testimonial-google { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 6px 12px; background: var(--gray-50); border-radius: 6px; font-size: .75rem; color: var(--gray-600); }
+    .testimonial-google svg { width: 14px; height: 14px; }
+    .google-rating { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 32px; }
+    .google-rating-stars { display: flex; gap: 2px; }
+    .google-rating-stars svg { width: 22px; height: 22px; color: var(--yellow); fill: var(--yellow); }
+    .google-rating-text { font-size: .95rem; color: var(--gray-600); }
+    .google-rating-text strong { color: var(--navy); font-weight: 800; }
     .testimonial-nav {
       display: flex; justify-content: center; gap: 12px; margin-top: 28px;
     }
@@ -406,7 +413,7 @@
       .offer-inner { grid-template-columns: 1fr; gap: 36px; }
       .cta-inner { grid-template-columns: 1fr; gap: 36px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .testimonial-card { min-width: calc(50% - 12px); }
+      .testimonial-card { min-width: 260px; max-width: 320px; }
     }
     @media (max-width: 768px) {
       .nav { display: none; }
@@ -422,7 +429,7 @@
       .footer-grid { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
       .mobile-call { display: block; }
-      .testimonial-card { min-width: calc(100% - 0px); }
+      .testimonial-card { min-width: 280px; max-width: none; }
       /* Mobile nav */
       .nav.open {
         display: flex; flex-direction: column;
@@ -535,7 +542,7 @@
       </span>
       <span class="stars">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg>
-        4.9 Google Stars
+        4.6 Google Stars
       </span>
     </div>
   </div>
@@ -558,7 +565,7 @@
         <div class="service-card-body">
           <h3>Two-Way Radios</h3>
           <ul>
-            <li>Sales, rentals &amp; repairs — Motorola &amp; Kenwood focus</li>
+            <li>Sales, rentals &amp; repairs — Kenwood &amp; Motorola focus</li>
             <li>Free estimates &amp; loaner radios during servicing</li>
             <li>Full accessories: batteries, antennas, speaker mics &amp; more</li>
           </ul>
@@ -644,47 +651,41 @@
 <section>
   <div class="container">
     <div class="text-center">
-      <div class="section-label">Testimonials</div>
+      <div class="section-label">Google Reviews</div>
       <h2 class="section-title">What Our Customers Say</h2>
-      <p class="section-sub mx-auto">Don't take our word for it — here's what our clients have to say.</p>
+      <p class="section-sub mx-auto">Real reviews from real customers on Google.</p>
     </div>
     <div class="testimonials-wrapper">
       <div class="testimonials-track" id="testimonialTrack">
         <div class="testimonial-card">
           <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg></div>
-          <blockquote>"MGS has been our go-to for radios for over 10 years. They always have what we need, and their turnaround on repairs is unbeatable. True professionals."</blockquote>
-          <div class="testimonial-author">Robert M.</div>
-          <div class="testimonial-role">Construction Company Owner</div>
+          <blockquote>"We love working with MGS! Missy and her team consistently deliver impeccable service and are exactly the kind of business partners we value."</blockquote>
+          <div class="testimonial-author">Sandy Wylie</div>
+          <div class="testimonial-google"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg> Google Review</div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg></div>
-          <blockquote>"We rented 40 radios for the Balloon Fiesta with only a week's notice. MGS made it happen flawlessly. Incredible service from start to finish."</blockquote>
-          <div class="testimonial-author">Patricia S.</div>
-          <div class="testimonial-role">Event Coordinator</div>
+          <blockquote>"Helpful, knowledgeable and friendly! MGS helped lift out festival operations this year and we are so grateful! I've worked with Missy and her team for the past couple of years and it's always top notch!"</blockquote>
+          <div class="testimonial-author">Kira Sipler</div>
+          <div class="testimonial-google"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg> Google Review</div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg></div>
-          <blockquote>"They installed cameras at my business and home. The quality is outstanding and the whole process was stress-free. Can't recommend MGS enough."</blockquote>
-          <div class="testimonial-author">Daniel K.</div>
-          <div class="testimonial-role">Small Business Owner</div>
+          <blockquote>"As a president of a nonprofit who take elderly veterans on a trip to Washington, DC, Missy and her staff are always eager to help us with our walkie talkie needs so we can stay in constant communication. This is invaluable!! Thank you MGS!!"</blockquote>
+          <div class="testimonial-author">Adeline Herrera</div>
+          <div class="testimonial-google"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg> Google Review</div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg></div>
-          <blockquote>"When you call MGS, a real person answers. That alone sets them apart. They've serviced our hotel's radios for years and the reliability is top-notch."</blockquote>
-          <div class="testimonial-author">Maria L.</div>
-          <div class="testimonial-role">Hotel Operations Manager</div>
+          <blockquote>"Excellent service and everything worked great! Missy is amazing!"</blockquote>
+          <div class="testimonial-author">Nahid Haji</div>
+          <div class="testimonial-google"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg> Google Review</div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg></div>
-          <blockquote>"Got a loaner radio the same day I dropped mine off for repair. Didn't miss a single shift. That's the kind of service you don't find at big box stores."</blockquote>
-          <div class="testimonial-author">James T.</div>
-          <div class="testimonial-role">Security Team Lead</div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg></div>
-          <blockquote>"Missy and her team are the real deal. We've sent every new franchise location to MGS for their radio setup. Wouldn't trust anyone else."</blockquote>
-          <div class="testimonial-author">Carlos R.</div>
-          <div class="testimonial-role">Franchise Director</div>
+          <blockquote>"Every time I walk into MGS, I am greeted with a warm smile and great customer service. Missy and her staff go above and beyond to ensure customer satisfaction."</blockquote>
+          <div class="testimonial-author">Kenny Gallegos</div>
+          <div class="testimonial-google"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg> Google Review</div>
         </div>
       </div>
     </div>
@@ -738,6 +739,10 @@
               <input type="text" name="name" placeholder="John Smith" required>
             </div>
             <div class="form-group">
+              <label>Business Name</label>
+              <input type="text" name="business" placeholder="Your Company LLC">
+            </div>
+            <div class="form-group">
               <label>Phone <span class="req">*</span></label>
               <input type="tel" name="phone" placeholder="(505) 555-0123" required>
             </div>
@@ -745,7 +750,7 @@
               <label>Email</label>
               <input type="email" name="email" placeholder="you@company.com">
             </div>
-            <div class="form-group">
+            <div class="form-group full">
               <label>I Need Help With:</label>
               <select name="service">
                 <option value="">Select...</option>
@@ -831,6 +836,10 @@
               <input type="text" name="name" placeholder="John Smith" required>
             </div>
             <div class="form-group">
+              <label>Business Name</label>
+              <input type="text" name="business" placeholder="Your Company LLC">
+            </div>
+            <div class="form-group">
               <label>Phone <span class="req">*</span></label>
               <input type="tel" name="phone" placeholder="(505) 555-0123" required>
             </div>
@@ -838,7 +847,7 @@
               <label>Email</label>
               <input type="email" name="email" placeholder="you@company.com">
             </div>
-            <div class="form-group">
+            <div class="form-group full">
               <label>I Need Help With:</label>
               <select name="service">
                 <option value="">Select...</option>
@@ -945,6 +954,10 @@
           <input type="text" name="name" placeholder="John Smith" required>
         </div>
         <div class="form-group full">
+          <label>Business Name</label>
+          <input type="text" name="business-name" placeholder="Your Company LLC">
+        </div>
+        <div class="form-group full">
           <label>Phone <span class="req">*</span></label>
           <input type="tel" name="phone" placeholder="(505) 555-0123" required>
         </div>
@@ -992,7 +1005,7 @@
     return 3;
   }
   function getTotalSlides() {
-    return Math.max(0, 6 - getVisibleCards());
+    return Math.max(0, 5 - getVisibleCards());
   }
   function updateCarousel() {
     const cardWidth = track.children[0].offsetWidth + 24; // gap
