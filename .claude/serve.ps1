@@ -1,4 +1,4 @@
-$port = if ($env:PORT) { $env:PORT } else { "3000" }
+$port = if ($env:PORT) { $env:PORT } else { "3001" }
 $root = "C:\Users\dusti\OneDrive\Desktop\mgs-site"
 $listener = [System.Net.HttpListener]::new()
 $listener.Prefixes.Add("http://localhost:$port/")

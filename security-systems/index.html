@@ -19,7 +19,7 @@
 
     :root {
       --navy: #1b2e1b; --navy-light: #2a4a2a;
-      --green: #2e7d32; --green-light: #43a047; --green-dark: #1b5e20;
+      --green: #00897B; --green-light: #26A69A; --green-dark: #00695C;
       --yellow: #f9a825; --yellow-light: #fdd835; --yellow-dark: #f57f17;
       --orange: #e65100;
       --gray-50: #f8faf8; --gray-100: #f1f5f1; --gray-200: #e2e8e2; --gray-300: #cbd5cb;
@@ -499,7 +499,7 @@
       const btn = form.querySelector('button[type="submit"]'); const origText = btn.textContent;
       e.preventDefault(); const formData = new FormData(form);
       fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(formData).toString() })
-      .then(() => { btn.textContent = "Sent! We'll call you soon."; btn.style.background = '#2e7d32'; btn.disabled = true; form.reset(); setTimeout(() => { btn.textContent = origText; btn.style.background = ''; btn.disabled = false; if (form.name === 'popup-quote') document.getElementById('exitPopup').classList.remove('active'); }, 3000); })
+      .then(() => { btn.textContent = "Sent! We'll call you soon."; btn.style.background = '#00897B'; btn.disabled = true; form.reset(); setTimeout(() => { btn.textContent = origText; btn.style.background = ''; btn.disabled = false; if (form.name === 'popup-quote') document.getElementById('exitPopup').classList.remove('active'); }, 3000); })
       .catch(() => { btn.textContent = 'Error — please call us!'; btn.style.background = '#c62828'; setTimeout(() => { btn.textContent = origText; btn.style.background = ''; btn.disabled = false; }, 3000); });
     });
   });
