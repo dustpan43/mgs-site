@@ -55,12 +55,12 @@
     .header.scrolled { box-shadow: var(--shadow-md); }
     .header-inner {
       display: flex; align-items: center; justify-content: space-between;
-      max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 88px;
     }
     .logo {
       display: flex; align-items: center;
     }
-    .logo img { height: 64px; width: auto; }
+    .logo img { height: 80px; width: auto; }
     .nav { display: flex; align-items: center; gap: 4px; }
     .nav a {
       padding: 8px 14px; font-size: .875rem; font-weight: 500;
@@ -125,7 +125,7 @@
 
     /* ===== HERO ===== */
     .hero {
-      margin-top: 72px; position: relative; overflow: hidden;
+      margin-top: 88px; position: relative; overflow: hidden;
       background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #2E7D32 100%);
       padding: 80px 0 90px; min-height: 560px; display: flex; align-items: center;
     }
@@ -355,6 +355,8 @@
       display: flex; align-items: center; gap: 8px;
       font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
       font-size: 1.2rem; color: var(--white); margin-bottom: 14px;
+      background: rgba(0,0,0,.15); border-radius: 10px; padding: 12px 16px;
+      display: inline-flex;
     }
     .footer-brand span { color: var(--green-light); }
     .footer-links a {
@@ -438,7 +440,7 @@
       /* Mobile nav */
       .nav.open {
         display: flex; flex-direction: column; align-items: center;
-        position: absolute; top: 72px; left: 0; right: 0;
+        position: absolute; top: 88px; left: 0; right: 0;
         background: var(--white); border-bottom: 1px solid var(--gray-200);
         padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md);
       }
@@ -884,7 +886,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-about">
-        <div class="footer-brand"><img src="/images/mgs-logo.png" alt="MGS Communications" style="height:48px;width:auto;"></div>
+        <div class="footer-brand"><img src="/images/mgs-logo.png" alt="MGS Communications" style="height:72px;width:auto;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));"></div>
         <p>Albuquerque's trusted provider of two-way radios and security systems since 1996. Real people, real service, real results.</p>
         <div class="footer-badges">
           <span class="footer-badge">
