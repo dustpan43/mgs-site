@@ -17,7 +17,7 @@
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow .3s; }
     .header.scrolled { box-shadow: var(--shadow-md); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 88px; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px; }
     .logo { display: flex; align-items: center; } .logo img { height: 80px; width: auto; }
     .nav { display: flex; align-items: center; gap: 4px; }
     .nav a { padding: 8px 14px; font-size: .875rem; font-weight: 500; color: var(--gray-700); border-radius: var(--radius-sm); transition: background .2s, color .2s; }
@@ -67,7 +67,7 @@
     .popup-close { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--gray-100); cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .popup h3 { font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; } .popup p { color: var(--gray-600); margin-bottom: 24px; } .popup .form-grid { grid-template-columns: 1fr; }
 
-    .subpage-hero { margin-top: 88px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #2E7D32 100%); padding: 60px 0 70px; }
+    .subpage-hero { margin-top: 72px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #2E7D32 100%); padding: 60px 0 70px; }
     .subpage-hero::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 50%; opacity: .06; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Ccircle cx='400' cy='300' r='250' fill='none' stroke='white' stroke-width='1'/%3E%3Ccircle cx='400' cy='300' r='180' fill='none' stroke='white' stroke-width='1'/%3E%3Ccircle cx='400' cy='300' r='110' fill='none' stroke='white' stroke-width='1'/%3E%3Cline x1='150' y1='300' x2='650' y2='300' stroke='white' stroke-width='.5'/%3E%3Cline x1='400' y1='50' x2='400' y2='550' stroke='white' stroke-width='.5'/%3E%3C/svg%3E") center/contain no-repeat; }
     .subpage-hero .hero-content { position: relative; z-index: 2; max-width: 700px; }
     .breadcrumb { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; color: rgba(255,255,255,.55); margin-bottom: 18px; }
@@ -103,7 +103,7 @@
       section { padding: 60px 0; } .section-title { font-size: 1.65rem; }
       .form-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } .mobile-call { display: block; }
-      .nav.open { display: flex; flex-direction: column; align-items: center; position: absolute; top: 88px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md); }
+      .nav.open { display: flex; flex-direction: column; align-items: center; position: absolute; top: 72px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md); }
       .nav.open a { padding: 14px 24px; text-align: center; }
       .nav.open .nav-dropdown { text-align: center; }
       .nav.open .nav-dropdown > a { justify-content: center; }
@@ -304,7 +304,7 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-about"><div class="footer-brand"><img src="/images/mgs-logo.png" alt="MGS Communications" style="height:72px;width:auto;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));"></div><p>Albuquerque's trusted provider of two-way radios and security systems since 1996. Real people, real service, real results.</p><div class="footer-badges"><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Kenwood Authorized</span><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Motorola Dealer</span></div></div>
+      <div class="footer-about"><div class="footer-brand"><img src="/images/mgs-logo.png" alt="MGS Communications" style="height:120px;width:auto;filter:drop-shadow(0 1px 4px rgba(255,255,255,.7));"></div><p>Albuquerque's trusted provider of two-way radios and security systems since 1996. Real people, real service, real results.</p><div class="footer-badges"><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Kenwood Authorized</span><span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Motorola Dealer</span></div></div>
       <div><h4>Quick Links</h4><div class="footer-links"><a href="/">Home</a><a href="/two-way-radios">Two-Way Radios</a><a href="/security-systems">Security Systems</a><a href="/service-repair">Service &amp; Repairs</a><a href="/service-areas">Service Areas</a></div></div>
       <div><h4>Company</h4><div class="footer-links"><a href="/about-us">About Us</a><a href="/why-us">Why Choose MGS</a><a href="/resources">Resources</a><a href="/contact">Contact &amp; Quote</a><a href="/privacy">Privacy Policy</a></div></div>
       <div><h4>Contact Us</h4>
