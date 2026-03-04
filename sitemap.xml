@@ -41,6 +41,36 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://mgscommunications.com/resources/choosing-two-way-radios/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mgscommunications.com/resources/fcc-licensing-guide/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mgscommunications.com/resources/radio-rental-guide/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mgscommunications.com/resources/security-camera-placement/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mgscommunications.com/resources/cctv-vs-ip-cameras/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mgscommunications.com/resources/radio-battery-life/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://mgscommunications.com/contact/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resources &amp; Guides | Two-Way Radio &amp; Security Tips | MGS Communications</title>
-  <meta name="description" content="Helpful guides and resources for two-way radios and security systems. Learn about radio types, FCC licensing, security camera placement, and more from MGS Communications.">
+  <title>CCTV vs. IP Cameras: Which is Right for You? | MGS Communications</title>
+  <meta name="description" content="Compare analog CCTV and IP security cameras side by side. Learn the differences in video quality, cost, installation, and features to choose the right system for your property.">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
@@ -76,39 +76,38 @@
     .subpage-hero h1 em { font-style: normal; color: var(--yellow); }
     .subpage-hero p { font-size: 1.08rem; color: rgba(255,255,255,.82); max-width: 560px; margin-bottom: 28px; line-height: 1.7; }
 
-    /* ===== RESOURCE CARDS ===== */
-    .resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .resource-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; transition: transform .25s, box-shadow .25s; }
-    .resource-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .resource-card-header { padding: 28px 28px 0; }
-    .resource-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
-    .tag-radios { background: rgba(46,125,50,.1); color: var(--green); }
-    .tag-security { background: rgba(249,168,37,.15); color: var(--yellow-dark); }
-    .tag-general { background: rgba(27,46,27,.08); color: var(--navy); }
-    .resource-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.35; }
-    .resource-card p { font-size: .88rem; color: var(--gray-600); line-height: 1.6; padding: 0 28px; margin-bottom: 20px; }
-    .resource-card-footer { padding: 0 28px 28px; }
-    .resource-link { display: inline-flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 600; color: var(--green); transition: gap .2s; }
-    .resource-link:hover { gap: 10px; }
-    .resource-link svg { width: 16px; height: 16px; }
-
-    /* ===== FAQ SECTION ===== */
-    .faq-list { max-width: 800px; margin: 0 auto; }
-    .faq-item { border: 1px solid var(--gray-200); border-radius: var(--radius-sm); margin-bottom: 12px; overflow: hidden; background: var(--white); }
-    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; font-weight: 600; font-size: .95rem; color: var(--navy); transition: background .2s; }
-    .faq-question:hover { background: var(--gray-50); }
-    .faq-question svg { width: 20px; height: 20px; color: var(--gray-600); flex-shrink: 0; transition: transform .3s; }
-    .faq-item.open .faq-question svg { transform: rotate(180deg); }
-    .faq-answer { display: none; padding: 0 24px 20px; font-size: .9rem; color: var(--gray-600); line-height: 1.7; }
-    .faq-item.open .faq-answer { display: block; }
-
     /* ===== CTA CALLOUT ===== */
     .callout-box { background: linear-gradient(135deg, var(--green-dark), var(--green)); border-radius: var(--radius); padding: 48px; text-align: center; color: var(--white); }
     .callout-box h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 14px; }
     .callout-box p { font-size: 1.05rem; color: rgba(255,255,255,.85); max-width: 550px; margin: 0 auto 28px; line-height: 1.7; }
     .callout-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
 
-    @media (max-width: 1024px) { .resource-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+    /* ===== ARTICLE CONTENT ===== */
+    .article-content { max-width: 760px; margin: 0 auto; }
+    .article-content h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--navy); margin: 40px 0 16px; }
+    .article-content h3 { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin: 32px 0 12px; }
+    .article-content p { font-size: 1rem; color: var(--gray-700); line-height: 1.8; margin-bottom: 18px; }
+    .article-content ul, .article-content ol { margin: 0 0 20px 24px; }
+    .article-content li { font-size: .95rem; color: var(--gray-700); line-height: 1.7; margin-bottom: 8px; }
+    .article-content li::marker { color: var(--green); }
+    .article-tip { background: var(--gray-50); border-left: 4px solid var(--green); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 20px 24px; margin: 24px 0; }
+    .article-tip strong { color: var(--navy); }
+    .article-tip p { margin-bottom: 0; }
+    .article-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; font-size: .85rem; color: var(--gray-600); }
+    .article-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; background: rgba(249,168,37,.15); color: var(--yellow-dark); }
+    .article-content ul { list-style: disc; }
+    .article-content ol { list-style: decimal; }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0 28px; font-size: .9rem; }
+    .comparison-table thead th { background: var(--navy); color: var(--white); font-weight: 700; font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; padding: 14px 18px; text-align: left; }
+    .comparison-table thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+    .comparison-table thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+    .comparison-table tbody td { padding: 13px 18px; border-bottom: 1px solid var(--gray-200); color: var(--gray-700); line-height: 1.5; }
+    .comparison-table tbody tr:last-child td:first-child { border-radius: 0 0 0 var(--radius-sm); }
+    .comparison-table tbody tr:last-child td:last-child { border-radius: 0 0 var(--radius-sm) 0; }
+    .comparison-table tbody tr:nth-child(even) { background: var(--gray-50); }
+    .comparison-table tbody td:first-child { font-weight: 600; color: var(--navy); }
+
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 768px) {
       .nav { display: none; } .menu-toggle { display: flex; } .header-phone { display: none; }
       .subpage-hero { padding: 40px 0 50px; } .subpage-hero h1 { font-size: 1.8rem; }
@@ -124,6 +123,9 @@
       .nav.open .dropdown-menu a { padding: 12px 14px; justify-content: center; }
       body { padding-bottom: 60px; }
       .popup { padding: 28px 20px; }
+      .article-content h2 { font-size: 1.3rem; }
+      .comparison-table { font-size: .8rem; }
+      .comparison-table thead th, .comparison-table tbody td { padding: 10px 12px; }
     }
     @media (max-width: 480px) { .subpage-hero h1 { font-size: 1.55rem; } .callout-buttons { flex-direction: column; } .callout-buttons .btn { width: 100%; } }
   </style>
@@ -142,7 +144,7 @@
         <a href="/service-areas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Service Areas</a>
       </div></div>
       <a href="/about-us">About</a>
-      <a href="/resources" class="active">Resources</a>
+      <a href="/resources">Resources</a>
       <a href="/contact">Contact</a>
     </nav>
     <div class="header-cta">
@@ -156,93 +158,158 @@
 <section class="subpage-hero">
   <div class="container">
     <div class="hero-content">
-      <div class="breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span style="color:rgba(255,255,255,.85);">Resources</span></div>
-      <h1>Helpful Guides &amp; <em>Resources</em></h1>
-      <p>Everything you need to know about two-way radios, security systems, and keeping your team connected. Written by our experts with 30 years of experience.</p>
+      <div class="breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/resources">Resources</a> <span class="sep">/</span> <span style="color:rgba(255,255,255,.85);">CCTV vs. IP Cameras</span></div>
+      <h1>CCTV vs. IP Cameras: <em>Which is Right for You?</em></h1>
+      <p>A practical guide to understanding the differences between analog CCTV and modern IP camera systems &mdash; so you can make the right investment for your property.</p>
     </div>
   </div>
 </section>
 
-<!-- ===== RESOURCE GUIDES ===== -->
+<!-- ===== ARTICLE ===== -->
 <section>
   <div class="container">
-    <div class="text-center">
-      <div class="section-label">Learn</div>
-      <h2 class="section-title">Guides &amp; Articles</h2>
-      <p class="section-sub mx-auto">Practical tips from our team to help you make the best decisions for your communication and security needs.</p>
-    </div>
-    <div class="resource-grid">
-      <a href="/resources/choosing-two-way-radios" class="resource-card" style="color:inherit;">
-        <div class="resource-card-header"><span class="resource-tag tag-radios">Two-Way Radios</span><h3>How to Choose the Right Two-Way Radio for Your Business</h3></div>
-        <p>Not all radios are created equal. Learn the difference between UHF and VHF, digital vs. analog, and which features matter most for your industry.</p>
-        <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
-      </a>
-      <a href="/resources/fcc-licensing-guide" class="resource-card" style="color:inherit;">
-        <div class="resource-card-header"><span class="resource-tag tag-radios">Two-Way Radios</span><h3>FCC Licensing for Two-Way Radios: What You Need to Know</h3></div>
-        <p>Using business radios without a license can result in fines. Here's a plain-English guide to FCC licensing requirements and how to get compliant.</p>
-        <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
-      </a>
-      <a href="/resources/radio-rental-guide" class="resource-card" style="color:inherit;">
-        <div class="resource-card-header"><span class="resource-tag tag-radios">Two-Way Radios</span><h3>Radio Rental Guide: Events, Construction &amp; Short-Term Needs</h3></div>
-        <p>Renting radios is often smarter than buying. Learn when renting makes sense, what to expect, and how to get the most out of your rental period.</p>
-        <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
-      </a>
-      <a href="/resources/security-camera-placement" class="resource-card" style="color:inherit;">
-        <div class="resource-card-header"><span class="resource-tag tag-security">Security Systems</span><h3>Where to Place Security Cameras for Maximum Coverage</h3></div>
-        <p>Camera placement can make or break your security system. Learn the best spots for homes and businesses, plus common mistakes to avoid.</p>
-        <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
-      </a>
-      <a href="/resources/cctv-vs-ip-cameras" class="resource-card" style="color:inherit;">
-        <div class="resource-card-header"><span class="resource-tag tag-security">Security Systems</span><h3>CCTV vs. IP Cameras: Which is Right for You?</h3></div>
-        <p>Understanding the difference between analog CCTV and modern IP cameras helps you make the right investment. We break down costs, quality, and features.</p>
-        <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
-      </a>
-      <a href="/resources/radio-battery-life" class="resource-card" style="color:inherit;">
-        <div class="resource-card-header"><span class="resource-tag tag-general">General</span><h3>How to Extend the Life of Your Radio Batteries</h3></div>
-        <p>Radio batteries can be expensive to replace. Follow these simple tips to maximize battery life and know when it's time for a replacement.</p>
-        <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
-      </a>
-    </div>
-  </div>
-</section>
+    <div class="article-content">
+      <div class="article-meta">
+        <span class="article-tag">Security Systems</span>
+        <span>MGS Communications Team</span>
+        <span>&bull;</span>
+        <span>10 min read</span>
+      </div>
 
-<!-- ===== FAQ ===== -->
-<section style="background:var(--gray-50);">
-  <div class="container">
-    <div class="text-center">
-      <div class="section-label">FAQ</div>
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <p class="section-sub mx-auto">Quick answers to the questions we hear most often.</p>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-question">Do I need an FCC license for two-way radios? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">Yes, most business-grade two-way radios require an FCC license. This applies to UHF and VHF radios used for commercial purposes. The FCC issues licenses by frequency, and the process is straightforward. We can help guide you through the application. Note: FRS (Family Radio Service) radios used for personal, short-range communication do not require a license.</div>
+      <h2>Introduction</h2>
+      <p>If you're shopping for a security camera system, you've probably run into two main types: traditional analog cameras (often called CCTV) and newer IP cameras (also called network cameras). Both can protect your property, but they work very differently under the hood &mdash; and those differences affect everything from image quality to long-term cost.</p>
+      <p>We've installed both types of systems for hundreds of businesses and homes across New Mexico since 1996. Here's an honest breakdown to help you decide which technology fits your situation.</p>
+
+      <h2>What is Analog CCTV?</h2>
+      <p>Analog CCTV (Closed-Circuit Television) is the original security camera technology. These cameras capture video and send it over coaxial cable (the same type of cable used for cable TV) to a Digital Video Recorder (DVR), which processes and stores the footage.</p>
+      <p>Analog systems have been around for decades, and they're still widely installed today. Modern analog cameras have improved significantly from their early days &mdash; most now support HD resolutions at 720p or 1080p through formats like HD-TVI, HD-CVI, and AHD.</p>
+      <h3>How analog CCTV works:</h3>
+      <ul>
+        <li>Each camera connects to the DVR via a dedicated coaxial cable</li>
+        <li>A separate power cable (or combined siamese cable) delivers power to each camera</li>
+        <li>The DVR converts the analog signal to digital for storage and playback</li>
+        <li>Remote viewing is possible when the DVR is connected to your network, though it depends on the DVR's software capabilities</li>
+      </ul>
+
+      <h2>What are IP Cameras?</h2>
+      <p>IP (Internet Protocol) cameras are digital devices that process video internally and transmit it over a standard data network &mdash; the same kind of network your computers and phones use. They connect via Ethernet cable (Cat5e or Cat6) to a Network Video Recorder (NVR) or directly to a network switch.</p>
+      <p>Because each camera is a small networked computer, IP cameras can do things analog cameras simply cannot: on-board motion detection, people counting, license plate recognition, and two-way audio, to name a few.</p>
+      <h3>How IP cameras work:</h3>
+      <ul>
+        <li>Each camera connects via a single Ethernet cable that carries both data and power (using Power over Ethernet, or PoE)</li>
+        <li>Video is processed and compressed at the camera itself, then sent digitally to the NVR</li>
+        <li>The NVR stores footage and provides the interface for playback, search, and remote access</li>
+        <li>Remote viewing is straightforward through apps and web browsers since IP cameras are network-native</li>
+      </ul>
+
+      <h2>Side-by-Side Comparison</h2>
+      <p>Here's how analog CCTV and IP cameras stack up across the factors that matter most when choosing a system:</p>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Analog CCTV</th>
+            <th>IP Cameras</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Video Quality</td>
+            <td>Up to 1080p (HD). Adequate for general surveillance.</td>
+            <td>2K, 4K, and higher. Much sharper detail for identification.</td>
+          </tr>
+          <tr>
+            <td>Installation</td>
+            <td>Straightforward. Run coax + power cable to each camera.</td>
+            <td>Single Ethernet cable per camera (PoE). Cleaner runs.</td>
+          </tr>
+          <tr>
+            <td>Cable Type</td>
+            <td>Coaxial (RG59 or RG6), plus separate power cable or siamese cable.</td>
+            <td>Cat5e or Cat6 Ethernet. Single cable for data and power.</td>
+          </tr>
+          <tr>
+            <td>Max Cable Run</td>
+            <td>Up to 1,000 ft with RG6 coax.</td>
+            <td>Up to 328 ft (100m) standard. Extenders available for longer runs.</td>
+          </tr>
+          <tr>
+            <td>Storage</td>
+            <td>DVR with local hard drives. Limited remote backup options.</td>
+            <td>NVR with local drives, plus optional cloud backup.</td>
+          </tr>
+          <tr>
+            <td>Remote Access</td>
+            <td>Possible but can be clunky. Depends on DVR brand and setup.</td>
+            <td>Built-in. Smooth mobile apps and browser access are standard.</td>
+          </tr>
+          <tr>
+            <td>Cost per Camera</td>
+            <td>Lower upfront. Cameras typically $40&ndash;$150 each.</td>
+            <td>Higher upfront. Cameras typically $80&ndash;$400+ each.</td>
+          </tr>
+          <tr>
+            <td>Scalability</td>
+            <td>Limited by DVR channel count. Adding cameras often means replacing the DVR.</td>
+            <td>Flexible. Add cameras to the network as needed. NVRs scale easily.</td>
+          </tr>
+          <tr>
+            <td>Advanced Features</td>
+            <td>Basic motion detection. Limited analytics.</td>
+            <td>Smart motion zones, line crossing, people counting, license plate capture, two-way audio.</td>
+          </tr>
+          <tr>
+            <td>Maintenance</td>
+            <td>Simple. Fewer firmware updates. Less to configure.</td>
+            <td>Requires occasional firmware updates and network management.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>When Analog CCTV Makes Sense</h2>
+      <p>Analog CCTV isn't outdated &mdash; it's still a solid choice for plenty of situations. Here's when it typically makes the most sense:</p>
+      <ul>
+        <li><strong>Budget is the top priority.</strong> If you need to cover several areas and your budget is tight, analog cameras deliver reliable surveillance at a lower per-camera cost. The DVR hardware is also less expensive.</li>
+        <li><strong>You already have coaxial wiring in place.</strong> If your building was previously wired for cable TV or an older camera system, you can often reuse that existing coax infrastructure and save significantly on installation labor.</li>
+        <li><strong>Your needs are straightforward.</strong> If you mainly need to monitor entrances, parking areas, or hallways and don't require advanced analytics, 1080p analog cameras do the job well.</li>
+        <li><strong>Smaller properties with fewer cameras.</strong> For a small retail shop, office, or home that only needs 4&ndash;8 cameras, the simplicity of an analog system can be an advantage. Less to configure, less to troubleshoot.</li>
+        <li><strong>Long cable runs.</strong> Coaxial cable supports much longer distances without signal boosters, which matters in large warehouses or rural properties where cameras are far from the recorder.</li>
+      </ul>
+
+      <div class="article-tip">
+        <p><strong>Tip from our team:</strong> If your current analog system is working well and the image quality meets your needs, there's no rush to replace it. We often recommend upgrading gradually rather than ripping everything out at once.</p>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">How long does a radio repair usually take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">Many repairs are completed the same day, especially if parts are in stock. More complex repairs or those requiring special-order parts may take 3&ndash;5 business days. We'll give you a free estimate with a time frame before starting any work, and you can use a free loaner radio in the meantime.</div>
+
+      <h2>When IP Cameras Make Sense</h2>
+      <p>IP cameras are the clear choice when you need more from your surveillance system. Here are the situations where they shine:</p>
+      <ul>
+        <li><strong>You need high-resolution footage.</strong> If being able to clearly identify faces, read license plates, or zoom into details matters (and for most businesses, it does), 4K IP cameras provide dramatically better image quality than analog.</li>
+        <li><strong>Remote monitoring is a priority.</strong> IP cameras are built for remote access. You can pull up live feeds, review recordings, and receive alerts directly on your phone from anywhere. This is especially valuable for business owners who manage multiple locations.</li>
+        <li><strong>Larger or growing properties.</strong> IP systems scale much more flexibly. Adding cameras to a network is straightforward, and modern NVRs can handle dozens of cameras without replacing hardware.</li>
+        <li><strong>You want smart features.</strong> Motion-triggered alerts that actually distinguish between people and animals, virtual tripwires, heat mapping of foot traffic, automatic license plate logging &mdash; these features only exist on IP camera platforms.</li>
+        <li><strong>Future-proofing matters.</strong> IP camera technology is where the industry is headed. Investing in an IP system now means you're building on a platform that will continue to improve and receive new features through firmware updates.</li>
+        <li><strong>Cleaner installation.</strong> A single PoE Ethernet cable per camera (carrying both data and power) means cleaner cable runs and simpler infrastructure, especially in new construction.</li>
+      </ul>
+
+      <h2>Hybrid Systems: The Best of Both Worlds</h2>
+      <p>You don't have to choose one technology or the other. Many modern NVRs and hybrid DVRs support both analog and IP cameras on the same system. This is a practical option in several scenarios:</p>
+      <ul>
+        <li><strong>Gradual upgrades.</strong> Keep your working analog cameras while adding IP cameras in the areas where higher resolution or smart features matter most. Replace analog cameras with IP as they age out.</li>
+        <li><strong>Budget phasing.</strong> Install a hybrid recorder now with your existing analog cameras, then add IP cameras over time as your budget allows. You get a single unified system from day one.</li>
+        <li><strong>Mixed requirements.</strong> Maybe your warehouse hallways are fine with 1080p analog coverage, but your cash registers and front entrance need 4K IP cameras. A hybrid system lets you tailor each camera to its location.</li>
+      </ul>
+
+      <div class="article-tip">
+        <p><strong>Important note:</strong> Not all hybrid recorders are created equal. Some limit the number of IP channels or reduce performance when mixing camera types. We always recommend consulting with an installer to make sure the recorder you choose actually supports the mix you need without compromises.</p>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Do you offer free estimates on repairs? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">Absolutely. Every repair estimate is free with no obligation. Just bring your equipment to our shop or call us to describe the issue. We'll diagnose the problem and give you an honest quote before doing any work.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Can I rent radios for a short-term event? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">Yes! We offer short-term radio rentals for events, construction projects, and any temporary communication need. We've equipped events like the Albuquerque International Balloon Fiesta with hundreds of radios on short notice. Contact us with your dates and quantity, and we'll put together a rental package.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">What brands of radios do you sell and service? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">We're an authorized dealer for Kenwood and carry Motorola products as well. We service most major radio brands regardless of where they were purchased. We also stock a full range of accessories: batteries, antennas, speaker mics, chargers, and cases.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Do you install security cameras at homes or just businesses? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">Both! We install security camera systems, access control, and alarm systems for both residential and commercial properties across New Mexico. Every installation starts with a free site survey where we assess your property and design a custom solution for your specific needs and budget.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">What areas do you serve? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">We're headquartered in Albuquerque and serve all of New Mexico. Our most common service areas include Albuquerque, Rio Rancho, Santa Fe, Los Lunas, Belen, Socorro, Las Cruces, and surrounding communities. For installations or on-site service outside the Albuquerque metro, please call to discuss logistics.</div>
-      </div>
+
+      <h2>Our Recommendation</h2>
+      <p>After nearly 30 years of installing and maintaining security camera systems across New Mexico, here's our honest take:</p>
+      <p><strong>For most new installations, IP cameras offer the best long-term value.</strong> The upfront cost is higher, but the superior image quality, remote access, smart features, and easier scalability make IP systems a better investment over the 5&ndash;10 year lifespan of a typical camera system. Prices have come down significantly in recent years, narrowing the gap with analog.</p>
+      <p><strong>If your existing analog system works well, don't feel pressured to replace it.</strong> A functional 1080p analog system that covers your property adequately is far better than no system at all. When cameras start failing or you need to expand coverage, that's the natural time to consider upgrading &mdash; and a hybrid approach makes that transition painless.</p>
+      <p><strong>The best system is the one that fits your actual needs and budget.</strong> A perfectly designed 8-camera analog system will outperform a poorly planned 4-camera IP system every time. The technology matters, but so does proper camera placement, correct lens selection, adequate storage, and professional installation.</p>
+      <p>Every property is different, and we'd rather give you an honest recommendation than upsell you on features you won't use. That's why every project starts with a free on-site assessment where we look at your property, understand your goals, and design a system that makes sense.</p>
+
     </div>
   </div>
 </section>
@@ -251,11 +318,11 @@
 <section>
   <div class="container">
     <div class="callout-box">
-      <h2>Still Have Questions? We're Here to Help.</h2>
-      <p>Call us or fill out a quick form. We respond same day during business hours &mdash; no phone trees, no runaround.</p>
+      <h2>Ready to Upgrade Your Security Cameras?</h2>
+      <p>We'll assess your property, review your existing setup, and recommend the right camera system for your needs and budget &mdash; no obligation.</p>
       <div class="callout-buttons">
         <a href="tel:5058882034" class="btn btn-yellow btn-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call (505) 888-2034</a>
-        <a href="/contact" class="btn btn-outline btn-lg">Contact Us Online</a>
+        <a href="/contact" class="btn btn-outline btn-lg">Get a Free Consultation</a>
       </div>
     </div>
   </div>
@@ -308,15 +375,7 @@
   document.addEventListener('mouseout', (e) => { if (!popupShown && popupReady && e.clientY < 5 && e.relatedTarget === null) { document.getElementById('exitPopup').classList.add('active'); popupShown = true; } });
   document.getElementById('popupClose').addEventListener('click', dismissPopup);
   document.getElementById('exitPopup').addEventListener('click', (e) => { if (e.target === e.currentTarget) dismissPopup(); });
-  // FAQ accordion
-  document.querySelectorAll('.faq-question').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
-    });
-  });
+  // Form AJAX submission
   document.querySelectorAll('form[data-netlify="true"]').forEach(form => {
     form.addEventListener('submit', function(e) {
       const btn = form.querySelector('button[type="submit"]'); const origText = btn.textContent;
