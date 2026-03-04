@@ -292,10 +292,15 @@
   window.addEventListener('scroll', () => { document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10); });
   document.getElementById('menuToggle').addEventListener('click', () => { document.getElementById('mainNav').classList.toggle('open'); });
   document.querySelectorAll('#mainNav a').forEach(a => { if (!a.parentElement.classList.contains('nav-dropdown') || a.closest('.dropdown-menu')) { a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open')); } });
-  let popupShown = false;
-  document.addEventListener('mouseout', (e) => { if (!popupShown && e.clientY < 5 && e.relatedTarget === null) { document.getElementById('exitPopup').classList.add('active'); popupShown = true; } });
-  document.getElementById('popupClose').addEventListener('click', () => { document.getElementById('exitPopup').classList.remove('active'); });
-  document.getElementById('exitPopup').addEventListener('click', (e) => { if (e.target === e.currentTarget) document.getElementById('exitPopup').classList.remove('active'); });
+  // Exit-intent popup with localStorage memory + 15s delay
+  let popupShown = false; let popupReady = false;
+  const lastDismissed = localStorage.getItem('mgs_popup_dismissed');
+  const cooldownExpired = !lastDismissed || (Date.now() - Number(lastDismissed)) > (3 * 24 * 60 * 60 * 1000);
+  if (cooldownExpired) { setTimeout(() => { popupReady = true; }, 15000); }
+  function dismissPopup() { document.getElementById('exitPopup').classList.remove('active'); localStorage.setItem('mgs_popup_dismissed', Date.now().toString()); }
+  document.addEventListener('mouseout', (e) => { if (!popupShown && popupReady && e.clientY < 5 && e.relatedTarget === null) { document.getElementById('exitPopup').classList.add('active'); popupShown = true; } });
+  document.getElementById('popupClose').addEventListener('click', dismissPopup);
+  document.getElementById('exitPopup').addEventListener('click', (e) => { if (e.target === e.currentTarget) dismissPopup(); });
   // FAQ accordion
   document.querySelectorAll('.faq-question').forEach(q => {
     q.addEventListener('click', () => {
