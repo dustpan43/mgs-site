@@ -19,11 +19,11 @@
 
     /* ===== COLORS ===== */
     :root {
-      --navy: #1b2e1b;
-      --navy-light: #2a4a2a;
-      --green: #00897B;
-      --green-light: #26A69A;
-      --green-dark: #00695C;
+      --navy: #1B5E20;
+      --navy-light: #2E7D32;
+      --green: #4CAF50;
+      --green-light: #66BB6A;
+      --green-dark: #388E3C;
       --yellow: #f9a825;
       --yellow-light: #fdd835;
       --yellow-dark: #f57f17;
@@ -253,7 +253,7 @@
     /* ===== SUBPAGE HERO ===== */
     .subpage-hero {
       margin-top: 72px; position: relative; overflow: hidden;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e4d2b 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #2E7D32 100%);
       padding: 60px 0 70px;
     }
     .subpage-hero::before {
@@ -848,7 +848,7 @@
       })
       .then(() => {
         btn.textContent = "Sent! We'll call you soon.";
-        btn.style.background = '#00897B';
+        btn.style.background = '#4CAF50';
         btn.disabled = true;
         form.reset();
         setTimeout(() => {
