@@ -9,6 +9,31 @@
 
 ## Update History
 
+### 2026-03-04 — Mobile Optimization Audit (Critical & Important Fixes)
+**Commit**: `bc892a7`
+- Comprehensive mobile audit across all 11 pages — fixed all Critical and Important issues
+- **Touch targets**: Menu toggle, popup close button, carousel nav, footer links all increased to 44px minimum (Apple HIG compliance)
+- **Overflow fix**: Added `overflow-x: hidden` to prevent horizontal scroll on all pages
+- **iOS zoom prevention**: Form input font-size increased to 1rem (16px) — prevents Safari auto-zoom on focus
+- **Sticky call bar**: Added `body padding-bottom: 60px` so footer content isn't hidden behind mobile call bar
+- **Mobile nav**: Increased tap target padding on nav links and dropdown menu items
+- **Carousel swipe**: Added touch swipe support (touchstart/touchend) on homepage testimonial carousel
+- **Dropdown fix**: Services dropdown `href="#"` no longer scrolls to top on mobile (preventDefault added)
+- **Responsive polish**: Popup and form card padding adjusted for smaller screens
+
+### 2026-03-04 — Testimonial Carousel Fix
+**Commit**: `b673d4a`
+- Fixed testimonial cards clipping on the right side
+- Changed card width from fixed pixel to percentage-based `calc()` for exact container fit
+- Updated responsive breakpoints (3 cards desktop, 2 tablet, 1 mobile)
+
+### 2026-03-04 — Exit-Intent Popup Improvement
+**Commit**: `fc5970f`
+- Popup no longer fires on every page switch (was resetting per page load)
+- Added localStorage-based 3-day cooldown across all pages
+- Added 15-second delay before popup can trigger (prevents immediate fire)
+- Removed popup entirely from Contact page (user is already converting)
+
 ### 2026-03-04 — Logo & Favicon Added
 **Commit**: `19352ab`
 - Added MGS Communications logo (transparent PNG) to the header across all 11 pages
@@ -47,7 +72,7 @@
 ## Upcoming / Needs
 
 ### High Priority
-- [ ] **Mobile optimization audit** — Review all pages on mobile devices, fix layout issues
+- [x] **Mobile optimization audit** — ✅ Completed 2026-03-04. All Critical and Important issues fixed across all 11 pages.
 - [ ] **Image optimization** — Compress large images (mgs-30th-birthday.jpg is 2.7MB)
 - [ ] **Install Node.js** — Enables local dev server for testing changes before pushing live
 
