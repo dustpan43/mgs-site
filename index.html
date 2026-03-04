@@ -437,18 +437,20 @@
       .testimonial-card { min-width: 100%; max-width: 100%; }
       /* Mobile nav */
       .nav.open {
-        display: flex; flex-direction: column;
+        display: flex; flex-direction: column; align-items: center;
         position: absolute; top: 72px; left: 0; right: 0;
         background: var(--white); border-bottom: 1px solid var(--gray-200);
         padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md);
       }
-      .nav.open a { padding: 14px 24px; } /* bigger tap targets */
+      .nav.open a { padding: 14px 24px; text-align: center; } /* bigger tap targets */
+      .nav.open .nav-dropdown { text-align: center; }
+      .nav.open .nav-dropdown > a { justify-content: center; }
       .nav.open .nav-dropdown > a::after { display: none; }
       .nav.open .dropdown-menu {
         display: block; position: static; border: none;
-        box-shadow: none; padding: 0 0 0 12px; min-width: auto;
+        box-shadow: none; padding: 4px 0 0; min-width: auto;
       }
-      .nav.open .dropdown-menu a { padding: 12px 14px; }
+      .nav.open .dropdown-menu a { padding: 12px 14px; justify-content: center; }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.65rem; }
