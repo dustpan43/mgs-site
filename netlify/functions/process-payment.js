@@ -42,7 +42,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request' }) };
   }
 
-  const { payment_token, amount, invoice_number, name, email } = body;
+  const { payment_token, amount, invoice_number, name, email, address, city, state, zip } = body;
 
   // Validate required fields
   if (!payment_token) {
@@ -72,7 +72,11 @@ exports.handler = async (event) => {
     orderid: (invoice_number || '').trim(),
     email: (email || '').trim(),
     first_name: firstName,
-    last_name: lastName
+    last_name: lastName,
+    address1: (address || '').trim(),
+    city: (city || '').trim(),
+    state: (state || '').trim(),
+    zip: (zip || '').trim()
   });
 
   // POST to NMI
