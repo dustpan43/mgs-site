@@ -16,6 +16,8 @@
     :root {
       --navy: #1B5E20; --navy-light: #2E7D32; --green: #4CAF50; --green-light: #66BB6A; --green-dark: #388E3C;
       --yellow: #f9a825; --yellow-light: #fdd835; --yellow-dark: #f57f17; --orange: #e65100;
+      --turquoise: #00BCD4;
+      --turquoise-light: #26C6DA;
       --gray-50: #f8faf8; --gray-100: #f1f5f1; --gray-200: #e2e8e2; --gray-300: #cbd5cb;
       --gray-600: #475549; --gray-700: #334335; --gray-900: #0f170f; --white: #ffffff;
       --shadow-sm: 0 1px 3px rgba(0,0,0,.08); --shadow-md: 0 4px 12px rgba(0,0,0,.1);
@@ -54,7 +56,7 @@
     .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 44px; height: 44px; align-items: center; justify-content: center; }
     .menu-toggle svg { width: 24px; height: 24px; color: var(--navy); }
     section { padding: 80px 0; }
-    .section-label { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin-bottom: 12px; }
+    .section-label { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--turquoise); margin-bottom: 12px; }
     .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 16px; }
     .section-sub { font-size: 1.05rem; color: var(--gray-600); max-width: 600px; margin-bottom: 48px; }
     .text-center { text-align: center; } .mx-auto { margin-left: auto; margin-right: auto; }
@@ -92,7 +94,7 @@
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-size: .8rem; color: rgba(255,255,255,.5); }
     .footer-badges { display: flex; align-items: center; gap: 16px; }
     .footer-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(255,255,255,.08); border-radius: 6px; font-size: .75rem; font-weight: 600; color: rgba(255,255,255,.7); }
-    .mobile-call { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: var(--green); padding: 14px 24px; text-align: center; color: var(--white); font-weight: 700; font-size: 1rem; box-shadow: 0 -4px 20px rgba(0,0,0,.2); }
+    .mobile-call { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: var(--turquoise); padding: 14px 24px; text-align: center; color: var(--white); font-weight: 700; font-size: 1rem; box-shadow: 0 -4px 20px rgba(0,0,0,.2); }
     .mobile-call svg { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
     .popup-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 24px; }
     .popup-overlay.active { display: flex; }
