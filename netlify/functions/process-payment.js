@@ -6,8 +6,13 @@ const https = require('https');
 const querystring = require('querystring');
 
 exports.handler = async (event) => {
+  // Allow both www and non-www origins
+  const origin = (event.headers && (event.headers.origin || event.headers.Origin)) || '';
+  const allowedOrigins = ['https://mgscommunications.com', 'https://www.mgscommunications.com'];
+  const corsOrigin = allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+
   const headers = {
-    'Access-Control-Allow-Origin': 'https://mgscommunications.com',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Content-Type': 'application/json'

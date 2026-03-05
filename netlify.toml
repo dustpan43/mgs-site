@@ -1,6 +1,13 @@
 [build]
   publish = "."
 
+# Force www to non-www
+[[redirects]]
+  from = "https://www.mgscommunications.com/*"
+  to = "https://mgscommunications.com/:splat"
+  status = 301
+  force = true
+
 # Redirect trailing slashes for consistency
 [[redirects]]
   from = "/thank-you"
