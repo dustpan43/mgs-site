@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "dev",
-      "runtimeExecutable": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "C:\\Users\\dusti\\OneDrive\\Desktop\\mgs-site\\.claude\\serve.ps1"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:\\Users\\dusti\\OneDrive\\Desktop\\mgs-site\\.claude\\serve.js"],
       "port": 3001
     }
   ]
