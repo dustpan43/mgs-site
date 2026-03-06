@@ -43,7 +43,6 @@ There is no build command. Netlify publishes the repository root (`.`) as-is.
 mgs-site/
 │
 ├── index.html                    # Homepage
-├── thank-you.html                # Form success page
 │
 ├── two-way-radios/index.html     # Two-Way Radios page
 ├── security-systems/index.html   # Security Systems page
@@ -51,37 +50,61 @@ mgs-site/
 ├── service-areas/index.html      # Service Areas page
 ├── about-us/index.html           # About Us page
 ├── why-us/index.html             # Why Choose Us page
-├── resources/index.html          # Resources & Guides page
+├── resources/index.html          # Resources & Guides hub
 ├── contact/index.html            # Contact page
 ├── privacy/index.html            # Privacy Policy page
+├── thank-you/index.html          # Form success page
+├── pay/index.html                # Online payment page (NMI)
+│
+├── resources/
+│   ├── choosing-two-way-radios/  # Article: Choosing Two-Way Radios
+│   ├── fcc-licensing-guide/      # Article: FCC Licensing Guide
+│   ├── radio-rental-guide/       # Article: Radio Rental Guide
+│   ├── security-camera-placement/# Article: Security Camera Placement
+│   ├── cctv-vs-ip-cameras/       # Article: CCTV vs IP Cameras
+│   └── radio-battery-life/       # Article: Radio Battery Life Tips
+│
+├── css/
+│   └── shared.css                # Shared styles (header, nav, footer, buttons, forms, etc.)
+│
+├── js/
+│   └── main.js                   # Shared scripts (nav, scroll, forms, popup)
 │
 ├── images/
 │   ├── mgs-logo.png              # Header logo (transparent, 92KB)
-│   ├── mgs-30th-birthday.jpg     # 30th anniversary logo (2.7MB)
-│   └── favicon.png               # Browser tab icon
+│   ├── mgs-30th-birthday.jpg     # 30th anniversary logo
+│   ├── favicon.png               # Browser tab icon
+│   ├── heroes/                   # Hero section photos
+│   ├── services/                 # Service card photos
+│   └── articles/                 # Article hero images
 │
-├── netlify.toml                  # Netlify config: headers, redirects, caching
+├── docs/
+│   ├── technical-setup.md        # This file
+│   ├── project-log.md            # Update history & project status
+│   ├── photo-catalog.md          # Photo inventory & descriptions
+│   ├── payment-error-reference.md# NMI payment error codes
+│   └── ai-image-prompts.md       # Prompts used for AI-generated images
+│
+├── netlify.toml                  # Netlify config: headers, caching
 ├── robots.txt                    # Search engine rules
 ├── sitemap.xml                   # SEO sitemap (lists all pages)
-├── .gitignore                    # Git ignore rules
-│
-├── PROJECT-LOG.md                # Update history & project status
-└── TECHNICAL-SETUP.md            # This file
+├── README.md                     # Quick project overview
+└── .gitignore                    # Git ignore rules
 ```
 
-**Why subfolders?** Each page lives in its own folder (e.g., `/about-us/index.html`) so the URLs are clean (`/about-us/` instead of `/about-us.html`). The exception is `thank-you.html` which is in the root and uses a Netlify redirect.
+**Why subfolders?** Each page lives in its own folder (e.g., `/about-us/index.html`) so the URLs are clean (`/about-us/` instead of `/about-us.html`).
 
 ---
 
 ## How Each Page is Built
 
-Every page is a **standalone HTML file** with:
-- All CSS in an inline `<style>` block in the `<head>`
-- All JavaScript in an inline `<script>` block before `</body>`
-- No external CSS or JS files
-- No shared stylesheet (styles are duplicated per page)
+Every page uses **shared external CSS/JS** plus **page-specific inline styles**:
+- `css/shared.css` — header, nav, footer, buttons, forms, popup, responsive breakpoints
+- `js/main.js` — scroll effects, mobile menu, form AJAX, exit-intent popup, smooth scroll
+- Page-specific CSS stays in an inline `<style>` block (hero layouts, grids, etc.)
+- Page-specific JS stays inline only where needed (homepage carousel, payment form, FAQ accordion)
 
-This means: **if you change a shared style (like the header or footer), you need to update all 11 HTML files.**
+To change shared styles (header, footer, nav, buttons, forms): **edit `css/shared.css` once — all 18 pages update automatically.**
 
 ### Common page structure:
 ```html
@@ -95,16 +118,18 @@ This means: **if you change a shared style (like the header or footer), you need
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@...&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
   <style>
-    /* All CSS for this page */
+    /* Page-specific CSS only */
   </style>
 </head>
 <body>
   <header><!-- Shared header with logo and nav --></header>
   <main><!-- Page-specific content --></main>
   <footer><!-- Shared footer --></footer>
+  <script src="/js/main.js"></script>
   <script>
-    /* All JS for this page (nav, forms, scroll effects) */
+    /* Page-specific JS only (if any) */
   </script>
 </body>
 </html>
@@ -196,7 +221,7 @@ On success, a "thank you" message appears inline. No page redirect for popup for
 - **HTML pages**: Must revalidate on every load (always fresh)
 
 ### Redirects
-- `/thank-you` → `/thank-you.html` (status 200, transparent rewrite)
+- None currently — all pages use clean folder-based URLs natively
 
 ---
 
@@ -219,19 +244,23 @@ To change DNS: Log into Squarespace > Domains > mgscommunications.com > DNS sett
 3. Save, then: `git add <file>` → `git commit -m "description"` → `git push`
 4. Live in ~1 minute
 
+### Change a shared style (header, nav, footer, buttons, forms)
+1. Edit `css/shared.css`
+2. Commit and push — all 18 pages update automatically
+
 ### Update the logo
 1. Replace `images/mgs-logo.png` with a new PNG (keep the filename the same)
 2. For favicon, replace `images/favicon.png`
 3. Commit and push
-4. All 11 pages reference these by the same path
+4. All 18 pages reference these by the same path
 
 ### Add a new page
 1. `mkdir new-page-name`
 2. Copy an existing `index.html` as a starting template
 3. Update: title, meta description, content, active nav link
-4. Add `<link rel="icon" ...>` favicon tag
+4. Add `<link rel="stylesheet" href="/css/shared.css">` and `<script src="/js/main.js">` (already in templates)
 5. Add the page to `sitemap.xml`
-6. Add a nav link on all other pages (11 files to update)
+6. Add a nav link in the header (shared across all pages in each HTML file's `<header>`)
 7. Commit and push
 
 ### Check/manage form submissions
@@ -254,11 +283,10 @@ If the rating changes from 4.6:
 
 | Issue | Impact | Potential Fix |
 |-------|--------|---------------|
-| No shared CSS file | Style changes require editing all 11 files | Extract shared styles to a `styles.css` file |
 | No local dev server | Can't preview changes before pushing live | Install Node.js, use `npx serve` |
 | No analytics | Can't track visitors or conversions | Add Google Analytics or Plausible |
 | No CMS | Content changes require HTML editing | Consider Netlify CMS or similar |
-| Large anniversary image | 2.7MB may slow page load if used | Compress or resize before using on-page |
+| Nav still duplicated in HTML | Adding a nav link requires editing all 18 files | Could use JS-based nav injection |
 | Inline form honeypot only | Basic spam protection | Add reCAPTCHA for stronger defense |
 
 ---

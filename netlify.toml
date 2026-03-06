@@ -8,12 +8,6 @@
   status = 301
   force = true
 
-# Redirect trailing slashes for consistency
-[[redirects]]
-  from = "/thank-you"
-  to = "/thank-you.html"
-  status = 200
-
 # Security & performance headers for all pages
 [[headers]]
   for = "/*"

@@ -8,124 +8,9 @@
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
   <style>
-    /* ===== RESET & BASE ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; }
-    body { font-family: 'Inter', system-ui, sans-serif; color: #1a1a2e; line-height: 1.6; background: #fff; overflow-x: hidden; }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-
-    /* ===== COLORS ===== */
-    :root {
-      --navy: #1B5E20;
-      --navy-light: #2E7D32;
-      --green: #4CAF50;
-      --green-light: #66BB6A;
-      --green-dark: #388E3C;
-      --yellow: #f9a825;
-      --yellow-light: #fdd835;
-      --yellow-dark: #f57f17;
-      --orange: #e65100;
-      --turquoise: #00BCD4;
-      --turquoise-light: #26C6DA;
-      --gray-50: #f8faf8;
-      --gray-100: #f1f5f1;
-      --gray-200: #e2e8e2;
-      --gray-300: #cbd5cb;
-      --gray-600: #475549;
-      --gray-700: #334335;
-      --gray-900: #0f170f;
-      --white: #ffffff;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
-      --shadow-md: 0 4px 12px rgba(0,0,0,.1);
-      --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
-      --shadow-xl: 0 20px 50px rgba(0,0,0,.15);
-      --radius: 12px;
-      --radius-sm: 8px;
-    }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* ===== STICKY HEADER ===== */
-    .header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: var(--white); border-bottom: 1px solid var(--gray-200);
-      transition: box-shadow .3s;
-    }
-    .header.scrolled { box-shadow: var(--shadow-md); }
-    .header-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px;
-    }
-    .logo {
-      display: flex; align-items: center;
-    }
-    .logo img { height: 80px; width: auto; }
-    .nav { display: flex; align-items: center; gap: 4px; }
-    .nav a {
-      padding: 8px 14px; font-size: .875rem; font-weight: 500;
-      color: var(--gray-700); border-radius: var(--radius-sm);
-      transition: background .2s, color .2s;
-    }
-    .nav a:hover { background: var(--gray-100); color: var(--green); }
-    .nav a.active { color: var(--green); font-weight: 600; }
-
-    /* Nav dropdown */
-    .nav-dropdown { position: relative; }
-    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
-    .nav-dropdown > a::after {
-      content: ''; width: 0; height: 0; border-left: 4px solid transparent;
-      border-right: 4px solid transparent; border-top: 5px solid currentColor;
-      transition: transform .2s;
-    }
-    .nav-dropdown:hover > a::after { transform: rotate(180deg); }
-    .dropdown-menu {
-      display: none; position: absolute; top: 100%; left: 0;
-      background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
-      min-width: 240px; padding: 8px 0; z-index: 100;
-    }
-    .nav-dropdown:hover .dropdown-menu { display: block; }
-    .dropdown-menu a {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 18px; font-size: .875rem; color: var(--gray-700);
-      transition: background .15s, color .15s;
-    }
-    .dropdown-menu a:hover { background: var(--gray-100); color: var(--green); }
-    .dropdown-menu svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
-
-    .header-cta { display: flex; align-items: center; gap: 12px; }
-    .header-phone {
-      display: flex; align-items: center; gap: 6px;
-      font-weight: 700; font-size: .95rem; color: var(--navy);
-    }
-    .header-phone svg { width: 18px; height: 18px; color: var(--green); }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;
-      font-size: .9rem; border: none; cursor: pointer; transition: all .2s;
-      text-align: center;
-    }
-    .btn-green { background: var(--green); color: var(--white); }
-    .btn-green:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-yellow { background: var(--yellow); color: var(--navy); font-weight: 700; }
-    .btn-yellow:hover { background: var(--yellow-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-white { background: var(--white); color: var(--navy); }
-    .btn-white:hover { background: var(--gray-100); }
-    .btn-outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
-    .btn-outline:hover { background: rgba(255,255,255,.15); }
-    .btn-lg { padding: 16px 32px; font-size: 1rem; border-radius: var(--radius); }
-
-    /* Mobile menu toggle */
-    .menu-toggle {
-      display: none; background: none; border: none; cursor: pointer;
-      width: 44px; height: 44px; align-items: center; justify-content: center;
-    }
-    .menu-toggle svg { width: 24px; height: 24px; color: var(--navy); }
-
-    /* ===== HERO ===== */
+    /* ===== HOMEPAGE HERO ===== */
     .hero {
       margin-top: 72px; position: relative; overflow: hidden;
       background: linear-gradient(135deg, rgba(27,94,32,.88) 0%, rgba(27,94,32,.82) 60%, rgba(46,125,50,.78) 100%),
@@ -154,7 +39,6 @@
       font-size: 1.15rem; color: rgba(255,255,255,.85); line-height: 1.7;
       margin-bottom: 32px; max-width: 560px;
     }
-    .hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; }
 
     /* ===== TRUST BAR ===== */
     .trust-bar {
@@ -168,21 +52,6 @@
     .trust-items span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
     .trust-items svg { width: 18px; height: 18px; color: var(--turquoise); flex-shrink: 0; }
     .trust-items .stars { color: var(--yellow); }
-
-    /* ===== SECTIONS ===== */
-    section { padding: 80px 0; }
-    .section-label {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .8rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .08em; color: var(--turquoise); margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem;
-      font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 16px;
-    }
-    .section-sub { font-size: 1.05rem; color: var(--gray-600); max-width: 600px; margin-bottom: 48px; }
-    .text-center { text-align: center; }
-    .mx-auto { margin-left: auto; margin-right: auto; }
 
     /* ===== SERVICE CARDS ===== */
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -299,170 +168,23 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* ===== QUOTE FORM ===== */
-    .form-card {
-      background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow-md);
-    }
-    .form-card h3 {
-      font-size: 1.3rem; font-weight: 700; color: var(--navy);
-      margin-bottom: 6px;
-    }
-    .form-card .form-sub { font-size: .9rem; color: var(--gray-600); margin-bottom: 24px; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group.full { grid-column: 1 / -1; }
-    .form-group label { font-size: .85rem; font-weight: 600; color: var(--gray-700); }
-    .form-group label .req { color: var(--orange); }
-    .form-group input, .form-group select, .form-group textarea {
-      padding: 12px 14px; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);
-      font-size: 1rem; font-family: inherit; transition: border-color .2s;
-      background: var(--white);
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(46,125,50,.12);
-    }
-    .form-group textarea { resize: vertical; min-height: 90px; }
-
-    /* ===== CTA SECTION ===== */
-    .cta-section { padding: 80px 0; }
-    .cta-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
-    }
-    .cta-text h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem;
-      font-weight: 800; color: var(--navy); margin-bottom: 16px;
-    }
-    .cta-text p { color: var(--gray-600); font-size: 1.05rem; margin-bottom: 24px; }
-    .cta-info { display: flex; flex-direction: column; gap: 18px; }
-    .cta-info-item { display: flex; gap: 14px; align-items: flex-start; }
-    .cta-info-icon {
-      width: 44px; height: 44px; flex-shrink: 0;
-      background: var(--gray-100); border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cta-info-icon svg { width: 20px; height: 20px; color: var(--green); }
-    .cta-info-item h4 { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
-    .cta-info-item p { font-size: .85rem; color: var(--gray-600); margin: 0; }
-
-    /* ===== FOOTER ===== */
-    .footer { background: var(--navy); color: rgba(255,255,255,.8); padding: 60px 0 0; }
-    .footer-grid {
-      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 40px;
-      padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-    .footer h4 {
-      font-size: .85rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .06em; color: var(--white); margin-bottom: 18px;
-    }
-    .footer-about p { font-size: .875rem; line-height: 1.65; margin-bottom: 16px; }
-    .footer-brand {
-      display: flex; align-items: center; gap: 8px;
-      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
-      font-size: 1.2rem; color: var(--white); margin-bottom: 14px;
-     
-      display: inline-flex;
-    }
-    .footer-brand span { color: var(--green-light); }
-    .footer-links a {
-      display: block; padding: 10px 0; font-size: .875rem;
-      color: rgba(255,255,255,.7); transition: color .2s;
-    }
-    .footer-links a:hover { color: var(--white); }
-    .footer-contact-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: .875rem; }
-    .footer-contact-item svg { width: 18px; height: 18px; color: var(--green-light); flex-shrink: 0; margin-top: 2px; }
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 0; font-size: .8rem; color: rgba(255,255,255,.5);
-    }
-    .footer-badges { display: flex; align-items: center; gap: 16px; }
-    .footer-badge {
-      display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
-      background: rgba(255,255,255,.08); border-radius: 6px; font-size: .75rem;
-      font-weight: 600; color: rgba(255,255,255,.7);
-    }
-
-    /* ===== MOBILE STICKY CALL ===== */
-    .mobile-call {
-      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-      background: var(--turquoise); padding: 14px 24px;
-      text-align: center; color: var(--white); font-weight: 700; font-size: 1rem;
-      box-shadow: 0 -4px 20px rgba(0,0,0,.2);
-    }
-    .mobile-call svg { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
-
-    /* ===== EXIT POPUP ===== */
-    .popup-overlay {
-      display: none; position: fixed; inset: 0; z-index: 2000;
-      background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
-      align-items: center; justify-content: center; padding: 24px;
-    }
-    .popup-overlay.active { display: flex; }
-    .popup {
-      background: var(--white); border-radius: var(--radius);
-      max-width: 480px; width: 100%; padding: 40px; text-align: center;
-      box-shadow: var(--shadow-xl); position: relative;
-    }
-    .popup-close {
-      position: absolute; top: 12px; right: 12px;
-      width: 44px; height: 44px; border-radius: 50%;
-      border: none; background: var(--gray-100); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .popup h3 { font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
-    .popup p { color: var(--gray-600); margin-bottom: 24px; }
-    .popup .form-grid { grid-template-columns: 1fr; }
-
-    /* ===== RESPONSIVE ===== */
+    /* ===== HOMEPAGE RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .services-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .offer-inner { grid-template-columns: 1fr; gap: 36px; }
-      .cta-inner { grid-template-columns: 1fr; gap: 36px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
       .testimonial-card { min-width: calc((100% - 24px) / 2); max-width: calc((100% - 24px) / 2); }
     }
     @media (max-width: 768px) {
-      body { padding-bottom: 60px; } /* space for sticky call bar */
-      .nav { display: none; }
-      .menu-toggle { display: flex; }
-      .header-phone { display: none; }
       .hero { padding: 50px 0 60px; min-height: auto; }
-      .hero::before { display: none; } /* hide decorative SVG on mobile */
+      .hero::before { display: none; }
       .hero h1 { font-size: 2rem; }
       .hero p { font-size: 1rem; }
-      section { padding: 60px 0; }
-      .section-title { font-size: 1.65rem; }
       .why-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-card { padding: 24px 18px; }
-      .form-group label { font-size: .9rem; }
-      .popup { padding: 28px 20px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-      .mobile-call { display: block; }
       .testimonial-card { min-width: 100%; max-width: 100%; }
-      /* Mobile nav */
-      .nav.open {
-        display: flex; flex-direction: column; align-items: center;
-        position: absolute; top: 72px; left: 0; right: 0;
-        background: var(--white); border-bottom: 1px solid var(--gray-200);
-        padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md);
-      }
-      .nav.open a { padding: 14px 24px; text-align: center; } /* bigger tap targets */
-      .nav.open .nav-dropdown { text-align: center; }
-      .nav.open .nav-dropdown > a { justify-content: center; }
-      .nav.open .nav-dropdown > a::after { display: none; }
-      .nav.open .dropdown-menu {
-        display: block; position: static; border: none;
-        box-shadow: none; padding: 4px 0 0; min-width: auto;
-      }
-      .nav.open .dropdown-menu a { padding: 12px 14px; justify-content: center; }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.65rem; }
-      .hero-buttons { flex-direction: column; }
-      .hero-buttons .btn { width: 100%; }
       .why-grid { grid-template-columns: 1fr; }
       .trust-items { flex-direction: column; align-items: center; gap: 8px; }
     }
@@ -744,7 +466,7 @@
       <div class="form-card" id="offer-form">
         <h3>Claim Your Free Site Survey</h3>
         <p class="form-sub">Fill out the form and we'll call you within 1 business hour.</p>
-        <form name="site-survey" method="POST" data-netlify="true" action="/thank-you.html">
+        <form name="site-survey" method="POST" data-netlify="true" action="/thank-you/">
           <input type="hidden" name="form-name" value="site-survey">
           <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
           <div class="form-grid">
@@ -841,7 +563,7 @@
       <div class="form-card">
         <h3>Get Your Free Quote</h3>
         <p class="form-sub">We reply same day during business hours.</p>
-        <form name="free-quote" method="POST" data-netlify="true" action="/thank-you.html">
+        <form name="free-quote" method="POST" data-netlify="true" action="/thank-you/">
           <input type="hidden" name="form-name" value="free-quote">
           <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
           <div class="form-grid">
@@ -960,7 +682,7 @@
     </button>
     <h3>Need Radios or Cameras Today?</h3>
     <p>Get a free quote in 30 seconds. We reply within 1 hour during business hours.</p>
-    <form name="popup-quote" method="POST" data-netlify="true" action="/thank-you.html">
+    <form name="popup-quote" method="POST" data-netlify="true" action="/thank-you/">
       <input type="hidden" name="form-name" value="popup-quote">
       <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-grid">
@@ -994,28 +716,9 @@
   </div>
 </div>
 
+<script src="/js/main.js"></script>
 <script>
-  // ===== STICKY HEADER SHADOW =====
-  window.addEventListener('scroll', () => {
-    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
-  });
-
-  // ===== MOBILE MENU =====
-  document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('mainNav').classList.toggle('open');
-  });
-  // Close mobile menu on link click (skip dropdown trigger)
-  document.querySelectorAll('#mainNav a').forEach(a => {
-    if (!a.parentElement.classList.contains('nav-dropdown') || a.closest('.dropdown-menu')) {
-      a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open'));
-    }
-  });
-  // Prevent "Services" dropdown trigger from scrolling to top on mobile
-  document.querySelectorAll('.nav-dropdown > a[href="#"]').forEach(a => {
-    a.addEventListener('click', (e) => e.preventDefault());
-  });
-
-  // ===== TESTIMONIAL CAROUSEL =====
+  // ===== TESTIMONIAL CAROUSEL (homepage only) =====
   const track = document.getElementById('testimonialTrack');
   let currentSlide = 0;
   function getVisibleCards() {
@@ -1056,92 +759,6 @@
       currentSlide = Math.max(0, currentSlide - 1);
       updateCarousel();
     }
-  });
-
-  // ===== EXIT-INTENT POPUP (with localStorage memory + delay) =====
-  let popupShown = false;
-  let popupReady = false;
-  const POPUP_COOLDOWN_DAYS = 3;
-  const POPUP_DELAY_MS = 15000; // 15 seconds before popup can trigger
-
-  // Check if popup was recently dismissed
-  const lastDismissed = localStorage.getItem('mgs_popup_dismissed');
-  const cooldownExpired = !lastDismissed || (Date.now() - Number(lastDismissed)) > (POPUP_COOLDOWN_DAYS * 24 * 60 * 60 * 1000);
-
-  // Arm the popup after a delay so it doesn't fire immediately on page load
-  if (cooldownExpired) {
-    setTimeout(() => { popupReady = true; }, POPUP_DELAY_MS);
-  }
-
-  function dismissPopup() {
-    document.getElementById('exitPopup').classList.remove('active');
-    localStorage.setItem('mgs_popup_dismissed', Date.now().toString());
-  }
-
-  document.addEventListener('mouseout', (e) => {
-    if (!popupShown && popupReady && e.clientY < 5 && e.relatedTarget === null) {
-      document.getElementById('exitPopup').classList.add('active');
-      popupShown = true;
-    }
-  });
-  document.getElementById('popupClose').addEventListener('click', dismissPopup);
-  document.getElementById('exitPopup').addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) dismissPopup();
-  });
-
-  // ===== FORM HANDLING (Netlify + success feedback) =====
-  document.querySelectorAll('form[data-netlify="true"]').forEach(form => {
-    form.addEventListener('submit', function(e) {
-      const btn = form.querySelector('button[type="submit"]');
-      const origText = btn.textContent;
-
-      // Let Netlify handle the POST natively — but show a brief success state
-      // For AJAX submission (stays on page instead of redirecting):
-      e.preventDefault();
-      const formData = new FormData(form);
-
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
-      })
-      .then(() => {
-        btn.textContent = "Sent! We'll call you soon.";
-        btn.style.background = '#4CAF50';
-        btn.disabled = true;
-        form.reset();
-
-        setTimeout(() => {
-          btn.textContent = origText;
-          btn.style.background = '';
-          btn.disabled = false;
-          // Close popup if applicable
-          if (form.name === 'popup-quote') {
-            document.getElementById('exitPopup').classList.remove('active');
-          }
-        }, 3000);
-      })
-      .catch(() => {
-        btn.textContent = 'Error — please call us!';
-        btn.style.background = '#c62828';
-        setTimeout(() => {
-          btn.textContent = origText;
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 3000);
-      });
-    });
-  });
-
-  // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
   });
 </script>
 
