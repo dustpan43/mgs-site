@@ -341,6 +341,12 @@
   document.querySelectorAll('#mainNav a').forEach(a => { if (!a.parentElement.classList.contains('nav-dropdown') || a.closest('.dropdown-menu')) { a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open')); } });
   document.querySelectorAll('.nav-dropdown > a[href="#"]').forEach(a => { a.addEventListener('click', (e) => e.preventDefault()); });
 
+  // ===== Auto-format amount to 2 decimals =====
+  document.querySelector('[name="amount"]').addEventListener('blur', function() {
+    var val = parseFloat(this.value);
+    if (!isNaN(val) && val > 0) this.value = val.toFixed(2);
+  });
+
   // ===== Collect.js Configuration =====
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof CollectJS !== 'undefined') {
