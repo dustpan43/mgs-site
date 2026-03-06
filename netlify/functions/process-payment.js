@@ -42,7 +42,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request' }) };
   }
 
-  const { payment_token, amount, invoice_number, name, email, address, city, state, zip } = body;
+  const { payment_token, amount, invoice_number, name, email, company, phone, address, city, state, zip } = body;
 
   // Validate required fields
   if (!payment_token) {
@@ -73,6 +73,8 @@ exports.handler = async (event) => {
     email: (email || '').trim(),
     first_name: firstName,
     last_name: lastName,
+    company: (company || '').trim(),
+    phone: (phone || '').trim(),
     address1: (address || '').trim(),
     city: (city || '').trim(),
     state: (state || '').trim(),
