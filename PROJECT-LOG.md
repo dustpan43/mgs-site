@@ -9,6 +9,68 @@
 
 ## Update History
 
+### 2026-03-06 — Real Photos Added to Website (Phase 1)
+**Commit**: `20e4e1d`
+- Reviewed and renamed all 55 raw photos from `MGS Communications Photos/` folder
+- Installed Node.js + sharp; batch-compressed 20 photos from 17-28MB to 50-320KB each (99%+ reduction)
+- Organized into `/images/hero/`, `/images/radios/`, `/images/building/`, `/images/interior/`
+- **Homepage**: Radio lineup hero background + Kenwood NX-1300 in-hand on service card
+- **About Us**: Building + Sandia Mountains hero + showroom overlay on "30 Years" box
+- **Contact**: Storefront sign hero
+- **Two-Way Radios**: Radio lineup hero
+- **Service Areas**: Building + Sandias angle hero
+- Created `photo-catalog.md` with full inventory, naming, and placement guide
+- Updated `.gitignore` to exclude raw photos and build artifacts
+- **Still needed**: Security equipment photos, repair bench/tech photos, team photo
+
+### 2026-03-06 — Hero Badge Reverted to Gold
+**Commit**: `c24a5bf`
+- Changed "Celebrating 30 Years of Service" badge back to gold (`--yellow-light: #fdd835`)
+- Turquoise didn't stand out enough against the dark hero background
+
+### 2026-03-05 — Turquoise Accents Site-Wide
+**Commit**: `c4a7659`
+- Applied turquoise (#00BCD4) accent color across all 17 pages per Missy's request
+- Added CSS variables: `--turquoise: #00BCD4`, `--turquoise-light: #26C6DA`
+- Changed: section labels, trust bar icons, Why Us card icons, mobile call button
+- Kept green: `.btn-green` buttons, nav hovers, form focus states, footer badges
+
+### 2026-03-05 — Turquoise Accents on Homepage + Hero Call Button
+**Commits**: `17d8d5a`, `6cc0e3e`, `9340c71`
+- Tested turquoise as accent color on homepage first (Missy approved)
+- Applied to: section labels, trust bar icons, Why Us icons, testimonial nav hover
+- Hero Call button changed to turquoise
+- Hero "Celebrating 30 Years" badge temporarily turquoise (later reverted to gold)
+
+### 2026-03-05 — Payment Page: Billing Address Fields
+**Commits**: `17d8d5a`, `fd8a588`, `4d75a75`, `70b37de`
+- Added billing address fields: Address, City, State dropdown (defaults to NM), ZIP
+- Updated serverless function to pass address1, city, state, zip to NMI API for AVS verification
+- Added company and phone fields to payment form and API
+- Auto-format payment amount to two decimal places on blur
+- Invoice placeholder changed from "INV-12345" to "MG-12345"
+
+### 2026-03-05 — Payment CORS Fix + Error Reference
+**Commits**: `631ed66`, `ec1cc6c`
+- Fixed CORS to allow both `mgscommunications.com` and `www.mgscommunications.com`
+- Added www-to-non-www 301 redirect in `netlify.toml`
+- Created `payment-error-reference.md` with NMI error codes, meanings, and troubleshooting
+
+### 2026-03-05 — NMI Payment Integration Live
+- Serverless function (`netlify/functions/process-payment.js`) processing real payments
+- $1.00 test charge approved (Transaction ID: 11786216245, auth code 00707B)
+- Public tokenization key in HTML, private API key in Netlify env var
+- Collect.js handles PCI-compliant card tokenization client-side
+
+### 2026-03-04 — 6 Resource Articles Added
+- Choosing the Right Two-Way Radio (`/resources/choosing-two-way-radios/`)
+- FCC Licensing Guide (`/resources/fcc-licensing-guide/`)
+- Radio Rental Guide (`/resources/radio-rental-guide/`)
+- Security Camera Placement (`/resources/security-camera-placement/`)
+- CCTV vs IP Cameras (`/resources/cctv-vs-ip-cameras/`)
+- Radio Battery Life (`/resources/radio-battery-life/`)
+- Total pages: 17 (11 main + 6 articles)
+
 ### 2026-03-04 — Mobile Optimization Audit (Critical & Important Fixes)
 **Commit**: `bc892a7`
 - Comprehensive mobile audit across all 11 pages — fixed all Critical and Important issues
@@ -63,47 +125,59 @@
 
 ## Current Status
 - **Live and operational** at mgscommunications.com
+- **17 pages** (11 main + 6 resource articles) + thank-you page + payment page
 - All forms functional and sending to team@mgscommunications.com
+- **Payment page live** — NMI/Collect.js processing real transactions
+- **Turquoise accents** applied site-wide
+- **Real photos** on 5 pages (Homepage, About Us, Contact, Two-Way Radios, Service Areas)
 - SSL active with auto-renewal
-- 10 public pages + 1 thank-you confirmation page
+- Node.js + Python installed on dev machine
 
 ---
 
 ## Upcoming / Needs
 
 ### High Priority
-- [x] **Mobile optimization audit** — ✅ Completed 2026-03-04. All Critical and Important issues fixed across all 11 pages.
-- [ ] **Image optimization** — Compress large images (mgs-30th-birthday.jpg is 2.7MB)
-- [ ] **Install Node.js** — Enables local dev server for testing changes before pushing live
+- [x] **Mobile optimization audit** — Completed 2026-03-04
+- [x] **Install Node.js + Python** — Completed 2026-03-06
+- [x] **Payment integration** — NMI/Collect.js live as of 2026-03-05
+- [x] **Image optimization** — 20 photos compressed and deployed 2026-03-06
+- [ ] **Photos Phase 2** — Add photos to Why Us hero, resource articles (existing photos available)
+- [ ] **Missing photos** — Security equipment, repair bench, team photo (need photo shoot or AI generation)
 
 ### Medium Priority
 - [ ] **Shared CSS file** — Currently all styles are inline in each page; a shared stylesheet would make site-wide style changes easier
 - [ ] **Google Analytics / tracking** — No analytics currently installed
 - [ ] **Google Business profile link** — Verify "Review us on Google" links are working
+- [ ] **Auto-receipt emails** — Currently manual forwarding; could add SendGrid for automated receipts
+- [ ] **Apple Pay** — NMI supports it; needs configuration
 
 ### Future / Nice-to-Have
-- [ ] **Payment integration** — Accept payments online (scope TBD)
+- [ ] **Updated logo** — User chose "backdrop now, new logo later"
 - [ ] **Blog / news section** — For SEO and customer engagement
 - [ ] **CMS integration** — Would allow non-technical team members to update content
 - [ ] **Contact form CAPTCHA** — Currently using honeypot only; reCAPTCHA would add extra spam protection
+- [ ] **SEO meta tag audit** — Review all pages for optimal meta descriptions and titles
+- [ ] **Performance audit** — Image lazy loading, preconnect hints, etc.
 
 ---
 
 ## Pages Overview
 
-| Page | URL | Description |
-|------|-----|-------------|
-| Homepage | `/` | Main landing page with services, testimonials, CTA |
-| Two-Way Radios | `/two-way-radios/` | Kenwood & Motorola products, sales/rental/repair |
-| Security Systems | `/security-systems/` | CCTV, access control, alarm installations |
-| Service & Repair | `/service-repair/` | Same-day repair, free estimates, loaner radios |
-| Service Areas | `/service-areas/` | Albuquerque, Rio Rancho, Santa Fe, all NM |
-| About Us | `/about-us/` | Family-owned since 1996, company story |
-| Why Us | `/why-us/` | Differentiators, 30 years of experience |
-| Resources | `/resources/` | Guides: radio types, FCC licensing, camera tips |
-| Contact | `/contact/` | Full contact form, phone, address, map |
-| Privacy Policy | `/privacy/` | Privacy policy |
-| Thank You | `/thank-you` | Post-form confirmation |
+| Page | URL | Has Photo? | Description |
+|------|-----|------------|-------------|
+| Homepage | `/` | Yes | Radio lineup hero + Kenwood service card |
+| Two-Way Radios | `/two-way-radios/` | Yes | Radio lineup hero |
+| Security Systems | `/security-systems/` | No | Needs security equipment photos |
+| Service & Repair | `/service-repair/` | No | Needs repair bench photos |
+| Service Areas | `/service-areas/` | Yes | Building + Sandias hero |
+| About Us | `/about-us/` | Yes | Building hero + showroom overlay |
+| Why Us | `/why-us/` | No | Could use interior shots |
+| Contact | `/contact/` | Yes | Storefront sign hero |
+| Payment | `/pay/` | No | Not needed |
+| Resources | `/resources/` | No | 6 articles — could use product shots |
+| Privacy Policy | `/privacy/` | No | Not needed |
+| Thank You | `/thank-you` | No | Not needed |
 
 ---
 
@@ -113,3 +187,9 @@
 - **Brand rule**: Always list Kenwood before Motorola in all content
 - **Google rating**: Currently 4.6 stars (update trust bar if this changes)
 - For full technical documentation, see [TECHNICAL-SETUP.md](./TECHNICAL-SETUP.md)
+- For photo inventory and placement guide, see [photo-catalog.md](./photo-catalog.md)
+- For payment error codes, see [payment-error-reference.md](./payment-error-reference.md)
+
+---
+
+*Last updated: March 6, 2026*
