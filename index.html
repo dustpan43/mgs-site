@@ -128,7 +128,8 @@
     /* ===== HERO ===== */
     .hero {
       margin-top: 72px; position: relative; overflow: hidden;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #2E7D32 100%);
+      background: linear-gradient(135deg, rgba(27,94,32,.88) 0%, rgba(27,94,32,.82) 60%, rgba(46,125,50,.78) 100%),
+                  url('/images/hero/radio-lineup-all-models.jpg') center/cover no-repeat;
       padding: 80px 0 90px; min-height: 560px; display: flex; align-items: center;
     }
     .hero::before {
@@ -195,6 +196,7 @@
     .service-card-img {
       height: 200px; background: linear-gradient(135deg, var(--navy), var(--green));
       display: flex; align-items: center; justify-content: center; position: relative;
+      background-size: cover; background-position: center;
     }
     .service-card-img svg { width: 64px; height: 64px; color: var(--white); opacity: .9; }
     .service-card-body { padding: 28px; display: flex; flex-direction: column; flex: 1; }
@@ -572,8 +574,7 @@
     <div class="services-grid">
       <!-- Card 1: Two-Way Radios -->
       <div class="service-card">
-        <div class="service-card-img" style="background: linear-gradient(135deg, #4CAF50, #66BB6A);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/><path d="M8 6h8"/><path d="M8 10h8"/><path d="M17 2l3-2"/></svg>
+        <div class="service-card-img" style="background: url('/images/radios/kenwood-nx1300-in-hand.jpg') center/cover no-repeat;">
         </div>
         <div class="service-card-body">
           <h3>Two-Way Radios</h3>

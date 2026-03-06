@@ -15,5 +15,13 @@ Desktop.ini
 # Node (if ever added)
 node_modules/
 
+# Raw photos (originals, 17-28MB each)
+MGS Communications Photos/
+
+# Build scripts
+compress-photos.js
+package.json
+package-lock.json
+
 # Netlify local
 .netlify/
