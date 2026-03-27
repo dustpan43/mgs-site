@@ -30,13 +30,14 @@ const exitPopup = document.getElementById('exitPopup');
 if (exitPopup) {
   let popupShown = false;
   let popupReady = false;
-  const lastDismissed = localStorage.getItem('mgs_popup_dismissed');
+  var lastDismissed = null;
+  try { lastDismissed = localStorage.getItem('mgs_popup_dismissed'); } catch(e) {}
   const cooldownExpired = !lastDismissed || (Date.now() - Number(lastDismissed)) > (3 * 24 * 60 * 60 * 1000);
   if (cooldownExpired) { setTimeout(() => { popupReady = true; }, 15000); }
 
   function dismissPopup() {
     exitPopup.classList.remove('active');
-    localStorage.setItem('mgs_popup_dismissed', Date.now().toString());
+    try { localStorage.setItem('mgs_popup_dismissed', Date.now().toString()); } catch(e) {}
   }
 
   document.addEventListener('mouseout', (e) => {
