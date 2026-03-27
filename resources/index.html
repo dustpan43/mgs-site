@@ -10,12 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/shared.css">
   <style>
-    .subpage-hero { background: linear-gradient(135deg, rgba(27,94,32,.88) 0%, rgba(27,94,32,.82) 60%, rgba(46,125,50,.78) 100%), url('/images/hero/radio-lineup-all-models.jpg') center/cover no-repeat; }
+    .subpage-hero { background: linear-gradient(135deg, rgba(27,94,32,.88) 0%, rgba(27,94,32,.82) 60%, rgba(46,125,50,.78) 100%), url('/images/radios/motorola-evxs24-in-hand.jpg') center/cover no-repeat; }
 
     /* ===== RESOURCE CARDS ===== */
     .resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .resource-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; transition: transform .25s, box-shadow .25s; }
     .resource-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .resource-card-img { width: 100%; height: 160px; object-fit: cover; display: block; }
     .resource-card-header { padding: 28px 28px 0; }
     .resource-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
     .tag-radios { background: rgba(46,125,50,.1); color: var(--green); }
@@ -93,31 +94,37 @@
     </div>
     <div class="resource-grid">
       <a href="/resources/choosing-two-way-radios" class="resource-card" style="color:inherit;">
+        <img class="resource-card-img" src="/images/radios/kenwood-nx1300-in-hand.jpg" alt="Person holding two-way radio" loading="lazy">
         <div class="resource-card-header"><span class="resource-tag tag-radios">Two-Way Radios</span><h3>How to Choose the Right Two-Way Radio for Your Business</h3></div>
         <p>Not all radios are created equal. Learn the difference between UHF and VHF, digital vs. analog, and which features matter most for your industry.</p>
         <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
       </a>
       <a href="/resources/fcc-licensing-guide" class="resource-card" style="color:inherit;">
+        <img class="resource-card-img" src="/images/radios/motorola-evxs24-front.jpg" alt="Motorola EVX-S24 radio" loading="lazy">
         <div class="resource-card-header"><span class="resource-tag tag-radios">Two-Way Radios</span><h3>FCC Licensing for Two-Way Radios: What You Need to Know</h3></div>
         <p>Using business radios without a license can result in fines. Here's a plain-English guide to FCC licensing requirements and how to get compliant.</p>
         <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
       </a>
       <a href="/resources/radio-rental-guide" class="resource-card" style="color:inherit;">
+        <img class="resource-card-img" src="/images/radios/motorola-bpr40-angle.jpg" alt="Motorola BPR40 rental radio" loading="lazy">
         <div class="resource-card-header"><span class="resource-tag tag-radios">Two-Way Radios</span><h3>Radio Rental Guide: Events, Construction &amp; Short-Term Needs</h3></div>
         <p>Renting radios is often smarter than buying. Learn when renting makes sense, what to expect, and how to get the most out of your rental period.</p>
         <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
       </a>
       <a href="/resources/security-camera-placement" class="resource-card" style="color:inherit;">
+        <img class="resource-card-img" src="/images/building/mgs-building-parking.jpg" alt="Commercial building security coverage" loading="lazy">
         <div class="resource-card-header"><span class="resource-tag tag-security">Security Systems</span><h3>Where to Place Security Cameras for Maximum Coverage</h3></div>
         <p>Camera placement can make or break your security system. Learn the best spots for homes and businesses, plus common mistakes to avoid.</p>
         <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
       </a>
       <a href="/resources/cctv-vs-ip-cameras" class="resource-card" style="color:inherit;">
+        <img class="resource-card-img" src="/images/building/mgs-building-sandias-angle.jpg" alt="Commercial building security" loading="lazy">
         <div class="resource-card-header"><span class="resource-tag tag-security">Security Systems</span><h3>CCTV vs. IP Cameras: Which is Right for You?</h3></div>
         <p>Understanding the difference between analog CCTV and modern IP cameras helps you make the right investment. We break down costs, quality, and features.</p>
         <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
       </a>
       <a href="/resources/radio-battery-life" class="resource-card" style="color:inherit;">
+        <img class="resource-card-img" src="/images/radios/kenwood-nx1300-front.jpg" alt="Kenwood NX-1300 radio battery" loading="lazy">
         <div class="resource-card-header"><span class="resource-tag tag-general">General</span><h3>How to Extend the Life of Your Radio Batteries</h3></div>
         <p>Radio batteries can be expensive to replace. Follow these simple tips to maximize battery life and know when it's time for a replacement.</p>
         <div class="resource-card-footer"><span class="resource-link">Read Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
@@ -141,7 +148,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-question">How long does a radio repair usually take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="faq-answer">Many repairs are completed the same day, especially if parts are in stock. More complex repairs or those requiring special-order parts may take 3&ndash;5 business days. We'll give you a free estimate with a time frame before starting any work, and loaner radios are available upon request to keep you connected in the meantime.</div>
+        <div class="faq-answer">Many repairs are completed the same day, especially if parts are in stock. More complex repairs or those requiring special-order parts may take 3&ndash;5 business days. We'll give you a free estimate with a time frame before starting any work, and courtesy loaner radios may be available during your repair, subject to fleet availability. For teams that can't afford downtime, we recommend keeping backup units on hand.</div>
       </div>
       <div class="faq-item">
         <div class="faq-question">Do you offer free estimates on repairs? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>

@@ -26,6 +26,32 @@
     .about-image .big-label { font-size: 1.2rem; font-weight: 700; margin-top: 8px; }
     .about-image .big-sub { font-size: .9rem; color: rgba(255,255,255,.75); margin-top: 6px; }
 
+    /* ===== PHOTO GALLERY ===== */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .gallery-item {
+      border-radius: var(--radius); overflow: hidden;
+      position: relative; aspect-ratio: 4/3;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.65));
+      padding: 24px 16px 12px; color: var(--white);
+      font-size: .82rem; font-weight: 600;
+    }
+    .gallery-item:first-child { grid-column: 1 / 3; aspect-ratio: 16/9; }
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } .gallery-item:first-child { grid-column: 1; } }
+
     /* ===== TIMELINE ===== */
     .timeline { max-width: 700px; margin: 0 auto; position: relative; }
     .timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: var(--gray-200); }
@@ -129,12 +155,45 @@
         <h2>Built on Handshakes, Not Contracts</h2>
         <p>MGS Communications was founded in 1996 right here in Albuquerque with a simple idea: give people honest, reliable communication and security solutions &mdash; and answer the phone when they call.</p>
         <p>For 30 years, we've served construction crews, hotels, schools, event coordinators, security teams, and families across New Mexico. We're an authorized Kenwood and Motorola dealer, and we stand behind every product we sell and every system we install.</p>
-        <p>When you call MGS, you talk to a real person. When you need a repair, we give you a free estimate and often finish the same day. Need a loaner radio while we work? Just ask. That's not a marketing pitch &mdash; it's just how we do business.</p>
+        <p>When you call MGS, you talk to a real person. When you need a repair, we give you a free estimate and often finish the same day. Need a loaner during a repair? Just ask &mdash; we do our best to keep you covered. That's not a marketing pitch &mdash; it's just how we do business.</p>
       </div>
       <div class="about-image">
         <div class="big-number">30</div>
         <div class="big-label">Years of Service</div>
         <div class="big-sub">Proudly serving New Mexico since 1996</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHOTO GALLERY ===== -->
+<section>
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">Inside MGS</div>
+      <h2 class="section-title">Our Shop &amp; Showroom</h2>
+      <p class="section-sub mx-auto">Visit us at 3505 Carlisle Blvd NE in Albuquerque &mdash; here's a look inside.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="/images/building/mgs-building-sandias-angle.jpg" alt="MGS Communications building with Sandia Mountains" loading="lazy">
+        <div class="gallery-caption">Our Carlisle Blvd location with the Sandia Mountains</div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/interior/mgs-lobby-entrance.jpg" alt="MGS Communications lobby and entrance" loading="lazy">
+        <div class="gallery-caption">Lobby &amp; Waiting Area</div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/interior/mgs-office-reception-green.jpg" alt="MGS Communications office reception area" loading="lazy">
+        <div class="gallery-caption">Office &amp; Reception</div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/interior/mgs-lobby-merchandise.jpg" alt="MGS Communications merchandise and product display" loading="lazy">
+        <div class="gallery-caption">Product Display</div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/interior/mgs-office-interior.jpg" alt="MGS Communications office interior" loading="lazy">
+        <div class="gallery-caption">Back Office</div>
       </div>
     </div>
   </div>
@@ -181,7 +240,7 @@
         <div class="timeline-dot">2026</div>
         <div class="timeline-content">
           <h3>30 Years Strong</h3>
-          <p>Celebrating three decades of local, family-owned service. Still answering the phone, still offering loaner radios, still here for you.</p>
+          <p>Celebrating three decades of local, family-owned service. Still answering the phone, still supporting our customers through every repair, still here for you.</p>
         </div>
       </div>
     </div>
@@ -210,7 +269,7 @@
       <div class="value-card">
         <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3>Fast Turnaround</h3>
-        <p>Same-day repairs when parts are in stock. Loaner radios available upon request so you're never without communication.</p>
+        <p>Same-day repairs when parts are in stock. Courtesy loaners during repairs when available. We also help teams right-size their fleet so downtime is never an issue.</p>
       </div>
       <div class="value-card">
         <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
