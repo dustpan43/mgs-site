@@ -25,6 +25,17 @@ document.querySelectorAll('.nav-dropdown > a[href="#"]').forEach(a => {
   a.addEventListener('click', (e) => e.preventDefault());
 });
 
+// Mobile dropdown accordion
+document.querySelectorAll('.nav-dropdown > a').forEach(toggle => {
+  toggle.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      const dropdown = this.parentElement;
+      dropdown.classList.toggle('dropdown-open');
+    }
+  });
+});
+
 // Exit-intent popup (only runs on pages that have the popup element)
 const exitPopup = document.getElementById('exitPopup');
 if (exitPopup) {

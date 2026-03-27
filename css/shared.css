@@ -308,11 +308,13 @@ section { padding: 80px 0; }
   .nav.open a { padding: 14px 24px; text-align: center; }
   .nav.open .nav-dropdown { text-align: center; }
   .nav.open .nav-dropdown > a { justify-content: center; }
-  .nav.open .nav-dropdown > a::after { display: none; }
+  .nav.open .nav-dropdown > a::after { display: inline-block; transition: transform .2s; }
+  .nav.open .nav-dropdown.dropdown-open > a::after { transform: rotate(180deg); }
   .nav.open .dropdown-menu {
-    display: block; position: static; border: none;
+    display: none; position: static; border: none;
     box-shadow: none; padding: 4px 0 0; min-width: auto;
   }
+  .nav.open .nav-dropdown.dropdown-open .dropdown-menu { display: block; }
   .nav.open .dropdown-menu a { padding: 12px 14px; justify-content: center; }
 }
 
