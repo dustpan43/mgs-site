@@ -271,13 +271,20 @@
   // ===== Phone number auto-format =====
   var phoneInput = document.querySelector('[name="phone"]');
   if (phoneInput) {
+    var prevPhoneLen = 0;
     phoneInput.addEventListener('input', function(e) {
-      var x = e.target.value.replace(/\D/g, '').substring(0, 10);
+      var raw = e.target.value.replace(/\D/g, '').substring(0, 10);
+      // Skip re-formatting when deleting — lets backspace flow through dashes/parens
+      if (e.target.value.length < prevPhoneLen) {
+        prevPhoneLen = e.target.value.length;
+        return;
+      }
       var formatted = '';
-      if (x.length > 0) formatted = '(' + x.substring(0, 3);
-      if (x.length >= 3) formatted += ') ' + x.substring(3, 6);
-      if (x.length >= 6) formatted += '-' + x.substring(6, 10);
+      if (raw.length > 0) formatted = '(' + raw.substring(0, 3);
+      if (raw.length >= 3) formatted += ') ' + raw.substring(3, 6);
+      if (raw.length >= 6) formatted += '-' + raw.substring(6, 10);
       e.target.value = formatted;
+      prevPhoneLen = formatted.length;
     });
   }
 
