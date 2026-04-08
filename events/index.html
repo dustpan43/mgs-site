@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's Happening in ABQ | Local Events | MGS Communications</title>
+  <meta name="description" content="Upcoming events in Albuquerque and New Mexico. Festivals, sports, community events and more — curated by MGS Communications, proudly supporting our local community since 1996.">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <style>
+    .subpage-hero { background: linear-gradient(135deg, rgba(27,94,32,.88) 0%, rgba(27,94,32,.82) 60%, rgba(46,125,50,.78) 100%), url('/images/hero/mgs-building-sandias-wide.jpg') center/cover no-repeat; }
+
+    /* ===== EVENTS GRID ===== */
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .event-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius); overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+      display: flex; flex-direction: column;
+    }
+    .event-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .event-card-top {
+      padding: 28px 28px 0; display: flex; align-items: flex-start; gap: 16px;
+    }
+    .event-emoji {
+      font-size: 2.2rem; line-height: 1; flex-shrink: 0; width: 48px; text-align: center;
+    }
+    .event-card-info { flex: 1; }
+    .event-date {
+      display: inline-block; padding: 4px 12px; border-radius: 50px;
+      font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+      background: rgba(46,125,50,.1); color: var(--green); margin-bottom: 10px;
+    }
+    .event-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 6px; }
+    .event-card-body {
+      padding: 14px 28px 28px; flex: 1; display: flex; flex-direction: column;
+    }
+    .event-card-body p { font-size: .88rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 18px; flex: 1; }
+    .event-card-body .event-meta {
+      font-size: .82rem; color: var(--gray-600); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .event-card-body .event-meta svg { width: 14px; height: 14px; color: var(--green); flex-shrink: 0; }
+    .ticket-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .88rem; font-weight: 600; color: var(--white);
+      background: var(--green); padding: 10px 20px; border-radius: var(--radius-sm);
+      transition: background .2s, gap .2s; text-align: center; justify-content: center;
+    }
+    .ticket-link:hover { background: var(--navy); gap: 10px; }
+    .ticket-link svg { width: 16px; height: 16px; }
+
+    /* ===== PAST EVENT STYLING ===== */
+    .event-card.past { opacity: .55; }
+    .event-card.past .event-date { background: rgba(0,0,0,.06); color: var(--gray-600); }
+    .event-card.past .ticket-link { background: var(--gray-300); color: var(--gray-600); pointer-events: none; }
+
+    /* ===== UPDATED NOTICE ===== */
+    .updated-notice {
+      text-align: center; font-size: .85rem; color: var(--gray-600);
+      margin-bottom: 40px; font-style: italic;
+    }
+
+    /* ===== COMMUNITY CALLOUT ===== */
+    .callout-box { background: linear-gradient(135deg, var(--green-dark), var(--green)); border-radius: var(--radius); padding: 48px; text-align: center; color: var(--white); }
+    .callout-box h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 14px; }
+    .callout-box p { font-size: 1.05rem; color: rgba(255,255,255,.85); max-width: 600px; margin: 0 auto 28px; line-height: 1.7; }
+    .callout-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) { .events-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .events-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+    @media (max-width: 480px) {
+      .callout-buttons { flex-direction: column; }
+      .callout-buttons .btn { width: 100%; }
+      .event-card-top { flex-direction: column; gap: 8px; }
+      .event-emoji { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo"><img src="/images/mgs-logo.png" alt="MGS Communications"></a>
+    <nav class="nav" id="mainNav">
+      <a href="/">Home</a>
+      <div class="nav-dropdown"><a href="#">Services</a><div class="dropdown-menu">
+        <a href="/two-way-radios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M17 2l3-2"/><path d="M8 6h8"/></svg> Two-Way Radios</a>
+        <a href="/security-systems"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Security Systems</a>
+        <a href="/service-repair"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Service &amp; Repairs</a>
+        <a href="/service-areas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Service Areas</a>
+      </div></div>
+      <a href="/about-us">About</a>
+      <div class="nav-dropdown"><a href="/resources">Resources</a><div class="dropdown-menu">
+        <a href="/resources"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Guides &amp; Articles</a>
+        <a href="/events"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Community Events</a>
+      </div></div>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:5058882034" class="header-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (505) 888-2034</a>
+      <a href="/contact" class="btn btn-yellow">Get Free Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="subpage-hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="breadcrumb"><a href="/">Home</a> <span class="sep">/</span> Events</div>
+      <h1>What's Happening in <em>ABQ</em></h1>
+      <p>MGS Communications is proud to support our Albuquerque community. Check out these upcoming local events — from festivals and sports to cultural celebrations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EVENTS ===== -->
+<section style="padding: 70px 0;">
+  <div class="container">
+    <p class="updated-notice">Last updated: April 8, 2026</p>
+
+    <div class="events-grid">
+
+      <!-- Event 1: Chocolate & Coffee Fest -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#9749;</span>
+          <div class="event-card-info">
+            <span class="event-date">Apr 11 &ndash; 12, 2026</span>
+            <h3>SW Chocolate &amp; Coffee Fest</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Expo New Mexico &bull; 10am &ndash; 5pm
+          </div>
+          <p>The 16th Annual festival brings 200+ chocolatiers, coffee roasters, and culinary artisans. Endless tastings, live music, and demos. Tickets: 2 for $25!</p>
+          <a href="https://chocolateandcoffeefest.com/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 2: NM Chupacabras -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127944;</span>
+          <div class="event-card-info">
+            <span class="event-date">Apr 11, 2026</span>
+            <h3>NM Chupacabras vs NAZ Wranglers</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Tingley Coliseum &bull; Tickets from $2
+          </div>
+          <p>Indoor football is back in Albuquerque! Catch the Chupacabras' inaugural IFL season at Tingley Coliseum. Affordable, family-friendly fun.</p>
+          <a href="http://www.chupacabras.net/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 3: Gathering of Nations -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#129703;</span>
+          <div class="event-card-info">
+            <span class="event-date">Apr 24 &ndash; 25, 2026</span>
+            <h3>Gathering of Nations Pow Wow</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Expo New Mexico &bull; GA $25/day
+          </div>
+          <p>North America's largest powwow — the 43rd annual Gathering of Nations. Two days of traditional music, dancing, singing, and the Indian Traders Market.</p>
+          <a href="https://www.gatheringofnations.com/event-tickets/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 4: NM United Apr 25 -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#9917;</span>
+          <div class="event-card-info">
+            <span class="event-date">Apr 25, 2026</span>
+            <h3>NM United Home Match</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Isotopes Park &bull; Tickets from $15
+          </div>
+          <p>Albuquerque's USL Championship soccer team kicks off at home. Electric atmosphere, family-friendly, and one of the best fan cultures in the league.</p>
+          <a href="https://www.newmexicoutd.com/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 5: Run for the Zoo -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127939;</span>
+          <div class="event-card-info">
+            <span class="event-date">May 1, 2026</span>
+            <h3>Run for the Zoo</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ABQ BioPark Zoo
+          </div>
+          <p>Albuquerque's favorite charity run supporting the ABQ BioPark Zoo. Run or walk through the zoo grounds for a great cause.</p>
+          <a href="https://www.abqbioparkzoo.com/" target="_blank" rel="noopener" class="ticket-link">
+            Register <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 6: NM United May dates -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#9917;</span>
+          <div class="event-card-info">
+            <span class="event-date">May 6, 9, 20 &amp; 23</span>
+            <h3>NM United Home Matches</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Isotopes Park &bull; Tickets from $15
+          </div>
+          <p>Four home matches in May! NM United's season is in full swing. Grab tickets for any (or all) of these exciting matchups at Isotopes Park.</p>
+          <a href="https://www.newmexicoutd.com/" target="_blank" rel="noopener" class="ticket-link">
+            View Schedule <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 7: Boots in the Park -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#129312;</span>
+          <div class="event-card-info">
+            <span class="event-date">May 15 &ndash; 16, 2026</span>
+            <h3>Boots in the Park</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Albuquerque
+          </div>
+          <p>Country music festival featuring top artists, great food, and good times. Two days of live music under the New Mexico sky.</p>
+          <a href="#" class="ticket-link">
+            Details Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 8: NM Wine Festivals -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127863;</span>
+          <div class="event-card-info">
+            <span class="event-date">May 23 &ndash; 25, 2026</span>
+            <h3>NM Wine Festival</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Balloon Fiesta Park (ABQ) &amp; Las Cruces Fairgrounds
+          </div>
+          <p>Memorial Day weekend tradition! All-you-care-to-taste NM wines, live entertainment, and a commemorative wine glass. Two locations to choose from.</p>
+          <a href="https://nmwine.com/new-mexico-wine-festivals/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 9: Special Olympics -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127941;</span>
+          <div class="event-card-info">
+            <span class="event-date">May 29 &ndash; 31, 2026</span>
+            <h3>Special Olympics of NM</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Albuquerque
+          </div>
+          <p>Three days celebrating athletes with intellectual disabilities. Come cheer, volunteer, or support one of New Mexico's most inspiring events.</p>
+          <a href="#" class="ticket-link">
+            Details Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 10: NM Chupacabras May -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127944;</span>
+          <div class="event-card-info">
+            <span class="event-date">May 31, 2026</span>
+            <h3>NM Chupacabras vs SD Strike Force</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Tingley Coliseum &bull; Tickets from $2
+          </div>
+          <p>Indoor football action continues at Tingley! The Chupacabras take on the San Diego Strike Force in their inaugural IFL season.</p>
+          <a href="http://www.chupacabras.net/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 11: NM United June -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#9917;</span>
+          <div class="event-card-info">
+            <span class="event-date">Jun 6, 2026</span>
+            <h3>NM United Home Match</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Isotopes Park &bull; Tickets from $15
+          </div>
+          <p>Summer soccer at Isotopes Park. Another chance to see NM United defend their home turf in the USL Championship.</p>
+          <a href="https://www.newmexicoutd.com/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 12: Heights Summer Fest -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127881;</span>
+          <div class="event-card-info">
+            <span class="event-date">Jun 13, 2026</span>
+            <h3>Heights Summer Fest</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Albuquerque Heights
+          </div>
+          <p>Community celebration in the Heights neighborhood. Local vendors, live entertainment, food, and fun for the whole family.</p>
+          <a href="#" class="ticket-link">
+            Details Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 13: Chupacabras June -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127944;</span>
+          <div class="event-card-info">
+            <span class="event-date">Jun 21, 2026</span>
+            <h3>NM Chupacabras vs NAZ Wranglers</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Tingley Coliseum &bull; Tickets from $2
+          </div>
+          <p>The Wranglers return to Tingley for the rematch. Affordable indoor football action the whole family can enjoy.</p>
+          <a href="http://www.chupacabras.net/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 14: Chupacabras July 4th -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-emoji">&#127944;</span>
+          <div class="event-card-info">
+            <span class="event-date">Jul 4, 2026</span>
+            <h3>NM Chupacabras vs Vegas Knight Hawks</h3>
+          </div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Tingley Coliseum &bull; Tickets from $2
+          </div>
+          <p>Celebrate the 4th of July with indoor football! The Chupacabras take on the Vegas Knight Hawks for a holiday showdown at Tingley.</p>
+          <a href="http://www.chupacabras.net/" target="_blank" rel="noopener" class="ticket-link">
+            Get Tickets <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMUNITY CALLOUT ===== -->
+<section style="padding: 0 0 80px;">
+  <div class="container">
+    <div class="callout-box">
+      <h2>Proud to Support Our Community</h2>
+      <p>For 30 years, MGS Communications has been part of the fabric of Albuquerque. We're honored to support the events and organizations that make New Mexico special.</p>
+      <div class="callout-buttons">
+        <a href="/about-us" class="btn btn-white">Our Story</a>
+        <a href="/contact" class="btn btn-yellow">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-brand"><img src="/images/mgs-logo.png" alt="MGS Communications" loading="lazy" style="height:90px;width:auto;background:#fff;padding:6px 14px;border-radius:8px;"></div>
+        <p>Albuquerque's trusted provider of two-way radios and security systems since 1996. Real people, real service, real results.</p>
+        <div class="footer-badges">
+          <span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Kenwood Authorized</span>
+          <span class="footer-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Motorola Dealer</span>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/two-way-radios">Two-Way Radios</a>
+          <a href="/security-systems">Security Systems</a>
+          <a href="/service-repair">Service &amp; Repairs</a>
+          <a href="/service-areas">Service Areas</a>
+          <a href="/pay">Pay Invoice</a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="footer-links">
+          <a href="/about-us">About Us</a>
+          <a href="/why-us">Why Choose MGS</a>
+          <div class="nav-dropdown"><a href="/resources">Resources</a><div class="dropdown-menu">
+        <a href="/resources"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Guides &amp; Articles</a>
+        <a href="/events"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Community Events</a>
+      </div></div>
+          <a href="/events">Events</a>
+          <a href="/contact">Contact &amp; Quote</a>
+          <a href="/privacy">Privacy Policy</a>
+        </div>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span><a href="tel:5058882034" style="color:inherit">(505) 888-2034</a><br>Mon&ndash;Fri 9am&ndash;5pm</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>3505 Carlisle Blvd NE<br>Albuquerque, NM 87110<br><small>Office: Tue&ndash;Fri 9am&ndash;2pm</small></span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span><a href="mailto:team@mgscommunications.com" style="color:inherit">team@mgscommunications.com</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 MGS Communications, Inc. All rights reserved. Serving Albuquerque, Rio Rancho, Santa Fe &amp; all NM since 1996.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

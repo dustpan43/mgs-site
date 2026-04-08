@@ -91,6 +91,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://mgscommunications.com/events/</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://mgscommunications.com/contact/</loc>
     <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
