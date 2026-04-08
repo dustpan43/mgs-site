@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "dev",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["C:\\Users\\dusti\\OneDrive\\Desktop\\mgs-site\\.claude\\serve.js"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "C:\\Users\\dusti\\Projects\\MGS-Hub\\website", "-l", "3001", "--no-clipboard"],
       "port": 3001
     }
   ]
