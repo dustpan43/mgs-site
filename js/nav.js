@@ -135,7 +135,7 @@
           ${navHTML}
         </nav>
         <div class="header-cta">
-          <a href="/pay" class="header-pay" aria-label="Pay Invoice">${icon('dollar')} Pay Invoice</a>
+          <a href="/pay" class="header-pay" aria-label="Pay Invoice">Pay Invoice</a>
           <a href="tel:5058882034" class="header-phone">${icon('phone')} (505) 888-2034</a>
           <a href="#quote-form" class="btn btn-yellow">Get Free Quote</a>
           <button class="menu-toggle" id="menuToggle" aria-label="Menu">${icon('menu')}</button>
