@@ -1,39 +1,15 @@
 /* ============================================================
    MGS Communications — Shared JavaScript
-   Extracted from inline <script> blocks across all pages.
+   Runs on every page. Non-nav bindings run immediately; nav
+   bindings wait for nav.js to render the header.
    ============================================================ */
 
-// Header scroll shadow
+// ----- Runs immediately (doesn't depend on rendered nav) -----
+
+// Header scroll shadow — #header element exists as empty shell in HTML
 window.addEventListener('scroll', () => {
-  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
-});
-
-// Mobile menu toggle
-document.getElementById('menuToggle').addEventListener('click', () => {
-  document.getElementById('mainNav').classList.toggle('open');
-});
-
-// Close mobile nav when a link is clicked
-document.querySelectorAll('#mainNav a').forEach(a => {
-  if (!a.parentElement.classList.contains('nav-dropdown') || a.closest('.dropdown-menu')) {
-    a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open'));
-  }
-});
-
-// Prevent default on dropdown toggle links
-document.querySelectorAll('.nav-dropdown > a[href="#"]').forEach(a => {
-  a.addEventListener('click', (e) => e.preventDefault());
-});
-
-// Mobile dropdown accordion
-document.querySelectorAll('.nav-dropdown > a').forEach(toggle => {
-  toggle.addEventListener('click', function(e) {
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-      const dropdown = this.parentElement;
-      dropdown.classList.toggle('dropdown-open');
-    }
-  });
+  const h = document.getElementById('header');
+  if (h) h.classList.toggle('scrolled', window.scrollY > 10);
 });
 
 // Exit-intent popup (only runs on pages that have the popup element)
@@ -58,7 +34,8 @@ if (exitPopup) {
     }
   });
 
-  document.getElementById('popupClose').addEventListener('click', dismissPopup);
+  const popupCloseBtn = document.getElementById('popupClose');
+  if (popupCloseBtn) popupCloseBtn.addEventListener('click', dismissPopup);
   exitPopup.addEventListener('click', (e) => { if (e.target === e.currentTarget) dismissPopup(); });
 }
 
@@ -101,7 +78,9 @@ document.querySelectorAll('form[data-netlify="true"]').forEach(form => {
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
-    const target = document.querySelector(a.getAttribute('href'));
+    const href = a.getAttribute('href');
+    if (href === '#' || href === '#!') return; // toggle-only anchors, don't scroll
+    const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth' });
@@ -127,3 +106,57 @@ document.querySelectorAll('input[type="tel"], input[name="phone"]').forEach(phon
     prevPhoneLen = formatted.length;
   });
 });
+
+// ----- Runs after nav.js has rendered the header -----
+
+function bindNavListeners() {
+  const mainNav = document.getElementById('mainNav');
+  const menuToggle = document.getElementById('menuToggle');
+  if (!mainNav || !menuToggle) return;
+
+  // Mobile menu toggle
+  menuToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+
+  // Close mobile nav when a leaf link is clicked (not toggle-parents)
+  document.querySelectorAll('#mainNav a').forEach(a => {
+    const parent = a.parentElement;
+    // Skip top-level dropdown toggle (Services, About, Resources)
+    if (parent.classList.contains('nav-dropdown')) return;
+    // Skip nested flyout toggle (Security Systems)
+    if (parent.classList.contains('nav-dropdown-nested')) return;
+    a.addEventListener('click', () => mainNav.classList.remove('open'));
+  });
+
+  // Prevent default on toggle-only dropdown parents (href="#")
+  document.querySelectorAll('.nav-dropdown > a[href="#"]').forEach(a => {
+    a.addEventListener('click', (e) => e.preventDefault());
+  });
+
+  // Mobile: top-level dropdown accordion (Services / About / Resources)
+  document.querySelectorAll('.nav-dropdown > a').forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        this.parentElement.classList.toggle('dropdown-open');
+      }
+    });
+  });
+
+  // Mobile: nested flyout accordion (Security Systems sub-pages)
+  document.querySelectorAll('.nav-dropdown-nested > a').forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.parentElement.classList.toggle('flyout-open');
+      }
+    });
+  });
+}
+
+// Bind nav listeners once the nav is rendered
+if (document.getElementById('mainNav')) {
+  bindNavListeners();
+} else {
+  document.addEventListener('nav:rendered', bindNavListeners, { once: true });
+}
