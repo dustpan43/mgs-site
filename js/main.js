@@ -108,3 +108,22 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// Phone number auto-format — backspace-safe (skips reformatting on delete
+// so users don't get stuck on ')' or '-' characters)
+document.querySelectorAll('input[type="tel"], input[name="phone"]').forEach(phoneInput => {
+  let prevPhoneLen = 0;
+  phoneInput.addEventListener('input', function(e) {
+    const raw = e.target.value.replace(/\D/g, '').substring(0, 10);
+    if (e.target.value.length < prevPhoneLen) {
+      prevPhoneLen = e.target.value.length;
+      return;
+    }
+    let formatted = '';
+    if (raw.length > 0) formatted = '(' + raw.substring(0, 3);
+    if (raw.length >= 3) formatted += ') ' + raw.substring(3, 6);
+    if (raw.length >= 6) formatted += '-' + raw.substring(6, 10);
+    e.target.value = formatted;
+    prevPhoneLen = formatted.length;
+  });
+});
