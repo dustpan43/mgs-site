@@ -32,26 +32,25 @@
 
   const NAV_TREE = [
     { label: 'Home', href: '/' },
-    { label: 'Services', toggle: true, children: [
-      { label: 'All Products & Services', href: '/products-services', icon: 'book' },
+    { label: 'Radios', toggle: true, children: [
       { label: 'Two-Way Radios', href: '/two-way-radios', icon: 'radio' },
-      { label: 'Security Systems', href: '/security-systems', icon: 'camera', flyout: [
-        { label: 'Video Surveillance', href: '/security-systems/video-surveillance', icon: 'camera' },
-        { label: 'Fire & Burglar Alarms', href: '/security-systems/fire-alarms', icon: 'fire' },
-        { label: '24/7 Monitoring', href: '/security-systems/monitoring', icon: 'clock' },
-        { label: 'Access Control', href: '/security-systems/access-control', icon: 'lock' },
-        { label: 'Commercial', href: '/security-systems/commercial', icon: 'building' }
-      ]},
-      { label: 'Service & Repairs', href: '/service-repair', icon: 'wrench' },
-      { label: 'Service Areas', href: '/service-areas', icon: 'pin' }
+      { label: 'Service & Repair', href: '/service-repair', icon: 'wrench' }
     ]},
-    { label: 'About', toggle: true, children: [
+    { label: 'Security', toggle: true, children: [
+      { label: 'All Security Systems', href: '/security-systems', icon: 'camera' },
+      { label: 'Video Surveillance', href: '/security-systems/video-surveillance', icon: 'camera' },
+      { label: 'Fire & Burglar Alarms', href: '/security-systems/fire-alarms', icon: 'fire' },
+      { label: '24/7 Monitoring', href: '/security-systems/monitoring', icon: 'clock' },
+      { label: 'Access Control', href: '/security-systems/access-control', icon: 'lock' },
+      { label: 'Commercial', href: '/security-systems/commercial', icon: 'building' }
+    ]},
+    { label: 'Catalog', href: '/products-services' },
+    { label: 'Company', toggle: true, children: [
       { label: 'About Us', href: '/about-us', icon: 'user' },
-      { label: 'Why Choose MGS', href: '/why-us', icon: 'star' }
-    ]},
-    { label: 'Resources', toggle: true, children: [
-      { label: 'Community Events', href: '/events', icon: 'calendar' },
-      { label: 'Guides & Articles', href: '/resources', icon: 'book' }
+      { label: 'Why Choose MGS', href: '/why-us', icon: 'star' },
+      { label: 'Service Areas', href: '/service-areas', icon: 'pin' },
+      { label: 'Guides & Articles', href: '/resources', icon: 'book' },
+      { label: 'Community Events', href: '/events', icon: 'calendar' }
     ]},
     { label: 'Contact', href: '/contact' }
   ];
@@ -168,8 +167,8 @@
               ${securityBadges}
             </div>
           </div>
-          <div><h4>Quick Links</h4><div class="footer-links"><a href="/">Home</a><a href="/two-way-radios">Two-Way Radios</a><a href="/security-systems">Security Systems</a><a href="/service-repair">Service &amp; Repairs</a><a href="/service-areas">Service Areas</a><a href="/pay">Pay Invoice</a></div></div>
-          <div><h4>Company</h4><div class="footer-links"><a href="/about-us">About Us</a><a href="/why-us">Why Choose MGS</a><a href="/resources">Resources</a><a href="/contact">Contact &amp; Quote</a><a href="/privacy">Privacy Policy</a></div></div>
+          <div><h4>What We Do</h4><div class="footer-links"><a href="/two-way-radios">Two-Way Radios</a><a href="/security-systems">Security Systems</a><a href="/service-repair">Service &amp; Repair</a><a href="/products-services">Full Catalog</a><a href="/pay">Pay Invoice</a></div></div>
+          <div><h4>Company</h4><div class="footer-links"><a href="/about-us">About Us</a><a href="/why-us">Why Choose MGS</a><a href="/service-areas">Service Areas</a><a href="/resources">Guides &amp; Articles</a><a href="/events">Community Events</a><a href="/contact">Contact</a><a href="/privacy">Privacy Policy</a></div></div>
           <div>
             <h4>Contact Us</h4>
             <div class="footer-contact-item">${icon('phone')}<span><a href="tel:5058882034" style="color:inherit">(505) 888-2034</a><br>Mon&ndash;Fri 9am&ndash;5pm</span></div>

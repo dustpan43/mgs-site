@@ -135,7 +135,6 @@
     <div class="hero-content">
       <div class="breadcrumb">
         <a href="/">Home</a> <span class="sep">/</span>
-        <a href="#">Services</a> <span class="sep">/</span>
         <span style="color:rgba(255,255,255,.85);">Two-Way Radios</span>
       </div>
       <h1>Albuquerque's <em>Two-Way Radio</em> Headquarters</h1>
@@ -333,6 +332,32 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- ===== BROWSE CATALOG CTA ===== -->
+<section style="background: var(--gray-50);">
+  <div class="container">
+    <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 40px 48px; display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center;">
+      <div style="width: 64px; height: 64px; border-radius: 14px; background: linear-gradient(135deg, var(--green), var(--green-light)); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <div>
+        <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: 6px;">Browse Our Full Kenwood &amp; Motorola Catalog</h3>
+        <p style="color: var(--gray-600); font-size: .95rem; line-height: 1.55; margin: 0;">Every handheld, mobile, repeater, battery, charger, earpiece, and accessory we carry &mdash; organized by brand and type with live search and filters. Have a specific model in mind? You'll find it there.</p>
+      </div>
+      <a href="/products-services" class="btn btn-green btn-lg" style="white-space: nowrap;">View Full Catalog →</a>
+    </div>
+  </div>
+  <style>
+    @media (max-width: 900px) {
+      section > .container > div[style*="grid-template-columns: auto 1fr auto"] {
+        grid-template-columns: 1fr !important; text-align: center; padding: 32px 24px !important; gap: 20px !important;
+      }
+      section > .container > div[style*="grid-template-columns: auto 1fr auto"] > div:first-child {
+        margin: 0 auto;
+      }
+    }
+  </style>
 </section>
 
 <!-- ===== CTA + QUOTE FORM ===== -->
