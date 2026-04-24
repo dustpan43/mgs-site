@@ -33,6 +33,7 @@
   const NAV_TREE = [
     { label: 'Home', href: '/' },
     { label: 'Services', toggle: true, children: [
+      { label: 'All Products & Services', href: '/products-services', icon: 'book' },
       { label: 'Two-Way Radios', href: '/two-way-radios', icon: 'radio' },
       { label: 'Security Systems', href: '/security-systems', icon: 'camera', flyout: [
         { label: 'Video Surveillance', href: '/security-systems/video-surveillance', icon: 'camera' },
