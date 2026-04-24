@@ -75,12 +75,15 @@
     .catalog-anchor-inner a:hover { background: var(--gray-100); color: var(--navy); }
     .catalog-anchor-inner a.active { background: var(--navy); color: var(--white); }
 
-    /* ===== CATALOG FILTER BAR ===== */
+    /* ===== CATALOG FILTER BAR (inline, adjacent to grid) ===== */
     .catalog-filters {
-      background: var(--gray-50); padding: 28px 0 24px;
-      border-bottom: 1px solid var(--gray-200);
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 22px 26px;
+      margin-bottom: 36px;
     }
-    .catalog-filters-grid { display: grid; gap: 16px; }
+    .catalog-filters-grid { display: grid; gap: 14px; }
     .search-row {
       display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
     }
@@ -391,58 +394,12 @@
   </div>
 </nav>
 
-<!-- ===== CATALOG FILTERS (controls the Radios & Accessories section) ===== -->
-<section class="catalog-filters" id="catalogFilters">
-  <div class="container">
-    <div class="catalog-filters-grid">
-      <div class="search-row">
-        <input type="search" class="catalog-search" id="catalogSearch"
-               placeholder="Search by model number, description, or keyword..." autocomplete="off" aria-label="Search catalog">
-        <div class="view-toggle" role="tablist" aria-label="View mode">
-          <button type="button" class="active" data-view="grid" aria-label="Grid view">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Grid
-          </button>
-          <button type="button" data-view="table" aria-label="Table view">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg> Table
-          </button>
-        </div>
-      </div>
-
-      <div class="filter-chips" role="group" aria-label="Filter by brand">
-        <span class="filter-label">Brand</span>
-        <button class="filter-chip active" data-brand="all">All Brands</button>
-        <button class="filter-chip" data-brand="Kenwood">Kenwood</button>
-        <button class="filter-chip" data-brand="Motorola">Motorola</button>
-        <button class="filter-chip" data-brand="Impact">Impact</button>
-      </div>
-
-      <div class="filter-chips" role="group" aria-label="Filter by type">
-        <span class="filter-label">Type</span>
-        <button class="filter-chip active" data-type="all">All Types</button>
-        <button class="filter-chip" data-type="Portables">Portables</button>
-        <button class="filter-chip" data-type="Mobile Radios">Mobile Radios</button>
-        <button class="filter-chip" data-type="Repeaters">Repeaters</button>
-        <button class="filter-chip" data-type="Call Boxes">Call Boxes</button>
-        <button class="filter-chip" data-type="Earpieces &amp; Headsets">Earpieces &amp; Headsets</button>
-        <button class="filter-chip" data-type="Speaker Mics">Speaker Mics</button>
-        <button class="filter-chip" data-type="Batteries">Batteries</button>
-        <button class="filter-chip" data-type="Chargers">Chargers</button>
-        <button class="filter-chip" data-type="Antennas">Antennas</button>
-        <button class="filter-chip" data-type="License Keys &amp; Software">License Keys &amp; Software</button>
-        <button class="filter-chip" data-type="Accessories">Other Accessories</button>
-      </div>
-
-      <div class="result-count" id="resultCount"><strong>—</strong> items shown</div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== RADIOS & ACCESSORIES SECTION ===== -->
 <section class="catalog-section" id="radios">
   <div class="container">
     <div class="text-center" style="margin-bottom: 40px;">
       <div class="section-label">Two-Way Radios &amp; Accessories</div>
-      <h2 class="section-title">Kenwood, Motorola &amp; Impact Catalog</h2>
+      <h2 class="section-title">Browse Our Radio Catalog</h2>
       <p class="section-sub mx-auto">The radios, accessories, and components we carry day-to-day — organized by brand and type.</p>
     </div>
 
@@ -465,6 +422,50 @@
         .catalog-honesty-note > div:first-child { margin: 0 auto; }
       }
     </style>
+
+    <!-- ===== CATALOG FILTER BAR (adjacent to grid) ===== -->
+    <div class="catalog-filters" id="catalogFilters">
+      <div class="catalog-filters-grid">
+        <div class="search-row">
+          <input type="search" class="catalog-search" id="catalogSearch"
+                 placeholder="Search by model number, description, or keyword..." autocomplete="off" aria-label="Search catalog">
+          <div class="view-toggle" role="tablist" aria-label="View mode">
+            <button type="button" class="active" data-view="grid" aria-label="Grid view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Grid
+            </button>
+            <button type="button" data-view="table" aria-label="Table view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg> Table
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-chips" role="group" aria-label="Filter by brand">
+          <span class="filter-label">Brand</span>
+          <button class="filter-chip active" data-brand="all">All Brands</button>
+          <button class="filter-chip" data-brand="Kenwood">Kenwood</button>
+          <button class="filter-chip" data-brand="Motorola">Motorola</button>
+          <button class="filter-chip" data-brand="Impact">Impact</button>
+        </div>
+
+        <div class="filter-chips" role="group" aria-label="Filter by type">
+          <span class="filter-label">Type</span>
+          <button class="filter-chip active" data-type="all">All Types</button>
+          <button class="filter-chip" data-type="Portables">Portables</button>
+          <button class="filter-chip" data-type="Mobile Radios">Mobile Radios</button>
+          <button class="filter-chip" data-type="Repeaters">Repeaters</button>
+          <button class="filter-chip" data-type="Call Boxes">Call Boxes</button>
+          <button class="filter-chip" data-type="Earpieces &amp; Headsets">Earpieces &amp; Headsets</button>
+          <button class="filter-chip" data-type="Speaker Mics">Speaker Mics</button>
+          <button class="filter-chip" data-type="Batteries">Batteries</button>
+          <button class="filter-chip" data-type="Chargers">Chargers</button>
+          <button class="filter-chip" data-type="Antennas">Antennas</button>
+          <button class="filter-chip" data-type="License Keys &amp; Software">License Keys &amp; Software</button>
+          <button class="filter-chip" data-type="Accessories">Other Accessories</button>
+        </div>
+
+        <div class="result-count" id="resultCount"><strong>—</strong> items shown</div>
+      </div>
+    </div>
 
     <!-- Grid view (default) -->
     <div id="catalogGrid"></div>
