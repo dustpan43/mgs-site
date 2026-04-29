@@ -1031,6 +1031,9 @@
   }, { passive: true });
 
   // ===== QUOTE CART =====
+  // Wrap in a function dispatched on DOMContentLoaded — cart UI HTML
+  // sits after this <script> tag, so we can't query it at parse time.
+  function initQuoteCart() {
   const STORAGE_KEY = 'mgs-quote-list';
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch (e) { cart = []; }
@@ -1213,6 +1216,13 @@
   });
 
   updateCartButton();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initQuoteCart);
+  } else {
+    initQuoteCart();
+  }
 
   // ===== INITIAL RENDER =====
   render();
