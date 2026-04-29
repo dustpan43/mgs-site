@@ -321,6 +321,157 @@
       .callout-buttons { flex-direction: column; }
       .callout-buttons .btn { width: 100%; }
     }
+
+    /* ===== QUOTE CART ===== */
+    .product-add-btn {
+      margin-top: 10px; padding: 9px 14px; border-radius: 8px; font-size: .82rem;
+      font-weight: 600; color: var(--green); background: var(--white);
+      border: 1px solid var(--green); cursor: pointer; transition: all .15s;
+      align-self: flex-start; font-family: inherit; text-align: center;
+    }
+    .product-add-btn:hover { background: var(--green); color: var(--white); }
+    .product-add-btn.added { background: var(--green); color: var(--white); border-color: var(--green); }
+    .catalog-table .product-add-btn {
+      padding: 6px 10px; font-size: .74rem; white-space: nowrap; margin-top: 0;
+    }
+    .service-item { display: flex; flex-direction: column; gap: 2px; }
+    .service-add-btn {
+      margin-top: 6px; padding: 5px 10px; border-radius: 6px; font-size: .72rem;
+      font-weight: 600; color: var(--green); background: var(--white);
+      border: 1px solid var(--green); cursor: pointer; transition: all .15s;
+      align-self: flex-start; font-family: inherit;
+    }
+    .service-add-btn:hover { background: var(--green); color: var(--white); }
+    .service-add-btn.added { background: var(--green); color: var(--white); }
+
+    /* Floating cart button */
+    #quote-cart-btn {
+      position: fixed; bottom: 24px; right: 24px; z-index: 80;
+      background: var(--green); color: var(--white); border: none;
+      padding: 14px 22px; border-radius: 999px; font-weight: 700; font-size: .92rem;
+      font-family: inherit; cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,.18);
+      display: none; align-items: center; gap: 10px;
+      transition: transform .15s, box-shadow .15s;
+    }
+    #quote-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,0,0,.22); }
+    #quote-cart-btn.visible { display: inline-flex; }
+    #quote-cart-btn.pulse { animation: cart-pulse .4s ease-out; }
+    #quote-cart-btn .count {
+      background: var(--yellow); color: var(--navy); border-radius: 999px;
+      padding: 2px 9px; font-size: .82rem; font-weight: 800;
+      min-width: 22px; text-align: center;
+    }
+    @keyframes cart-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* Cart backdrop + panel */
+    #quote-cart-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,.42); z-index: 95;
+      opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s;
+    }
+    #quote-cart-backdrop.open { opacity: 1; visibility: visible; }
+
+    #quote-cart-panel {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 460px; max-width: 100%;
+      background: var(--white); z-index: 100; display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform .3s ease-out;
+      box-shadow: -8px 0 24px rgba(0,0,0,.12);
+    }
+    #quote-cart-panel.open { transform: translateX(0); }
+
+    .qcp-head {
+      padding: 22px 26px; display: flex; align-items: center; justify-content: space-between;
+      background: var(--navy); color: var(--white); flex-shrink: 0;
+    }
+    .qcp-head h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.18rem; font-weight: 800;
+      margin: 0; color: var(--white);
+    }
+    .qcp-close {
+      background: transparent; border: none; color: var(--white); cursor: pointer;
+      font-size: 1.6rem; line-height: 1; padding: 4px 10px; opacity: .85; transition: opacity .15s;
+    }
+    .qcp-close:hover { opacity: 1; }
+
+    .qcp-body { flex: 1; overflow-y: auto; padding: 18px 26px 24px; }
+
+    .qcp-empty { text-align: center; padding: 50px 20px; color: var(--gray-500); }
+    .qcp-empty h4 { color: var(--navy); font-size: 1.08rem; margin-bottom: 8px; }
+    .qcp-empty p { font-size: .9rem; line-height: 1.5; }
+
+    .qcp-items {
+      list-style: none; margin: 0 0 14px; padding: 0;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .qcp-item {
+      display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center;
+      padding: 12px 14px; background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-radius: 8px;
+    }
+    .qcp-item-name { font-size: .88rem; font-weight: 600; color: var(--navy); line-height: 1.35; }
+    .qcp-item-cat { font-size: .72rem; color: var(--gray-500); margin-top: 2px; }
+    .qcp-qty {
+      width: 56px; padding: 6px 8px; border: 1px solid var(--gray-300); border-radius: 6px;
+      font-size: .88rem; text-align: center; font-family: inherit;
+    }
+    .qcp-remove {
+      background: transparent; border: none; color: var(--gray-500); cursor: pointer;
+      font-size: 1.3rem; line-height: 1; padding: 4px 6px; transition: color .15s;
+    }
+    .qcp-remove:hover { color: var(--orange); }
+
+    .qcp-clear {
+      background: transparent; border: none; color: var(--gray-500); cursor: pointer;
+      font-size: .8rem; text-decoration: underline; padding: 4px 0;
+      font-family: inherit; margin-bottom: 14px;
+    }
+    .qcp-clear:hover { color: var(--orange); }
+
+    .qcp-form { display: flex; flex-direction: column; gap: 12px; }
+    .qcp-form h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin: 4px 0;
+    }
+    .qcp-form input, .qcp-form select, .qcp-form textarea {
+      width: 100%; padding: 11px 13px; border: 1px solid var(--gray-300); border-radius: 8px;
+      font-family: inherit; font-size: .92rem; color: var(--gray-900); background: var(--white);
+    }
+    .qcp-form input:focus, .qcp-form select:focus, .qcp-form textarea:focus {
+      outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(46,125,50,.15);
+    }
+    .qcp-form textarea { resize: vertical; min-height: 70px; }
+    .qcp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 520px) { .qcp-form-row { grid-template-columns: 1fr; } }
+    .qcp-submit {
+      background: var(--green); color: var(--white); border: none; padding: 14px 20px;
+      border-radius: 10px; font-weight: 700; font-size: .96rem; cursor: pointer;
+      font-family: inherit; transition: background .15s;
+    }
+    .qcp-submit:hover { background: var(--green-dark, #1B5E20); }
+    .qcp-submit:disabled { opacity: .6; cursor: not-allowed; }
+
+    .qcp-success { text-align: center; padding: 40px 20px; }
+    .qcp-success svg { width: 56px; height: 56px; color: var(--green); margin-bottom: 14px; }
+    .qcp-success h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.18rem; color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .qcp-success p { font-size: .9rem; color: var(--gray-600); line-height: 1.55; }
+    .qcp-success a { color: var(--green); font-weight: 700; }
+
+    .qcp-error {
+      background: #FFF3E0; border: 1px solid #FFB74D; color: #E65100;
+      padding: 10px 14px; border-radius: 8px; font-size: .85rem; margin-top: 6px;
+    }
+
+    @media (max-width: 520px) {
+      #quote-cart-btn { right: 16px; bottom: 16px; padding: 12px 18px; font-size: .86rem; }
+      #quote-cart-panel { width: 100%; }
+      .qcp-head { padding: 18px 20px; }
+      .qcp-body { padding: 16px 20px 22px; }
+    }
   </style>
   <script src="/js/nav.js" defer></script>
 </head>
@@ -708,7 +859,7 @@
             <h4 class="product-model">${escapeHtml(p.model)}</h4>
             <p class="product-desc">${escapeHtml(p.description)}</p>
             ${connector}
-            <a href="/contact?subject=Quote+request%3A+${encodeURIComponent(p.model)}" class="product-quote-btn">Request Quote →</a>
+            <button type="button" class="product-add-btn" data-add-to-cart data-model="${escapeHtml(p.model)}" data-category="${escapeHtml(p.category)}">+ Add to Quote List</button>
           </article>
         `;
       }).join('');
@@ -736,7 +887,7 @@
         <td>${brandCell}</td>
         <td>${escapeHtml(p.category)}</td>
         <td>${escapeHtml(p.description)}${p.connector ? ` <em style="color:var(--gray-500);">(${escapeHtml(p.connector)})</em>` : ''}</td>
-        <td><a href="/contact?subject=Quote+request%3A+${encodeURIComponent(p.model)}" class="product-quote-btn">Quote</a></td>
+        <td><button type="button" class="product-add-btn" data-add-to-cart data-model="${escapeHtml(p.model)}" data-category="${escapeHtml(p.category)}">+ Add</button></td>
       </tr>
     `;
     }).join('');
@@ -794,6 +945,7 @@
         <li class="service-item">
           <span class="service-item-name">${escapeHtml(s.name)}</span>
           <span class="service-item-desc">${escapeHtml(s.description)}</span>
+          <button type="button" class="service-add-btn" data-add-to-cart data-model="${escapeHtml(s.name)}" data-category="${escapeHtml(s.category)}">+ Add to Quote</button>
         </li>
       `).join('');
       parts.push(`
@@ -878,11 +1030,256 @@
     }
   }, { passive: true });
 
+  // ===== QUOTE CART =====
+  const STORAGE_KEY = 'mgs-quote-list';
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch (e) { cart = []; }
+
+  const cartBtn = document.getElementById('quote-cart-btn');
+  const cartCount = document.getElementById('quote-cart-count');
+  const cartPanel = document.getElementById('quote-cart-panel');
+  const cartBackdrop = document.getElementById('quote-cart-backdrop');
+  const cartItemsEl = document.getElementById('qcp-items');
+  const cartEmptyEl = document.getElementById('qcp-empty');
+  const cartFormEl = document.getElementById('qcp-form');
+  const cartSuccessEl = document.getElementById('qcp-success');
+  const cartItemsHidden = document.getElementById('qcp-items-hidden');
+
+  function saveCart() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) {}
+  }
+
+  function totalQty() { return cart.reduce((sum, i) => sum + i.qty, 0); }
+
+  function updateCartButton() {
+    const total = totalQty();
+    cartCount.textContent = total;
+    cartBtn.classList.toggle('visible', total > 0);
+  }
+
+  function pulseCartButton() {
+    cartBtn.classList.remove('pulse');
+    void cartBtn.offsetWidth;
+    cartBtn.classList.add('pulse');
+  }
+
+  function addToCart(model, category) {
+    const existing = cart.find(i => i.model === model);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ model, category, qty: 1 });
+    }
+    saveCart();
+    updateCartButton();
+    pulseCartButton();
+    renderCartItems();
+  }
+
+  function removeFromCart(model) {
+    cart = cart.filter(i => i.model !== model);
+    saveCart();
+    updateCartButton();
+    renderCartItems();
+  }
+
+  function updateQty(model, qty) {
+    const item = cart.find(i => i.model === model);
+    if (!item) return;
+    item.qty = Math.max(1, parseInt(qty, 10) || 1);
+    saveCart();
+    updateCartButton();
+  }
+
+  function clearCart() {
+    cart = [];
+    saveCart();
+    updateCartButton();
+    renderCartItems();
+  }
+
+  function renderCartItems() {
+    if (cart.length === 0) {
+      cartItemsEl.innerHTML = '';
+      cartItemsEl.hidden = true;
+      cartEmptyEl.hidden = false;
+      return;
+    }
+    cartEmptyEl.hidden = true;
+    cartItemsEl.hidden = false;
+    cartItemsEl.innerHTML = cart.map(i => `
+      <li class="qcp-item">
+        <div>
+          <div class="qcp-item-name">${escapeHtml(i.model)}</div>
+          <div class="qcp-item-cat">${escapeHtml(i.category)}</div>
+        </div>
+        <input type="number" class="qcp-qty" min="1" value="${i.qty}" data-qty-for="${escapeHtml(i.model)}" aria-label="Quantity for ${escapeHtml(i.model)}">
+        <button type="button" class="qcp-remove" data-remove="${escapeHtml(i.model)}" aria-label="Remove ${escapeHtml(i.model)}">×</button>
+      </li>
+    `).join('');
+  }
+
+  function openCartPanel() {
+    cartPanel.classList.add('open');
+    cartBackdrop.classList.add('open');
+    cartSuccessEl.hidden = true;
+    cartFormEl.hidden = false;
+    document.body.style.overflow = 'hidden';
+    renderCartItems();
+  }
+
+  function closeCartPanel() {
+    cartPanel.classList.remove('open');
+    cartBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Add-to-cart buttons (event delegation across grid, table, services)
+  document.addEventListener('click', (e) => {
+    const addBtn = e.target.closest('[data-add-to-cart]');
+    if (!addBtn) return;
+    const model = addBtn.dataset.model;
+    const category = addBtn.dataset.category;
+    addToCart(model, category);
+    const orig = addBtn.textContent;
+    addBtn.textContent = '✓ Added';
+    addBtn.classList.add('added');
+    clearTimeout(addBtn._addedTimer);
+    addBtn._addedTimer = setTimeout(() => {
+      addBtn.textContent = orig;
+      addBtn.classList.remove('added');
+    }, 900);
+  });
+
+  // Open / close
+  cartBtn.addEventListener('click', openCartPanel);
+  cartBackdrop.addEventListener('click', closeCartPanel);
+  document.querySelectorAll('[data-cart-close]').forEach(el => {
+    el.addEventListener('click', closeCartPanel);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cartPanel.classList.contains('open')) closeCartPanel();
+  });
+
+  // Qty input + remove + clear (event delegation inside panel)
+  cartPanel.addEventListener('input', (e) => {
+    if (e.target.matches('[data-qty-for]')) {
+      updateQty(e.target.dataset.qtyFor, e.target.value);
+    }
+  });
+  cartPanel.addEventListener('click', (e) => {
+    const removeBtn = e.target.closest('[data-remove]');
+    if (removeBtn) removeFromCart(removeBtn.dataset.remove);
+    const clearBtn = e.target.closest('[data-cart-clear]');
+    if (clearBtn && cart.length > 0 && confirm('Clear all items from your quote list?')) clearCart();
+  });
+
+  // Submit
+  cartFormEl.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (cart.length === 0) return;
+
+    const itemsText = cart.map(i => `- ${i.model} (qty: ${i.qty})`).join('\n');
+    cartItemsHidden.value = itemsText;
+
+    const submitBtn = cartFormEl.querySelector('.qcp-submit');
+    const existingErr = cartFormEl.querySelector('.qcp-error');
+    if (existingErr) existingErr.remove();
+    submitBtn.disabled = true;
+    const origSubmitText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(cartFormEl);
+      const body = new URLSearchParams(formData).toString();
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      });
+      if (!res.ok) throw new Error('Submission failed');
+      cartFormEl.hidden = true;
+      cartSuccessEl.hidden = false;
+      clearCart();
+      cartFormEl.reset();
+    } catch (err) {
+      const errEl = document.createElement('div');
+      errEl.className = 'qcp-error';
+      errEl.textContent = "Something went wrong. Please try again or call us at (505) 888-2034.";
+      submitBtn.parentElement.insertBefore(errEl, submitBtn);
+      submitBtn.disabled = false;
+      submitBtn.textContent = origSubmitText;
+    }
+  });
+
+  updateCartButton();
+
   // ===== INITIAL RENDER =====
   render();
   renderServices();
 })();
 </script>
+
+<!-- ===== QUOTE CART UI ===== -->
+<button type="button" id="quote-cart-btn" aria-label="Open quote list">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M9 11V7a3 3 0 0 1 6 0v4"/>
+    <rect x="4" y="11" width="16" height="10" rx="2"/>
+  </svg>
+  <span>Quote List</span>
+  <span class="count" id="quote-cart-count">0</span>
+</button>
+
+<div id="quote-cart-backdrop" data-cart-close></div>
+
+<aside id="quote-cart-panel" aria-label="Quote list" role="dialog" aria-modal="true">
+  <div class="qcp-head">
+    <h3>Your Quote List</h3>
+    <button type="button" class="qcp-close" data-cart-close aria-label="Close quote list">×</button>
+  </div>
+
+  <div class="qcp-body">
+    <div id="qcp-empty" class="qcp-empty" hidden>
+      <h4>Your quote list is empty</h4>
+      <p>Browse the catalog and tap "Add to Quote List" on any item to start building your quote.</p>
+    </div>
+
+    <ul id="qcp-items" class="qcp-items"></ul>
+
+    <button type="button" class="qcp-clear" data-cart-clear>Clear all items</button>
+
+    <form id="qcp-form" class="qcp-form" name="quote-list" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="quote-list">
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <textarea name="items" id="qcp-items-hidden" hidden></textarea>
+
+      <h4>Your Information</h4>
+      <input type="text" name="name" placeholder="Your name *" required>
+      <input type="text" name="company" placeholder="Company / organization">
+      <div class="qcp-form-row">
+        <input type="email" name="email" placeholder="Email *" required>
+        <input type="tel" name="phone" placeholder="Phone">
+      </div>
+      <select name="preferred_contact">
+        <option value="">Preferred contact method (optional)</option>
+        <option value="Email">Email</option>
+        <option value="Phone">Phone</option>
+        <option value="No preference">No preference</option>
+      </select>
+      <textarea name="message" placeholder="Anything else we should know? (frequencies, deadlines, qty notes, etc.)"></textarea>
+      <button type="submit" class="qcp-submit">Send My Quote Request</button>
+    </form>
+
+    <div id="qcp-success" class="qcp-success" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+      <h4>Thanks — we got your quote request!</h4>
+      <p>We'll review your list and get back to you within 1 business day with pricing and availability. Need it faster? Call us at <a href="tel:5058882034">(505) 888-2034</a>.</p>
+    </div>
+  </div>
+</aside>
 
 </body>
 </html>
