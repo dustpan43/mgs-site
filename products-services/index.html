@@ -930,10 +930,16 @@
   };
 
   function renderServices() {
-    // Exclude Rentals from the services section (per business decision)
+    // Categories hidden from the catalog (Rentals: promoted via separate card.
+    // Shipping & Handling: incidental cost, billed with the order, not self-quotable.)
+    const HIDDEN_SERVICE_CATS = new Set(['Rentals', 'Shipping & Handling']);
+    // Categories where customers can self-add to a quote (concrete, well-defined units).
+    // Everything else is consultation-first — the team scopes the work, then quotes.
+    const QUOTABLE_SERVICE_CATS = new Set(['Programming Services']);
+
     const groups = new Map();
     SERVICES.forEach(s => {
-      if (s.category === 'Rentals') return;
+      if (HIDDEN_SERVICE_CATS.has(s.category)) return;
       if (!groups.has(s.category)) groups.set(s.category, []);
       groups.get(s.category).push(s);
     });
@@ -941,11 +947,12 @@
     const parts = [];
     groups.forEach((svcs, category) => {
       const icon = SERVICE_ICONS[category] || '';
+      const showBtn = QUOTABLE_SERVICE_CATS.has(category);
       const items = svcs.map(s => `
         <li class="service-item">
           <span class="service-item-name">${escapeHtml(s.name)}</span>
           <span class="service-item-desc">${escapeHtml(s.description)}</span>
-          <button type="button" class="service-add-btn" data-add-to-cart data-model="${escapeHtml(s.name)}" data-category="${escapeHtml(s.category)}">+ Add to Quote</button>
+          ${showBtn ? `<button type="button" class="service-add-btn" data-add-to-cart data-model="${escapeHtml(s.name)}" data-category="${escapeHtml(s.category)}">+ Add to Quote</button>` : ''}
         </li>
       `).join('');
       parts.push(`
