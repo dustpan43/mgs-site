@@ -13,6 +13,8 @@
   <script src="https://secure.nmi.com/token/Collect.js"
           data-tokenization-key="U38AKH-4Q3x2B-WC8DRP-feXuud"
           data-variant="inline"></script>
+  <!-- Cloudflare Turnstile — bot protection -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     /* ===== PAYMENT-SPECIFIC ===== */
     .pay-wrapper { max-width: 560px; margin: 0 auto; }
@@ -49,6 +51,15 @@
 
     .pay-phone-note { text-align: center; margin-top: 24px; font-size: .88rem; color: var(--gray-600); }
     .pay-phone-note a { color: var(--green); font-weight: 600; }
+
+    .amount-min-note { margin-top: 6px; font-size: .8rem; color: var(--gray-600); line-height: 1.4; }
+    .amount-min-note strong { color: var(--navy); }
+    .amount-min-note a { color: var(--green); font-weight: 600; text-decoration: none; }
+    .amount-min-note a:hover { text-decoration: underline; }
+
+    .turnstile-wrap { display: flex; justify-content: center; margin: 8px 0 4px; min-height: 65px; }
+    .turnstile-error { font-size: .85rem; color: var(--orange); text-align: center; margin-top: 4px; display: none; }
+    .turnstile-error.show { display: block; }
 
     .subpage-hero {
       background: linear-gradient(135deg, rgba(27,94,32,.88) 0%, rgba(27,94,32,.82) 60%, rgba(46,125,50,.78) 100%);
@@ -125,8 +136,9 @@
               <label>Amount <span class="req">*</span></label>
               <div class="amount-input-wrap">
                 <span class="dollar-sign">$</span>
-                <input type="number" name="amount" placeholder="0.00" step="0.01" min="0.01" max="99999.99" inputmode="decimal" required>
+                <input type="number" name="amount" placeholder="25.00" step="0.01" min="25" max="99999.99" inputmode="decimal" required>
               </div>
+              <p class="amount-min-note">Minimum online payment: <strong>$25</strong>. For smaller amounts, please call <a href="tel:5058882034">(505) 888-2034</a>.</p>
             </div>
 
             <!-- Row 3: Billing Address -->
@@ -170,6 +182,20 @@
             <div class="form-group">
               <label>CVV <span class="req">*</span></label>
               <div id="cvv" class="cc-field"></div>
+            </div>
+
+            <!-- Bot protection (Cloudflare Turnstile) -->
+            <div class="form-group full">
+              <div class="turnstile-wrap">
+                <div class="cf-turnstile"
+                     data-sitekey="0x4AAAAAADWy_ggDD1oLyGOw"
+                     data-callback="onTurnstileSuccess"
+                     data-expired-callback="onTurnstileExpired"
+                     data-error-callback="onTurnstileError"
+                     data-theme="light"
+                     data-size="normal"></div>
+              </div>
+              <p class="turnstile-error" id="turnstileError">Bot verification failed. Please refresh the page or call (505) 888-2034.</p>
             </div>
 
             <!-- Submit -->
@@ -228,7 +254,26 @@
 
 <script src="/js/main.js" defer></script>
 <script>
-  // ===== Auto-format amount to 2 decimals =====
+  // ===== Minimum payment amount =====
+  var MIN_PAYMENT_AMOUNT = 25;
+
+  // ===== Turnstile token storage =====
+  var turnstileToken = null;
+  function onTurnstileSuccess(token) {
+    turnstileToken = token;
+    var errEl = document.getElementById('turnstileError');
+    if (errEl) errEl.classList.remove('show');
+  }
+  function onTurnstileExpired() {
+    turnstileToken = null;
+  }
+  function onTurnstileError() {
+    turnstileToken = null;
+    var errEl = document.getElementById('turnstileError');
+    if (errEl) errEl.classList.add('show');
+  }
+
+  // ===== Auto-format amount to 2 decimals (min check happens on submit) =====
   document.querySelector('[name="amount"]').addEventListener('blur', function() {
     var val = parseFloat(this.value);
     if (!isNaN(val) && val > 0) this.value = val.toFixed(2);
@@ -325,12 +370,22 @@
     if (!name) { showPaymentError('Please enter your name.'); return; }
     if (!invoiceNumber) { showPaymentError('Please enter your invoice number.'); return; }
     if (!amount || parseFloat(amount) <= 0) { showPaymentError('Please enter a valid payment amount.'); return; }
+    if (parseFloat(amount) < MIN_PAYMENT_AMOUNT) {
+      showPaymentError('Online payments must be at least $' + MIN_PAYMENT_AMOUNT + '. For smaller amounts, please call (505) 888-2034.');
+      return;
+    }
     if (!address) { showPaymentError('Please enter your billing address.'); return; }
     if (!city) { showPaymentError('Please enter your city.'); return; }
     if (!state) { showPaymentError('Please select your state.'); return; }
     if (!zip) { showPaymentError('Please enter your ZIP code.'); return; }
     if (!/^\d{5}(-\d{4})?$/.test(zip)) { showPaymentError('Please enter a valid ZIP code (e.g., 87110).'); return; }
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showPaymentError('Please enter a valid email address.'); return; }
+
+    // Bot protection — require Turnstile token
+    if (!turnstileToken) {
+      showPaymentError('Please complete the bot verification above before submitting payment.');
+      return;
+    }
 
     hidePaymentError();
 
@@ -346,6 +401,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           payment_token: paymentToken,
+          turnstile_token: turnstileToken,
           amount: amount,
           invoice_number: invoiceNumber,
           name: name,
@@ -366,10 +422,19 @@
       } else {
         showPaymentError(data.error || 'Payment was declined. Please check your card details or call (505) 888-2034.');
         resetButton(btn, origHTML);
+        // Turnstile tokens are single-use — reset widget so user can retry
+        if (typeof turnstile !== 'undefined') {
+          turnstile.reset();
+          turnstileToken = null;
+        }
       }
     } catch (err) {
       showPaymentError('Connection error. Please try again or call (505) 888-2034.');
       resetButton(btn, origHTML);
+      if (typeof turnstile !== 'undefined') {
+        turnstile.reset();
+        turnstileToken = null;
+      }
     }
   }
 
@@ -411,6 +476,10 @@
     document.getElementById('paymentFormCard').style.display = 'block';
     document.getElementById('paymentForm').reset();
     hidePaymentError();
+    if (typeof turnstile !== 'undefined') {
+      turnstile.reset();
+      turnstileToken = null;
+    }
     document.getElementById('paymentFormCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 </script>

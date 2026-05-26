@@ -1,9 +1,84 @@
 // MGS Communications — NMI Payment Processing Function
-// Receives a Collect.js payment_token from the client and processes a sale via NMI's Direct Connect API.
-// The NMI_SECURITY_KEY environment variable must be set in the Netlify dashboard.
+// Receives a Collect.js payment_token from the client, verifies a Cloudflare Turnstile
+// bot-protection token, enforces a $25 minimum + per-IP rate limit, then processes a sale
+// via NMI's Direct Connect API.
+//
+// Required environment variables (set in Netlify dashboard):
+//   NMI_SECURITY_KEY        — NMI gateway security key
+//   TURNSTILE_SECRET_KEY    — Cloudflare Turnstile secret key
 
 const https = require('https');
 const querystring = require('querystring');
+
+// ===== Configuration =====
+const MIN_PAYMENT_AMOUNT = 25;          // Minimum online payment in dollars
+const MAX_PAYMENT_AMOUNT = 99999.99;    // NMI cap
+const RATE_LIMIT_MAX = 5;               // Max attempts per IP per window
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour rolling window
+
+// ===== In-memory rate limiter =====
+// Module-level Map persists across invocations when the Netlify function container
+// stays warm (typical during a burst of traffic — exactly when we need throttling).
+// Best-effort secondary defense behind Turnstile.
+const rateLimitStore = new Map();
+
+function checkRateLimit(ip) {
+  if (!ip) return { allowed: true };
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  const attempts = (rateLimitStore.get(ip) || []).filter(ts => ts > cutoff);
+
+  if (attempts.length >= RATE_LIMIT_MAX) {
+    rateLimitStore.set(ip, attempts);
+    return { allowed: false, retryAfterSec: Math.ceil((attempts[0] + RATE_LIMIT_WINDOW_MS - now) / 1000) };
+  }
+  attempts.push(now);
+  rateLimitStore.set(ip, attempts);
+
+  // Opportunistic cleanup to keep the Map from growing forever
+  if (rateLimitStore.size > 500) {
+    for (const [k, v] of rateLimitStore) {
+      const fresh = v.filter(ts => ts > cutoff);
+      if (fresh.length === 0) rateLimitStore.delete(k);
+      else rateLimitStore.set(k, fresh);
+    }
+  }
+  return { allowed: true };
+}
+
+// ===== Cloudflare Turnstile verification =====
+function verifyTurnstile(token, ip) {
+  return new Promise((resolve) => {
+    const postData = querystring.stringify({
+      secret: process.env.TURNSTILE_SECRET_KEY,
+      response: token,
+      remoteip: ip || ''
+    });
+    const req = https.request({
+      hostname: 'challenges.cloudflare.com',
+      path: '/turnstile/v0/siteverify',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          const parsed = JSON.parse(data);
+          resolve({ success: !!parsed.success, codes: parsed['error-codes'] || [] });
+        } catch (e) {
+          resolve({ success: false, codes: ['parse-error'] });
+        }
+      });
+    });
+    req.on('error', () => resolve({ success: false, codes: ['network-error'] }));
+    req.write(postData);
+    req.end();
+  });
+}
 
 exports.handler = async (event) => {
   // Allow both www and non-www origins
@@ -28,10 +103,30 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  // Check for API key
+  // Identify caller IP for rate limiting + Turnstile verification
+  const clientIp =
+    (event.headers && (event.headers['x-nf-client-connection-ip'] || event.headers['x-forwarded-for'] || '').split(',')[0].trim()) ||
+    '';
+
+  // ===== Rate limit gate (before anything expensive) =====
+  const rl = checkRateLimit(clientIp);
+  if (!rl.allowed) {
+    console.warn(`[rate-limit] blocked IP=${clientIp} retryAfter=${rl.retryAfterSec}s`);
+    return {
+      statusCode: 429,
+      headers: { ...headers, 'Retry-After': String(rl.retryAfterSec) },
+      body: JSON.stringify({ error: 'Too many payment attempts from your network. Please wait an hour and try again, or call (505) 888-2034.' })
+    };
+  }
+
+  // Check for required env vars
   if (!process.env.NMI_SECURITY_KEY) {
     console.error('NMI_SECURITY_KEY environment variable is not set');
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Payment processing is not configured. Please call (505) 888-2034.' }) };
+  }
+  if (!process.env.TURNSTILE_SECRET_KEY) {
+    console.error('TURNSTILE_SECRET_KEY environment variable is not set');
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'Bot verification is not configured. Please call (505) 888-2034.' }) };
   }
 
   // Parse request body
@@ -42,9 +137,19 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request' }) };
   }
 
-  const { payment_token, amount, invoice_number, name, email, company, phone, address, city, state, zip } = body;
+  const { payment_token, turnstile_token, amount, invoice_number, name, email, company, phone, address, city, state, zip } = body;
 
-  // Validate required fields
+  // ===== Turnstile gate (before any NMI call — bots never reach the gateway) =====
+  if (!turnstile_token) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Bot verification missing. Please refresh the page and try again.' }) };
+  }
+  const turnstileResult = await verifyTurnstile(turnstile_token, clientIp);
+  if (!turnstileResult.success) {
+    console.warn(`[turnstile] verification failed IP=${clientIp} codes=${turnstileResult.codes.join(',')}`);
+    return { statusCode: 403, headers, body: JSON.stringify({ error: 'Bot verification failed. Please refresh the page and try again, or call (505) 888-2034.' }) };
+  }
+
+  // Validate required payment fields
   if (!payment_token) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Payment token is required' }) };
   }
@@ -52,10 +157,17 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Amount is required' }) };
   }
 
-  // Validate amount
+  // Validate amount (including $25 minimum)
   const parsedAmount = parseFloat(amount);
-  if (isNaN(parsedAmount) || parsedAmount <= 0 || parsedAmount > 99999.99) {
-    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Please enter a valid amount' }) };
+  if (isNaN(parsedAmount) || parsedAmount <= 0 || parsedAmount > MAX_PAYMENT_AMOUNT) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Please enter a valid amount.' }) };
+  }
+  if (parsedAmount < MIN_PAYMENT_AMOUNT) {
+    return {
+      statusCode: 400,
+      headers,
+      body: JSON.stringify({ error: 'Online payments must be at least $' + MIN_PAYMENT_AMOUNT + '. For smaller amounts, please call (505) 888-2034.' })
+    };
   }
 
   // Parse name into first/last

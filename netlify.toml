@@ -65,11 +65,11 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Payment page — allow NMI Collect.js scripts, iframes, and connections
+# Payment page — allow NMI Collect.js + Cloudflare Turnstile scripts, iframes, and connections
 [[headers]]
   for = "/pay/*"
   [headers.values]
-    Content-Security-Policy = "script-src 'self' 'unsafe-inline' https://secure.nmi.com https://fonts.googleapis.com; frame-src https://secure.nmi.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://secure.nmi.com; connect-src 'self' https://secure.nmi.com; frame-ancestors 'none'"
+    Content-Security-Policy = "script-src 'self' 'unsafe-inline' https://secure.nmi.com https://fonts.googleapis.com https://challenges.cloudflare.com; frame-src https://secure.nmi.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://secure.nmi.com; connect-src 'self' https://secure.nmi.com https://challenges.cloudflare.com; frame-ancestors 'none'"
 
 # Netlify Functions directory
 [functions]
