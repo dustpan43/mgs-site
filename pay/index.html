@@ -52,11 +52,6 @@
     .pay-phone-note { text-align: center; margin-top: 24px; font-size: .88rem; color: var(--gray-600); }
     .pay-phone-note a { color: var(--green); font-weight: 600; }
 
-    .amount-min-note { margin-top: 6px; font-size: .8rem; color: var(--gray-600); line-height: 1.4; }
-    .amount-min-note strong { color: var(--navy); }
-    .amount-min-note a { color: var(--green); font-weight: 600; text-decoration: none; }
-    .amount-min-note a:hover { text-decoration: underline; }
-
     .turnstile-wrap { display: flex; justify-content: center; margin: 8px 0 4px; min-height: 65px; }
     .turnstile-error { font-size: .85rem; color: var(--orange); text-align: center; margin-top: 4px; display: none; }
     .turnstile-error.show { display: block; }
@@ -136,9 +131,8 @@
               <label>Amount <span class="req">*</span></label>
               <div class="amount-input-wrap">
                 <span class="dollar-sign">$</span>
-                <input type="number" name="amount" placeholder="25.00" step="0.01" min="25" max="99999.99" inputmode="decimal" required>
+                <input type="number" name="amount" placeholder="0.00" step="0.01" min="25" max="99999.99" inputmode="decimal" required>
               </div>
-              <p class="amount-min-note">Minimum online payment: <strong>$25</strong>. For smaller amounts, please call <a href="tel:5058882034">(505) 888-2034</a>.</p>
             </div>
 
             <!-- Row 3: Billing Address -->
