@@ -1,6 +1,8 @@
 # MGS Communications — AI Image Generation Prompts
 ## For Nanobanana 2 / Grok Imagine
 
+> **📌 Newer set available:** The primary, current prompt set for the 2026 design upgrade lives in **[`ai-image-prompts-2026.md`](./ai-image-prompts-2026.md)** — longer, more detailed prompts with a shared house-style block, per-scene logo handling, and corrected brand colors (`#009E49` / `#FFD700`). Use that first. The set below stays for its creative-spin and article-diagram ideas.
+
 **Priority legend**: P1 = High impact (fills a major gap), P2 = Medium (enhances existing content), P3 = Nice-to-have
 
 ---
