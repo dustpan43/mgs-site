@@ -455,6 +455,13 @@ section { padding: 80px 0; }
 .hero-premium .hero-content > *:nth-child(3) { animation-delay: .25s; }
 .hero-premium .hero-content > *:nth-child(4) { animation-delay: .35s; }
 .hero-premium .hero-content > *:nth-child(5) { animation-delay: .45s; }
+/* All subpage heroes inherit the premium staggered entrance (global, no per-page edit) */
+.subpage-hero .hero-content > * { animation: mgsHeroIn .9s var(--ease-out-soft) both; }
+.subpage-hero .hero-content > *:nth-child(1) { animation-delay: .05s; }
+.subpage-hero .hero-content > *:nth-child(2) { animation-delay: .15s; }
+.subpage-hero .hero-content > *:nth-child(3) { animation-delay: .25s; }
+.subpage-hero .hero-content > *:nth-child(4) { animation-delay: .35s; }
+.subpage-hero .hero-content > *:nth-child(5) { animation-delay: .45s; }
 /* OPTIONAL parallax — add .hero-parallax to a hero (desktop + fine-pointer only) */
 @media (min-width: 1025px) and (hover: hover) { .hero-parallax { background-attachment: fixed; } }
 
@@ -475,7 +482,7 @@ section { padding: 80px 0; }
   .card-lift:hover .icon-chip, .icon-chip-host:hover .icon-chip { transform: none; }
   .icon-anim svg, .icon-anim:hover svg { transition: none; transform: none; }
   .sticky-cta { transition: none; }
-  .hero-premium .hero-content > * { animation: none; }
+  .hero-premium .hero-content > *, .subpage-hero .hero-content > * { animation: none; }
   .hero-parallax { background-attachment: scroll; }
 }
 
