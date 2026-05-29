@@ -160,3 +160,92 @@ if (document.getElementById('mainNav')) {
 } else {
   document.addEventListener('nav:rendered', bindNavListeners, { once: true });
 }
+
+// ----- Premium motion systems (scroll reveals, stat counters, sticky CTA) -----
+// Added with the design upgrade. Honors prefers-reduced-motion and degrades
+// gracefully on pages that don't use these hooks.
+(function () {
+  const reduce = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function initReveals() {
+    const els = document.querySelectorAll('.reveal, .reveal-group');
+    if (!els.length) return;
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(el => io.observe(el));
+  }
+
+  function animateCount(el) {
+    const target = parseFloat(el.getAttribute('data-count-to'));
+    if (isNaN(target)) return;
+    const dur = parseInt(el.getAttribute('data-count-dur') || '1400', 10);
+    const dec = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
+    const pre = el.getAttribute('data-count-prefix') || '';
+    const suf = el.getAttribute('data-count-suffix') || '';
+    const start = performance.now();
+    (function frame(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + (target * eased).toFixed(dec) + suf;
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = pre + target.toFixed(dec) + suf;
+    })(start);
+  }
+
+  function setBar(el) {
+    const v = Math.max(0, Math.min(100, parseFloat(el.getAttribute('data-bar-to')) || 0));
+    el.style.setProperty('--bar-fill', v + '%');
+  }
+
+  function initCounters() {
+    const counters = document.querySelectorAll('[data-count-to]');
+    const bars = document.querySelectorAll('.viz-bar[data-bar-to]');
+    if (!counters.length && !bars.length) return;
+    if (reduce || !('IntersectionObserver' in window)) {
+      counters.forEach(el => {
+        const t = parseFloat(el.getAttribute('data-count-to'));
+        const dec = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
+        el.textContent = (el.getAttribute('data-count-prefix') || '') +
+          (isNaN(t) ? el.textContent : t.toFixed(dec)) +
+          (el.getAttribute('data-count-suffix') || '');
+      });
+      bars.forEach(setBar);
+      return;
+    }
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        if (e.target.hasAttribute('data-count-to')) animateCount(e.target);
+        if (e.target.hasAttribute('data-bar-to')) setBar(e.target);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(el => io.observe(el));
+    bars.forEach(el => io.observe(el));
+  }
+
+  function initStickyCTA() {
+    const bar = document.getElementById('stickyCta');
+    if (!bar) return;
+    let shown = false;
+    const onScroll = () => {
+      const should = window.scrollY > 600;
+      if (should !== shown) { shown = should; bar.classList.toggle('visible', shown); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  function initMotion() { initReveals(); initCounters(); initStickyCTA(); }
+
+  if (document.getElementById('mainNav')) initMotion();
+  else document.addEventListener('nav:rendered', initMotion, { once: true });
+})();

@@ -22,7 +22,15 @@
     menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     email: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
     check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
-    dollar: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'
+    dollar: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    antenna: '<path d="M12 12v9"/><path d="M8 21h8"/><circle cx="12" cy="9" r="2.2"/><path d="M6.5 5.5a7 7 0 0 0 0 7"/><path d="M17.5 5.5a7 7 0 0 1 0 7"/><path d="M4 3.5a11 11 0 0 0 0 11"/><path d="M20 3.5a11 11 0 0 1 0 11"/>',
+    truck: '<path d="M1 3h13v11H1z"/><path d="M14 7h4l3 3v4h-7z"/><circle cx="5.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/>',
+    headset: '<path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v4a2 2 0 0 0 2 2h1v-6H6a2 2 0 0 0-2 2z"/><path d="M20 13v4a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z"/>',
+    keycard: '<rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.4"/><path d="M14 10h5"/><path d="M14 14h5"/>',
+    bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6z"/>',
+    award: '<circle cx="12" cy="8" r="6"/><path d="M9 13.5 8 22l4-2 4 2-1-8.5"/>',
+    handshake: '<path d="M11 17l2 2a1.5 1.5 0 0 0 2-2"/><path d="m13 19 2 2a1.5 1.5 0 0 0 2-2l1-1"/><path d="M2 9l4-4 5 4 3-1 4 4"/><path d="M2 9v5l4 4"/><path d="M22 13V8l-2-2"/>'
   };
 
   function icon(key, width) {
