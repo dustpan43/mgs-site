@@ -595,3 +595,9 @@ body :is(.detail-card, .brand-card, .product-card, .value-card, .feature-card,
   .hero-buttons { flex-direction: column; }
   .hero-buttons .btn { width: 100%; }
 }
+
+/* Trust bar: stack cleanly (centered) on phones & small tablets instead of
+   wrapping into uneven rows. `body` prefix overrides each page's inline rule. */
+@media (max-width: 640px) {
+  body .trust-items { flex-direction: column; align-items: center; gap: 10px; }
+}

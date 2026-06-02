@@ -77,12 +77,14 @@
     }
 
     /* ===== EVENTS GRID ===== */
-    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    /* Flexbox (not grid) so a partial last row centers instead of leaving a lone left-aligned card */
+    .events-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
     .event-card {
       background: var(--white); border: 1px solid var(--gray-200);
       border-radius: var(--radius); overflow: hidden;
       transition: transform .25s, box-shadow .25s;
       display: flex; flex-direction: column;
+      flex: 1 1 300px; max-width: 380px;
     }
     .event-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
     .event-card-top {
