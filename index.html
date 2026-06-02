@@ -58,16 +58,32 @@
     .service-card {
       background: var(--white); border: 1px solid var(--gray-200);
       border-radius: var(--radius); overflow: hidden;
-      transition: transform .25s, box-shadow .25s;
+      /* slow opacity+transform = smooth entrance matching the rest of the site */
+      transition: transform var(--dur-slow) var(--ease-out-soft), opacity var(--dur-slow) var(--ease-out-soft), box-shadow var(--dur-med) var(--ease-out-soft);
       display: flex; flex-direction: column;
     }
-    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    /* hover is scoped to a snappier duration so the lift feels responsive, not languid */
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--elev-4); transition: transform var(--dur-med) var(--ease-out-soft), box-shadow var(--dur-med) var(--ease-out-soft); }
     .service-card-img {
       height: 200px; background: linear-gradient(135deg, var(--navy), var(--green));
       display: flex; align-items: center; justify-content: center; position: relative;
-      background-size: cover; background-position: center;
+      background-size: cover; background-position: center; overflow: hidden;
+      transition: transform var(--dur-slow) var(--ease-out-soft);
     }
+    .service-card:hover .service-card-img { transform: scale(1.05); }
     .service-card-img svg { width: 64px; height: 64px; color: var(--white); opacity: .9; }
+    /* Security card has no stock photo — a designed signal/surveillance motif makes the slot intentional */
+    .service-card-graphic {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--green-dark) 55%, var(--green) 100%);
+    }
+    .service-card-graphic .scg-motif {
+      position: absolute; inset: 0; opacity: .55; pointer-events: none;
+      background:
+        radial-gradient(circle at 80% 22%, rgba(249,168,37,.30), transparent 45%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Ccircle cx='400' cy='300' r='250' fill='none' stroke='white' stroke-width='1'/%3E%3Ccircle cx='400' cy='300' r='180' fill='none' stroke='white' stroke-width='1'/%3E%3Ccircle cx='400' cy='300' r='110' fill='none' stroke='white' stroke-width='1'/%3E%3Cline x1='150' y1='300' x2='650' y2='300' stroke='white' stroke-width='.5'/%3E%3Cline x1='400' y1='50' x2='400' y2='550' stroke='white' stroke-width='.5'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .service-card-graphic .scg-icon { position: relative; z-index: 1; width: 60px; height: 60px; color: #fff; opacity: .96;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.28)); }
     .service-card-body { padding: 28px; display: flex; flex-direction: column; flex: 1; }
     .service-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 14px; color: var(--navy); }
     .service-card ul { margin-bottom: 20px; flex: 1; }
@@ -87,12 +103,16 @@
       text-align: center; padding: 32px 20px;
       background: var(--white); border-radius: var(--radius);
       border: 1px solid var(--gray-200);
+      transition: transform var(--dur-slow) var(--ease-out-soft), opacity var(--dur-slow) var(--ease-out-soft), box-shadow var(--dur-med) var(--ease-out-soft), border-color var(--dur-med) var(--ease-out-soft);
     }
+    .why-card:hover { transform: translateY(-6px); box-shadow: var(--elev-3); border-color: transparent; transition: transform var(--dur-med) var(--ease-out-soft), box-shadow var(--dur-med) var(--ease-out-soft), border-color var(--dur-med) var(--ease-out-soft); }
     .why-icon {
       width: 64px; height: 64px; margin: 0 auto 18px;
       background: linear-gradient(135deg, var(--turquoise), var(--turquoise-light));
       border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      transition: transform var(--dur-med) var(--ease-out-back), box-shadow var(--dur-med) var(--ease-out-soft);
     }
+    .why-card:hover .why-icon { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 20px rgba(0,188,212,.32); }
     .why-icon svg { width: 30px; height: 30px; color: var(--white); }
     .why-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
     .why-card p { font-size: .875rem; color: var(--gray-600); }
@@ -329,7 +349,7 @@
       <h2 class="section-title">Communication &amp; Security Solutions</h2>
       <p class="section-sub mx-auto">From two-way radios to full security installations, we keep your people connected and your property protected.</p>
     </div>
-    <div class="services-grid reveal">
+    <div class="services-grid reveal-group">
       <!-- Card 1: Two-Way Radios -->
       <div class="service-card">
         <div class="service-card-img" style="background: url('/images/radios/kenwood-nx1300-in-hand.jpg') center/cover no-repeat;">
@@ -346,8 +366,9 @@
       </div>
       <!-- Card 2: Security Systems -->
       <div class="service-card">
-        <div class="service-card-img" style="background: linear-gradient(135deg, #f57f17, #f9a825);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <div class="service-card-img service-card-graphic">
+          <span class="scg-motif" aria-hidden="true"></span>
+          <svg class="scg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </div>
         <div class="service-card-body">
           <h3>Security Systems</h3>

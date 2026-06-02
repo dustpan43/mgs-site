@@ -169,7 +169,7 @@ if (document.getElementById('mainNav')) {
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function initReveals() {
-    const els = document.querySelectorAll('.reveal, .reveal-group');
+    const els = document.querySelectorAll('.reveal, .reveal-group, .reveal-left, .reveal-right, .reveal-scale');
     if (!els.length) return;
     if (reduce || !('IntersectionObserver' in window)) {
       els.forEach(el => el.classList.add('in'));
