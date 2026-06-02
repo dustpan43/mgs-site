@@ -417,6 +417,28 @@ section { padding: 80px 0; }
 /* ===== CARD LIFT & ICON CHIP ===== */
 .card-lift { transition: transform var(--dur-med) var(--ease-out-soft), box-shadow var(--dur-med) var(--ease-out-soft); }
 .card-lift:hover { transform: translateY(-6px); box-shadow: var(--elev-4); }
+
+/* ===== UNIFIED CARD ELEVATION (site-wide cascade) =====
+   Standardizes every page's content cards onto the warm green-tinted lift used
+   on the homepage. The `body` prefix raises specificity just above each page's
+   inline `.card:hover` rule, so this wins WITHOUT !important. Base transition is
+   slow opacity+transform so cards inside a `.reveal-group` ease in smoothly
+   (no "snap"); hover is scoped to a snappier duration. */
+body :is(.detail-card, .brand-card, .product-card, .value-card, .feature-card,
+         .resource-card, .event-card, .contact-card, .security-card) {
+  transition: transform var(--dur-slow) var(--ease-out-soft),
+              opacity var(--dur-slow) var(--ease-out-soft),
+              box-shadow var(--dur-med) var(--ease-out-soft),
+              border-color var(--dur-med) var(--ease-out-soft);
+}
+body :is(.detail-card, .brand-card, .product-card, .value-card, .feature-card,
+         .resource-card, .event-card, .contact-card, .security-card):hover {
+  transform: translateY(-6px);
+  box-shadow: var(--elev-3);
+  transition: transform var(--dur-med) var(--ease-out-soft),
+              box-shadow var(--dur-med) var(--ease-out-soft),
+              border-color var(--dur-med) var(--ease-out-soft);
+}
 .icon-chip {
   display: inline-flex; align-items: center; justify-content: center;
   width: 52px; height: 52px; border-radius: 14px;
