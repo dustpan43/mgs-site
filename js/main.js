@@ -135,7 +135,7 @@ function bindNavListeners() {
   // Mobile: top-level dropdown accordion (Services / About / Resources)
   document.querySelectorAll('.nav-dropdown > a').forEach(toggle => {
     toggle.addEventListener('click', function(e) {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 1024) {
         e.preventDefault();
         this.parentElement.classList.toggle('dropdown-open');
       }
@@ -145,7 +145,7 @@ function bindNavListeners() {
   // Mobile: nested flyout accordion (Security Systems sub-pages)
   document.querySelectorAll('.nav-dropdown-nested > a').forEach(toggle => {
     toggle.addEventListener('click', function(e) {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 1024) {
         e.preventDefault();
         e.stopPropagation();
         this.parentElement.classList.toggle('flyout-open');

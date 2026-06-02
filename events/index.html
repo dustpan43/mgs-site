@@ -160,7 +160,7 @@
     @media (max-width: 1024px) { .events-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) {
       .events-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-      .events-controls { padding: 16px; }
+      .events-controls { padding: 16px; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 14px; }
       .month-heading { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 4px; }
     }
     @media (max-width: 480px) {

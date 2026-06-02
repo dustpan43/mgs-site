@@ -466,8 +466,12 @@
       padding: 10px 14px; border-radius: 8px; font-size: .85rem; margin-top: 6px;
     }
 
+    /* Lift the floating cart button above the fixed mobile Call bar (~60px) so it's never hidden */
+    @media (max-width: 1024px) {
+      #quote-cart-btn { bottom: 76px; }
+    }
     @media (max-width: 520px) {
-      #quote-cart-btn { right: 16px; bottom: 16px; padding: 12px 18px; font-size: .86rem; }
+      #quote-cart-btn { right: 16px; bottom: 72px; padding: 12px 18px; font-size: .86rem; }
       #quote-cart-panel { width: 100%; }
       .qcp-head { padding: 18px 20px; }
       .qcp-body { padding: 16px 20px 22px; }

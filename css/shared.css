@@ -80,7 +80,7 @@ ul { list-style: none; }
   max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px;
 }
 .logo { display: flex; align-items: center; }
-.logo img { height: 80px; width: auto; }
+.logo img { height: 54px; width: auto; }
 .nav { display: flex; align-items: center; gap: 4px; }
 .nav a {
   padding: 8px 14px; font-size: .875rem; font-weight: 500;
@@ -158,6 +158,9 @@ ul { list-style: none; }
   font-weight: 500; font-size: .875rem; color: var(--gray-700);
 }
 .header-phone svg { width: 18px; height: 18px; color: var(--green); }
+
+/* In-menu CTA block — hidden on desktop, revealed inside the open mobile menu */
+.nav-cta { display: none; }
 
 /* ===== BUTTONS ===== */
 .btn {
@@ -434,7 +437,7 @@ section { padding: 80px 0; }
   transition: transform var(--dur-med) var(--ease-out-soft);
 }
 .sticky-cta.visible { transform: translateY(0); }
-@media (min-width: 769px) { .sticky-cta { display: none; } }
+@media (min-width: 1025px) { .sticky-cta { display: none; } }
 
 /* ===== PREMIUM HERO (layered depth + staggered entrance) ===== */
 .hero-premium { position: relative; }
@@ -487,20 +490,66 @@ section { padding: 80px 0; }
 }
 
 /* ===== RESPONSIVE — SHARED COMPONENTS ===== */
-@media (max-width: 1200px) {
-  .header-pay { display: none; }
-}
-
+/* COMPACT HEADER MODE (≤1024 = tablet + phone): logo + hamburger only.
+   Pay Invoice / Get Quote / Call all move into the slide-down menu. */
 @media (max-width: 1024px) {
   .cta-inner { grid-template-columns: 1fr; gap: 36px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-}
 
-@media (max-width: 768px) {
   body { padding-bottom: 60px; }
   .nav { display: none; }
   .menu-toggle { display: flex; }
+  .header-pay { display: none; }
   .header-phone { display: none; }
+  .header-cta > .btn-yellow { display: none; }   /* Get Quote lives in the menu now */
+  .mobile-call { display: block; }
+
+  /* Slide-down mobile menu */
+  .nav.open {
+    display: flex; flex-direction: column; align-items: stretch;
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--white); border-bottom: 1px solid var(--gray-200);
+    padding: 14px 20px 22px; gap: 2px; box-shadow: var(--shadow-lg);
+    max-height: calc(100vh - 72px); overflow-y: auto;
+  }
+  .nav.open > a,
+  .nav.open .nav-dropdown > a { padding: 14px 16px; text-align: center; justify-content: center; }
+  .nav.open .nav-dropdown { text-align: center; }
+  .nav.open .nav-dropdown > a::after { display: inline-block; transition: transform .2s; }
+  .nav.open .nav-dropdown.dropdown-open > a::after { transform: rotate(180deg); }
+  .nav.open .dropdown-menu {
+    display: none; position: static; border: none;
+    box-shadow: none; padding: 4px 0 6px; min-width: auto;
+  }
+  .nav.open .nav-dropdown.dropdown-open .dropdown-menu { display: block; }
+  .nav.open .dropdown-menu a { padding: 12px 14px; justify-content: center; }
+  /* Nested flyout: inline accordion on mobile */
+  .nav.open .nav-dropdown-nested { position: static; }
+  .nav.open .nav-dropdown-nested > a { justify-content: center; }
+  .nav.open .nav-dropdown-nested > a::after { content: '▾'; margin-left: 8px; font-size: .9em; }
+  .nav.open .nav-dropdown-nested.flyout-open > a::after { transform: rotate(180deg); }
+  .nav.open .flyout-menu {
+    display: none; position: static; border: none; box-shadow: none;
+    padding: 4px 0 0; min-width: auto; margin: 0; background: var(--gray-50);
+  }
+  .nav.open .nav-dropdown-nested.flyout-open > .flyout-menu { display: block; }
+  .nav.open .flyout-menu a { padding: 12px 14px; justify-content: center; font-size: .85rem; }
+
+  /* In-menu CTA block (Pay / Quote / Call) */
+  .nav.open .nav-cta {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--gray-200);
+  }
+  .nav.open .nav-cta .btn {
+    width: 100%; padding: 13px 20px; font-size: .95rem; border-radius: var(--radius-sm);
+  }
+  .nav.open .nav-cta .btn-yellow { background: var(--yellow); color: var(--navy); }
+  .nav.open .nav-cta .nav-cta-pay { background: var(--white); color: var(--navy); border: 1.5px solid var(--gray-300); }
+  .nav.open .nav-cta .nav-cta-call { background: var(--turquoise); color: #fff; }
+  .nav.open .nav-cta .nav-cta-call svg { width: 18px; height: 18px; }
+}
+
+@media (max-width: 768px) {
   .subpage-hero { padding: 40px 0 50px; }
   .subpage-hero h1 { font-size: 1.8rem; }
   section { padding: 60px 0; }
@@ -511,39 +560,6 @@ section { padding: 80px 0; }
   .popup { padding: 28px 20px; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-  .mobile-call { display: block; }
-  /* Mobile nav */
-  .nav.open {
-    display: flex; flex-direction: column; align-items: center;
-    position: absolute; top: 72px; left: 0; right: 0;
-    background: var(--white); border-bottom: 1px solid var(--gray-200);
-    padding: 16px 24px; gap: 4px; box-shadow: var(--shadow-md);
-  }
-  .nav.open a { padding: 14px 24px; text-align: center; }
-  .nav.open .nav-dropdown { text-align: center; }
-  .nav.open .nav-dropdown > a { justify-content: center; }
-  .nav.open .nav-dropdown > a::after { display: inline-block; transition: transform .2s; }
-  .nav.open .nav-dropdown.dropdown-open > a::after { transform: rotate(180deg); }
-  .nav.open .dropdown-menu {
-    display: none; position: static; border: none;
-    box-shadow: none; padding: 4px 0 0; min-width: auto;
-  }
-  .nav.open .nav-dropdown.dropdown-open .dropdown-menu { display: block; }
-  .nav.open .dropdown-menu a { padding: 12px 14px; justify-content: center; }
-  /* Nested flyout: render as inline accordion on mobile */
-  .nav.open .nav-dropdown-nested { position: static; }
-  .nav.open .nav-dropdown-nested > a { justify-content: center; }
-  .nav.open .nav-dropdown-nested > a::after {
-    content: '▾'; margin-left: 8px; font-size: .9em;
-  }
-  .nav.open .nav-dropdown-nested.flyout-open > a::after { transform: rotate(180deg); }
-  .nav.open .flyout-menu {
-    display: none; position: static; border: none; box-shadow: none;
-    padding: 4px 0 0; min-width: auto; margin: 0;
-    background: var(--gray-50);
-  }
-  .nav.open .nav-dropdown-nested.flyout-open > .flyout-menu { display: block; }
-  .nav.open .flyout-menu a { padding: 12px 14px; justify-content: center; font-size: .85rem; }
 }
 
 @media (max-width: 480px) {
