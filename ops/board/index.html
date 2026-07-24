@@ -1119,7 +1119,7 @@ function revArchHTML(list) {
         (r.amount && r.amount !== "—" ? '<span class="mono">' + esc(r.amount) + "</span>" : "") +
         '<span class="arc-when">printed ' + esc(r.done) + (r.doneAge > 0 ? " · " + r.doneAge + "d ago" : " · today") + "</span>" +
         '<a class="arc-open" href="' + esc(r.url) + '" target="_blank" rel="noopener">Drive ↗</a>' +
-        '<button type="button" class="arc-open" data-drv-preview="' + esc(r.url) + '" data-drv-title="' + esc(r.doc || r.customer || "Document") + '" style="margin-left:6px;cursor:pointer">Preview</button>' +
+        '<button type="button" class="arc-open" data-drv-preview="' + esc(r.url) + '" data-drv-title="' + esc(r.doc || r.customer || "Document") + '" style="margin-left:6px;cursor:pointer">Open PDF</button>' +
         "</div>";
     }).join("") + "</div></section>";
 }
@@ -1141,7 +1141,7 @@ function revRow(r, open) {
     '<span class="rrow-caret" aria-hidden="true">▼</span>' +
     "</button>" +
     '<a class="rrow-drive" href="' + esc(r.url) + '" target="_blank" rel="noopener" title="Open in Drive — review &amp; print">Drive ↗</a>' +
-    '<button type="button" class="rrow-drive" data-drv-preview="' + esc(r.url) + '" data-drv-title="' + esc(r.doc || r.customer || "Document") + '" title="Preview in page" style="margin-left:6px;cursor:pointer;border:0;background:#e8f5e9;font-weight:700">Preview</button>' +
+    '<button type="button" class="rrow-drive" data-drv-preview="' + esc(r.url) + '" data-drv-title="' + esc(r.doc || r.customer || "Document") + '" title="Open PDF in Google Drive (new tab)" style="margin-left:6px;cursor:pointer;border:0;background:#e8f5e9;font-weight:700">Open PDF</button>' +
     "</div>" +
     '<ul class="rev-check rrow-check">' + String(r.check).split(" · ").map(c => "<li>" + esc(c) + "</li>").join("") + "</ul>" +
     "</div>";
