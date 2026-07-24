@@ -786,14 +786,14 @@
    Dates are ISO (YYYY-MM-DD) for sorting; "disp" fields are what shows.
    ===================================================================== */
 const BOARD = {
-  snapshot: { day: "Friday, July 24, 2026", time: "11:15 AM MST", label: "FRIDAY — ⚠️ OAK VIEW MG26-316 REPRINTED (internal notes had leaked onto the customer copy + You-Saved amounts were blank) — RECYCLE any print made before Fri 11:08 AM, the Review-tab link now opens the corrected copy · Manheim SIGNED 10:59 AM (41 min!) — repair proceeding · Rogelio picked up his power supply · Opera picked up Thu" },
+  snapshot: { day: "Friday, July 24, 2026", time: "1:28 PM MST", label: "FRIDAY PM — Manheim MG26-339 on Review tab (repair COMPLETE, print next week when they call) · Oak View MG26-316 corrected for Tue 7/28 · Rogelio done · 30 radios out" },
 
   kpis: [
     { label: "Radios out now", value: "30", note: "Kenny's 10 + Blue River's 20 (picked up Thu PM, a day early) — both back Tue 7/28 · Oak View 40 out Tue · Fri 7/31 crunch: NM United 40 + Westside 14 + Alliance AV pickup", tone: "brand", go: "rentals", preset: null },
     { label: "Missing gear", value: "9", suffix: "earpieces", note: "Kenny's 9 earpieces from the 7/21 return (10 of 19 back) — charge case-by-case at close-out; chase again at his 7/28 return · radio ~#704 is CLOSED (LOST-PAID via Schimmel)", tone: "crit", go: "rentals", preset: "PARTIAL" },
     { label: "Owed on finished work", value: "$937.56", note: "Kenny week $449.88 (cards ready) + Route 66 $269 + Cochiti $195 + the Tue Plaza $23.68 skip question (ask Missy) · sales print queue is separate (~$17k paperwork, not card-ready)", tone: "brand", go: "money", preset: null, mono: true },
-    { label: "Out for signature", value: "6", note: "✅ Manheim repair estimate SIGNED Fri 10:59 AM — 41 minutes after send (new customer, repair proceeding) · Ghost Ranch $1,511.06 sent Thu 3:29 PM · SIGNED: Westside Summerfest — Steven signed Wed 2:52 PM, 32 minutes after send ($176 · MG# + booking writes pending Dustin OK) · still waiting: Boy Scouts (8d) + Sky City (7d) opened-not-signed · 3 older floating: Anzula (28d), Popejoy proposal (27d — likely superseded, void?), Freedom 4th corrected (27d never opened — void?) · Inspire Church + Atlas are NOT in DocuSign (FreshBooks-era) · Alliance Audio Visual CONFIRMED Wed 4:55 PM (RPO in, pickup Fri 7/31)", tone: "brand", go: "money", preset: null, mono: true },
-    { label: "Open tasks", value: "85", note: "Dustin ~49 · Angela ~26 · Missy 4 · Claude 2 · NEW: Manheim repair (do today) + Gotham radio recovery (High) · still open: TCNM state-contract answer · Squarespace bill · Ghost Ranch follow-through", tone: "brand", go: "tasks", preset: null }
+    { label: "Out for signature", value: "5", note: "Manheim estimate SIGNED Fri 10:59 AM — repair DONE, invoice MG26-339 on Review · Ghost Ranch $1,511.06 sent Thu 3:29 PM · Westside Summerfest signed · still waiting: Boy Scouts + Sky City opened-not-signed · older floaters (Anzula / Popejoy proposal / Freedom 4th corrected) · Inspire + Atlas are FreshBooks-era not DocuSign", tone: "brand", go: "money", preset: null, mono: true },
+    { label: "Open tasks", value: "85", note: "Dustin ~49 · Angela ~26 · Missy 4 · Claude 1 · Manheim ready next week (Review tab) · Gotham radio recovery (High) · Wherry FCC WQXH419 new · TCNM state-contract · Squarespace bill", tone: "brand", go: "tasks", preset: null }
   ],
 
   missing: [
@@ -803,7 +803,7 @@ const BOARD = {
   days: [
     { dow: "Fri 7/24 (today)", badge: "Opera pickup AM", items: [
       { t: "OAK VIEW MG26-316 REPRINTED (11:08 AM) — the earlier customer copy had INTERNAL NOTES leaked into Special Instructions + blank You-Saved amounts · fixed: You Saved $200.00, internal line removed · RECYCLE any earlier print — the Review-tab link now opens the corrected copy · print fresh for Tue 7/28 pickup", heavy: true },
-      { t: "MANHEIM SIGNED — Marwan signed the $72.65 PTT repair estimate at 10:59 AM, 41 minutes after Dustin sent it · repair proceeding (Dustin promised within-the-hour turnaround) · repair invoice on completion", heavy: true },
+      { t: "MANHEIM DONE — repair COMPLETE, unit ready · Repair Invoice MG26-339 ($72.65) staged on Review tab · they pick up NEXT WEEK — PRINT when they call (not a same-day rush)", heavy: true },
       { t: "Rogelio (Metro Courts): DONE — invoice printed and he picked up the power supply late morning · paper rode the handover ($314.25, PO 11830)", heavy: false },
       { t: "Santa Fe Opera: DONE — Brittney picked up the repaired radios THURSDAY (a day early) · task closed · payment due on completion, watch for it", heavy: false },
       { t: "Blue River is ALREADY OUT (picked up Thu PM a day early, paper signed) — no counter work today · Kenny runs Railyards + Nature Pointe today on gear already out · MISSY CARDS still ready: Route 66 $269 + Kenny week $449.88 + Cochiti $195 (+ the $23.68 Plaza skip question)" }
@@ -871,6 +871,9 @@ const BOARD = {
        per Angela) instead of being deleted; engine hides it after 31 days — a republish session
        DELETES rows whose done date is over a month old (that's the new "retire") */
   reviewQueue: [
+    { customer: "Manheim NM (Cox Automotive)", doc: "Repair Invoice MG26-339", amount: "$72.65", staged: "Fri 7/24", needBy: "2026-07-29",
+      check: "PRINT when they call — pickup expected NEXT WEEK (not today) · Taxable $72.65 locks signed estimate 072426a · VX-261 S/N 275A080413 · PTT button/switch $12.50 + Tech SVC $55 + tax $5.15 · Marwan Jones 505-242-9191 · paper signs at counter · repair COMPLETE, unit ready",
+      url: "https://drive.google.com/file/d/1AN1MzOdZl5-_j4kMLK500MqTAir7jSUC/view" },
     { customer: "Bernalillo County Metro Courts", doc: "Sales Invoice MG26-338", amount: "$314.25", staged: "Thu 7/23", needBy: "2026-07-24", done: "Thu 7/23",
       check: "PRINT for Rogelio pickup (imminent) · Tax EXEMPT gov · PO 24400-0000011830 (11830) on invoice · power supply $276.25 + ship $38 = $314.25 · You Saved $48.75 · same deal MGS-065 (NOT MGS-021 repeater) · terms Pay Now · paper rides handover",
       url: "https://drive.google.com/file/d/1FeWxmQ-7lPt0JdVKMvaYdtef98_tHGOx/view" },
@@ -913,7 +916,7 @@ const BOARD = {
     { id: "MGS-113", text: "Ghost Ranch / Blossoms & Bones — Proposal 072326a built $1,162.35 · on Review tab · DocuSign to Jamie after Angela/Missy review · no rush", who: "Angela", due: "2026-07-21", dueDisp: "review", dueClass: "overdue" },
     { id: "MGS-086", text: "Albuquerque High — MG26-323 rebuilt w/ PO 590-3946 + NX-1300DUBK, package with Angela · stage on Review tab if not already · PO 590-3945 $1,000 service = MGS-116", who: "Angela", due: "2026-07-18", dueDisp: "print/deliver", dueClass: "overdue" },
     { id: "MGS-110", text: "Pay Portacraft repair bills — 28906 $1,639.75 + 28907 $549.00 (due 7/21) · Estimate 1737 also landed Tue evening — open + file", who: "Missy", due: "2026-07-21", dueDisp: "7/21", dueClass: "overdue" },
-    { id: "MGS-129", text: "Manheim NM (Cox Automotive) — estimate SIGNED 10:59 AM ($72.65, VX-261 PTT) — DO THE REPAIR (within-the-hour promise) · repair invoice on completion", who: "Dustin", due: "2026-07-24", dueDisp: "TODAY", dueClass: "today" },
+    { id: "MGS-129", text: "Manheim NM — repair COMPLETE · MG26-339 on Review tab ($72.65) · PRINT when they call (pickup next week) · unit ready", who: "Angela", due: "2026-07-29", dueDisp: "next week", dueClass: "soon" },
     { id: "MGS-065", text: "Metro Courts power supply — MG26-338 built $314.25 (PO 11830) · PRINT invoice for Rogelio pickup · call when unit ready", who: "Dustin", due: "2026-07-23", dueDisp: "TODAY", dueClass: "today" },
     { id: "MGS-099", text: "Popejoy Hall — invoice + serial unit list on the Review tab ($8,056) — print both, Rachel signs at delivery", who: "Angela", due: "2026-07-17", dueDisp: "7/17", dueClass: "overdue" },
     { id: "MGS-033", text: "West Las Vegas Schools — combined MG26-327 on Review tab · print 2 copies + mail 179 Bridge St · then mark Done", who: "Angela", due: "2026-07-07", dueDisp: "mail", dueClass: "overdue" },
@@ -932,6 +935,7 @@ const BOARD = {
   ],
 
   feed: [
+    { when: "Fri ~1:45 PM", what: "<strong>Manheim repair invoice staged for next-week print.</strong> Repair COMPLETE — VX-261 PTT done, unit ready · <strong>Repair Invoice MG26-339 ($72.65)</strong> on the Review tab · they won't pick up until next week, so Angela/Missy print from Review when they call · ALSO afternoon boot: Wherry Elementary FCC license expired (WQXH419) captured as a task · Old Mill Riverside cancel confirmed by Alpine (billing 8/1)" },
     { when: "Fri 11:15 AM", what: "<strong>Oak View invoice REPRINTED — plus two wins.</strong> Dustin spotted internal ops notes leaked into MG26-316's Special Instructions and blank You-Saved amounts (a build-script escaping bug ate the dollar figures) · fixed + rebuilt 11:08 AM: <strong>You Saved $200.00</strong>, internal line gone, totals unchanged ($430.50 — still locks the signed proposal) · same Review-tab link now opens the corrected copy — <strong>recycle any earlier print</strong> · ALSO: <strong>Manheim SIGNED at 10:59 AM</strong> (41 minutes!) — repair proceeding · <strong>Rogelio picked up</strong> his power supply, invoice paper rode along · Gotham mystery solved: it's Gotham Security — a 7/23 return receipt (6 radios + 6 chargers back to void an invoice, <strong>1 radio still owed to MGS</strong>, serial C1410105) — folder created, scan filed, recovery task added (High)" },
     { when: "Fri 10:35 AM", what: "<strong>Manheim estimate is OUT — and the new customer is fully on the books.</strong> Dustin sent the DocuSign envelope to Marwan (~10:15 AM, $72.65 VX-261 PTT repair) · customer folder updated (estimate filed, contacts table + open items), Marwan + Manheim NM added to the Contacts sheet, tracking task added · ALSO: <strong>Santa Fe Opera pickup already happened Thursday</strong> — Brittney came a day early, task closed, watch for payment" },
     { when: "Fri 10:10 AM", what: "<strong>Friday boot — Manheim repair estimate staged in DocuSign.</strong> NEW customer Manheim NM (Cox Automotive, Broadway SE): VX-261 PTT button repair estimate 072426a, <strong>$72.65</strong> · Grok built the PDF, Claude verified it and staged the <strong>DocuSign DRAFT</strong> to Marwan — send it from Drafts when reviewed · fleet check clean (30 out = Kenny 10 + Blue River 20) · Westside + Alliance already booked Thu, no new signatures overnight · Alpine's four payment emails Thu evening look like the overdue matter resolving" },
