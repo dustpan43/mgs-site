@@ -75,6 +75,22 @@
 [functions]
   directory = "netlify/functions"
 
+# Team Ops password gate (edge) — see ops/README.md
+[[edge_functions]]
+  function = "ops-gate"
+  path = "/ops"
+
+[[edge_functions]]
+  function = "ops-gate"
+  path = "/ops/*"
+
+# Ops HTML should never be cached aggressively (cookie-gated)
+[[headers]]
+  for = "/ops/*"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"
+
 # Netlify Forms settings
 [build.processing]
   skip_processing = false

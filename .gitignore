@@ -26,3 +26,8 @@ package-lock.json
 # Netlify local
 .netlify/
 mgs-30th-birthday-original.jpg
+
+# Ops gate secrets (local only)
+ops/.gate-token*
+ops/*SECRET*
+
