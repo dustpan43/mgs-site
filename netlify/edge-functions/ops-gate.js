@@ -1,9 +1,26 @@
 // Protects /ops/* behind the mgs_ops_session cookie set by ops-login.
-// Public: /ops/login/* only (plus the login function, which is under /.netlify/).
+// Public: /ops/login/* only.
 //
 // Env: OPS_GATE_TOKEN (must match the cookie value issued on successful login)
 
 const COOKIE_NAME = 'mgs_ops_session';
+
+function cookieMatches(raw, expected) {
+  if (!raw || !expected) return false;
+  if (raw === expected) return true;
+  // Tolerate URI-encoding differences (+ vs %2B, = vs %3D)
+  try {
+    if (decodeURIComponent(raw) === expected) return true;
+  } catch (_) {
+    /* ignore */
+  }
+  try {
+    if (raw === encodeURIComponent(expected)) return true;
+  } catch (_) {
+    /* ignore */
+  }
+  return false;
+}
 
 export default async (request, context) => {
   const url = new URL(request.url);
@@ -28,13 +45,14 @@ export default async (request, context) => {
   }
 
   const cookieVal = context.cookies.get(COOKIE_NAME) || '';
-  if (cookieVal === expected) {
+  if (cookieMatches(cookieVal, expected)) {
     return context.next();
   }
 
   const next = path + (url.search || '');
   const login = new URL('/ops/login/', url.origin);
-  login.searchParams.set('next', next.startsWith('/ops') ? next : '/ops/forms/');
+  const safeNext = next.startsWith('/ops') ? next : '/ops/forms/';
+  login.searchParams.set('next', safeNext);
   return Response.redirect(login.toString(), 302);
 };
 

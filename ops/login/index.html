@@ -11,7 +11,6 @@
       --green: #2e7d32;
       --green-light: #43a047;
       --yellow: #f9a825;
-      --gray-50: #fafafa;
       --gray-200: #eeeeee;
       --gray-600: #757575;
       --gray-900: #212121;
@@ -33,70 +32,15 @@
       max-width: 400px;
       background: #fff;
       border-radius: 16px;
-      padding: 32px 28px 28px;
+      padding: 28px 28px 26px;
       box-shadow: 0 18px 50px rgba(0,0,0,.28);
+      text-align: center;
     }
-    .brand {
-      font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
-      font-weight: 800;
-      font-size: 1.15rem;
-      color: var(--navy);
-      letter-spacing: -0.02em;
-    }
-    .sub {
-      margin: 6px 0 22px;
-      color: var(--gray-600);
-      font-size: 0.92rem;
-      line-height: 1.45;
-    }
-    label {
+    .logo {
       display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--navy);
-    }
-    input[type="password"] {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid var(--gray-200);
-      border-radius: 10px;
-      font-size: 1rem;
-      outline: none;
-    }
-    input[type="password"]:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(46,125,50,.15);
-    }
-    button {
-      width: 100%;
-      margin-top: 16px;
-      padding: 12px 16px;
-      border: 0;
-      border-radius: 10px;
-      background: var(--green);
-      color: #fff;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    button:hover { background: var(--green-light); }
-    button:disabled { opacity: .6; cursor: wait; }
-    .err {
-      display: none;
-      margin-top: 12px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      background: #ffebee;
-      color: #b71c1c;
-      font-size: 0.88rem;
-    }
-    .err.show { display: block; }
-    .hint {
-      margin-top: 18px;
-      font-size: 0.78rem;
-      color: var(--gray-600);
-      line-height: 1.4;
+      width: min(220px, 70%);
+      height: auto;
+      margin: 0 auto 14px;
     }
     .badge {
       display: inline-block;
@@ -109,55 +53,199 @@
       margin-bottom: 10px;
       letter-spacing: .04em;
     }
+    .brand {
+      font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      margin: 6px 0 20px;
+      color: var(--gray-600);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    form { text-align: left; }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+    .pw-wrap {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+    }
+    .pw-wrap input {
+      width: 100%;
+      padding: 12px 88px 12px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+      font-family: inherit;
+    }
+    .pw-wrap input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(46,125,50,.15);
+    }
+    .toggle {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: #f3f5f3;
+      color: var(--navy);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .toggle:hover { background: #e5ebe5; }
+    .toggle:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 1px;
+    }
+    button.submit {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    button.submit:hover { background: var(--green-light); }
+    button.submit:disabled { opacity: .65; cursor: wait; }
+    .err {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #ffebee;
+      color: #b71c1c;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    .err.show { display: block; }
+    .ok {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #e8f5e9;
+      color: #1b5e20;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    .ok.show { display: block; }
+    .hint {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--gray-600);
+      line-height: 1.4;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <main class="card">
+    <img class="logo" src="/images/mgs-logo.png" width="220" height="auto" alt="MGS Communications">
     <div class="badge">TEAM ONLY</div>
     <div class="brand">MGS Operations</div>
     <p class="sub">Sign in to open Form Station and other team tools. Not for customers.</p>
-    <form id="loginForm" autocomplete="current-password">
+    <form id="loginForm" autocomplete="current-password" method="post" action="/.netlify/functions/ops-login">
       <label for="password">Team password</label>
-      <input id="password" name="password" type="password" required autofocus placeholder="••••••••">
-      <button type="submit" id="btn">Sign in</button>
+      <div class="pw-wrap">
+        <input id="password" name="password" type="password" required autofocus placeholder="••••••••" autocomplete="current-password">
+        <button type="button" class="toggle" id="togglePw" aria-pressed="false" aria-controls="password">Show</button>
+      </div>
+      <button type="submit" class="submit" id="btn">Sign in</button>
       <div class="err" id="err" role="alert"></div>
+      <div class="ok" id="ok" role="status">Signed in — opening tools…</div>
     </form>
-    <p class="hint">Missy / Angela / Dustin — same password as the team ops gate. Session lasts 30 days on this browser.</p>
+    <p class="hint">Shared team password. Session lasts 30 days on this browser.</p>
   </main>
   <script>
     (function () {
       var form = document.getElementById('loginForm');
       var err = document.getElementById('err');
+      var ok = document.getElementById('ok');
       var btn = document.getElementById('btn');
+      var pw = document.getElementById('password');
+      var toggle = document.getElementById('togglePw');
+
       var params = new URLSearchParams(location.search);
       var next = params.get('next') || '/ops/forms/';
-      // Only allow relative next paths under /ops/
-      if (!next.startsWith('/ops/') || next.indexOf('//') !== -1) next = '/ops/forms/';
+      // Only allow relative next paths under /ops
+      if (next.indexOf('//') !== -1 || next.charAt(0) !== '/') next = '/ops/forms/';
+      if (next !== '/ops' && next.indexOf('/ops/') !== 0) next = '/ops/forms/';
 
-      form.addEventListener('submit', async function (e) {
+      function showErr(msg) {
+        ok.classList.remove('show');
+        err.textContent = msg || 'Sign-in failed';
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = 'Sign in';
+      }
+
+      toggle.addEventListener('click', function () {
+        var showing = pw.type === 'text';
+        pw.type = showing ? 'password' : 'text';
+        toggle.textContent = showing ? 'Show' : 'Hide';
+        toggle.setAttribute('aria-pressed', showing ? 'false' : 'true');
+        pw.focus();
+      });
+
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
         err.classList.remove('show');
+        ok.classList.remove('show');
         btn.disabled = true;
         btn.textContent = 'Signing in…';
-        try {
-          var res = await fetch('/.netlify/functions/ops-login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'same-origin',
-            body: JSON.stringify({ password: document.getElementById('password').value })
-          });
-          var data = {};
-          try { data = await res.json(); } catch (_) {}
-          if (!res.ok) {
-            throw new Error(data.error || 'Sign-in failed');
-          }
-          location.replace(next);
-        } catch (ex) {
-          err.textContent = ex.message || 'Sign-in failed';
-          err.classList.add('show');
-          btn.disabled = false;
-          btn.textContent = 'Sign in';
+
+        var password = pw.value;
+        if (!password) {
+          showErr('Enter the team password.');
+          return;
         }
+
+        fetch('/.netlify/functions/ops-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ password: password })
+        })
+          .then(function (res) {
+            return res.text().then(function (text) {
+              var data = {};
+              try { data = text ? JSON.parse(text) : {}; } catch (_) {}
+              return { res: res, data: data, text: text };
+            });
+          })
+          .then(function (r) {
+            if (!r.res.ok) {
+              throw new Error((r.data && r.data.error) || ('Sign-in failed (' + r.res.status + ')'));
+            }
+            ok.classList.add('show');
+            // Short beat so the cookie is committed, then go
+            setTimeout(function () {
+              window.location.assign(next);
+            }, 80);
+          })
+          .catch(function (ex) {
+            showErr((ex && ex.message) ? ex.message : 'Sign-in failed. Check your connection and try again.');
+          });
       });
     })();
   </script>
