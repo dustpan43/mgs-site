@@ -31,6 +31,34 @@ const { getStore } = require("@netlify/blobs");
 
 const COOKIE_NAME = "mgs_ops_session";
 const BLOB_KEY = "board";
+const SITE_ID =
+  process.env.SITE_ID ||
+  process.env.NETLIFY_SITE_ID ||
+  "9ac39f1e-1673-4f27-b0af-1981bf5b39b2";
+
+/**
+ * Open the Blobs cabinet.
+ * On a healthy Netlify function runtime, getStore("name") is enough.
+ * Some deploys need siteID + NETLIFY_AUTH_TOKEN (personal access / CLI token)
+ * set as a Netlify env var — then Grok can still POST snapshots with no git.
+ */
+function openStore() {
+  try {
+    return getStore("mgs-ops");
+  } catch (_) {
+    /* fall through to explicit config */
+  }
+  const token =
+    process.env.NETLIFY_AUTH_TOKEN ||
+    process.env.NETLIFY_BLOBS_TOKEN ||
+    process.env.BLOBS_TOKEN;
+  if (!token) {
+    throw new Error(
+      "Blobs not auto-configured. Set NETLIFY_AUTH_TOKEN in Netlify env (CLI login token or personal access token) and redeploy."
+    );
+  }
+  return getStore({ name: "mgs-ops", siteID: SITE_ID, token });
+}
 
 function json(status, body, extra) {
   return {
@@ -96,12 +124,12 @@ exports.handler = async (event) => {
 
   let store;
   try {
-    store = getStore("mgs-ops");
+    store = openStore();
   } catch (e) {
     return json(503, {
       error: "Blobs unavailable",
       detail: String(e && e.message ? e.message : e),
-      hint: "Netlify Blobs runs on Netlify's cloud. Local `netlify dev` needs linked site.",
+      hint: "Set NETLIFY_AUTH_TOKEN in Netlify site env (from `netlify login` CLI token) and redeploy. See ops/TEACHING-LIVE-BOARD.md.",
     });
   }
 
