@@ -8,8 +8,17 @@ Private tools for Missy / Angela / Dustin. **Not** linked from the public nav. *
 |------|-----|
 | `/ops/` | Hub landing |
 | `/ops/login/` | Password gate |
+| `/ops/board/` | **Operations Board** (live snapshot dashboard) |
 | `/ops/forms/` | **Form Station** (v1.23.0 master copy) |
-| `/ops/board/` | Ops Board — Step 4 (not yet) |
+
+### Operations Board refresh (Grok master)
+1. Edit **only** the `const BOARD = {…}` block in either:
+   - Master: `MGS Hub\Operations Hub\Hub Dashboard\mgs-hub-dashboard.html`
+   - Site publish copy: `website\ops\board\index.html`
+2. Copy master → `website/ops/board/index.html` (keep noindex meta).
+3. `git add ops/board/index.html` → commit → `git push origin main` → Netlify ~60s.
+4. Live URL: **https://mgscommunications.com/ops/board/** (same team password as Form Station).
+5. Do **not** edit below the `RENDERING ENGINE` banner. Recipe: Hub Dashboard README.
 
 ## Security model
 

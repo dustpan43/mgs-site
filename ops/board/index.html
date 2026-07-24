@@ -1,0 +1,1604 @@
+<meta charset="utf-8">
+<title>MGS Hub — Operations Board</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<style>
+  :root {
+    --brand: #1c5c38;
+    --brand-deep: #0f3822;
+    --brand-soft: #dfeee3;
+    --ground: #f2f5f0;
+    --surface: #ffffff;
+    --surface-2: #e9efe7;
+    --ink: #18211a;
+    --ink-2: #55645a;
+    --ink-3: #87958a;
+    --line: #d8e0d6;
+    --line-strong: #bcc8ba;
+    --crit: #b3362b;
+    --crit-bg: #f7e7e4;
+    --warn: #8a6207;
+    --warn-bg: #f6eed6;
+    --ok: #2c7a44;
+    --ok-bg: #e0efe4;
+    --masthead-ink: #f2f7f1;
+    --masthead-dim: #b9d2bf;
+    --link: #1c5c38;
+    --shadow: 0 1px 3px rgba(24, 33, 26, 0.07);
+    --stripe-none: transparent;
+    --d-rent-bg: #ecfdf5; --d-rent-fg: #059669; --d-rent-ink: #065f46; --d-rent-grad: linear-gradient(150deg, #059669, #10b981);
+    --d-money-bg: #fffbeb; --d-money-fg: #d97706; --d-money-ink: #92400e; --d-money-grad: linear-gradient(150deg, #d97706, #fbbf24);
+    --d-sig-bg: #f5f3ff; --d-sig-fg: #7c3aed; --d-sig-ink: #4c1d95; --d-sig-grad: linear-gradient(150deg, #6d28d9, #8b5cf6);
+    --d-task-bg: #eff6ff; --d-task-fg: #2563eb; --d-task-ink: #1e3a8a; --d-task-grad: linear-gradient(150deg, #1d4ed8, #3b82f6);
+    --d-rev-bg: #fdf2f8; --d-rev-fg: #db2777; --d-rev-ink: #831843; --d-rev-grad: linear-gradient(150deg, #db2777, #ec4899);
+    --d-alert-bg: #fef2f2; --d-alert-fg: #dc2626; --d-alert-ink: #7f1d1d; --d-alert-grad: linear-gradient(150deg, #dc2626, #f87171);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --brand: #6fbe8c;
+      --brand-deep: #0e2b1a;
+      --brand-soft: #1d3324;
+      --ground: #121812;
+      --surface: #1a221a;
+      --surface-2: #212c22;
+      --ink: #e4eae2;
+      --ink-2: #a3b2a5;
+      --ink-3: #6f7d71;
+      --line: #2b352b;
+      --line-strong: #3c483c;
+      --crit: #e5766a;
+      --crit-bg: #3a1f1b;
+      --warn: #d9a940;
+      --warn-bg: #33290f;
+      --ok: #6fbe8c;
+      --ok-bg: #1d3324;
+      --masthead-ink: #eef4ed;
+      --masthead-dim: #a8c2ad;
+      --link: #8ccca4;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --d-rent-bg: #06281e; --d-rent-fg: #34d399; --d-rent-ink: #a7f3d0; --d-rent-grad: linear-gradient(150deg, #047857, #10b981);
+      --d-money-bg: #2d1e05; --d-money-fg: #fbbf24; --d-money-ink: #fde68a; --d-money-grad: linear-gradient(150deg, #b45309, #f59e0b);
+      --d-sig-bg: #221543; --d-sig-fg: #a78bfa; --d-sig-ink: #ddd6fe; --d-sig-grad: linear-gradient(150deg, #5b21b6, #8b5cf6);
+      --d-task-bg: #0c1e3d; --d-task-fg: #60a5fa; --d-task-ink: #bfdbfe; --d-task-grad: linear-gradient(150deg, #1e40af, #3b82f6);
+      --d-rev-bg: #34081f; --d-rev-fg: #f472b6; --d-rev-ink: #fbcfe8; --d-rev-grad: linear-gradient(150deg, #9d174d, #ec4899);
+      --d-alert-bg: #340a0a; --d-alert-fg: #f87171; --d-alert-ink: #fecaca; --d-alert-grad: linear-gradient(150deg, #b91c1c, #ef4444);
+    }
+  }
+  :root[data-theme="light"] {
+    --brand: #1c5c38; --brand-deep: #0f3822; --brand-soft: #dfeee3;
+    --ground: #f2f5f0; --surface: #ffffff; --surface-2: #e9efe7;
+    --ink: #18211a; --ink-2: #55645a; --ink-3: #87958a;
+    --line: #d8e0d6; --line-strong: #bcc8ba;
+    --crit: #b3362b; --crit-bg: #f7e7e4;
+    --warn: #8a6207; --warn-bg: #f6eed6;
+    --ok: #2c7a44; --ok-bg: #e0efe4;
+    --masthead-ink: #f2f7f1; --masthead-dim: #b9d2bf; --link: #1c5c38;
+    --shadow: 0 1px 3px rgba(24, 33, 26, 0.07);
+    --d-rent-bg: #ecfdf5; --d-rent-fg: #059669; --d-rent-ink: #065f46; --d-rent-grad: linear-gradient(150deg, #059669, #10b981);
+    --d-money-bg: #fffbeb; --d-money-fg: #d97706; --d-money-ink: #92400e; --d-money-grad: linear-gradient(150deg, #d97706, #fbbf24);
+    --d-sig-bg: #f5f3ff; --d-sig-fg: #7c3aed; --d-sig-ink: #4c1d95; --d-sig-grad: linear-gradient(150deg, #6d28d9, #8b5cf6);
+    --d-task-bg: #eff6ff; --d-task-fg: #2563eb; --d-task-ink: #1e3a8a; --d-task-grad: linear-gradient(150deg, #1d4ed8, #3b82f6);
+    --d-rev-bg: #fdf2f8; --d-rev-fg: #db2777; --d-rev-ink: #831843; --d-rev-grad: linear-gradient(150deg, #db2777, #ec4899);
+    --d-alert-bg: #fef2f2; --d-alert-fg: #dc2626; --d-alert-ink: #7f1d1d; --d-alert-grad: linear-gradient(150deg, #dc2626, #f87171);
+  }
+  :root[data-theme="dark"] {
+    --brand: #6fbe8c; --brand-deep: #0e2b1a; --brand-soft: #1d3324;
+    --ground: #121812; --surface: #1a221a; --surface-2: #212c22;
+    --ink: #e4eae2; --ink-2: #a3b2a5; --ink-3: #6f7d71;
+    --line: #2b352b; --line-strong: #3c483c;
+    --crit: #e5766a; --crit-bg: #3a1f1b;
+    --warn: #d9a940; --warn-bg: #33290f;
+    --ok: #6fbe8c; --ok-bg: #1d3324;
+    --masthead-ink: #eef4ed; --masthead-dim: #a8c2ad; --link: #8ccca4;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --d-rent-bg: #06281e; --d-rent-fg: #34d399; --d-rent-ink: #a7f3d0; --d-rent-grad: linear-gradient(150deg, #047857, #10b981);
+    --d-money-bg: #2d1e05; --d-money-fg: #fbbf24; --d-money-ink: #fde68a; --d-money-grad: linear-gradient(150deg, #b45309, #f59e0b);
+    --d-sig-bg: #221543; --d-sig-fg: #a78bfa; --d-sig-ink: #ddd6fe; --d-sig-grad: linear-gradient(150deg, #5b21b6, #8b5cf6);
+    --d-task-bg: #0c1e3d; --d-task-fg: #60a5fa; --d-task-ink: #bfdbfe; --d-task-grad: linear-gradient(150deg, #1e40af, #3b82f6);
+    --d-rev-bg: #34081f; --d-rev-fg: #f472b6; --d-rev-ink: #fbcfe8; --d-rev-grad: linear-gradient(150deg, #9d174d, #ec4899);
+    --d-alert-bg: #340a0a; --d-alert-fg: #f87171; --d-alert-ink: #fecaca; --d-alert-grad: linear-gradient(150deg, #b91c1c, #ef4444);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .mono {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--brand); outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* ---------- command bar (masthead + view tabs, sticky) ---------- */
+  .command {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--brand-deep);
+    color: var(--masthead-ink);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  }
+  .masthead-inner {
+    max-width: 1140px; margin: 0 auto;
+    padding: 12px 24px 10px;
+    display: flex; flex-wrap: wrap; gap: 8px 24px;
+    align-items: center; justify-content: space-between;
+  }
+  .wordmark { display: flex; align-items: center; gap: 12px; }
+  .logo-chip {
+    background: #ffffff; border-radius: 7px; padding: 5px 9px;
+    display: inline-flex; align-items: center; flex: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+  .logo-chip img { height: 38px; display: block; }
+  .led {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #7fd89e; align-self: center; flex: none;
+    box-shadow: 0 0 6px rgba(127, 216, 158, 0.8);
+  }
+  .wordmark h1 {
+    margin: 0;
+    font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--masthead-ink);
+  }
+  .stamp { text-align: right; font-size: 12.5px; color: var(--masthead-dim); }
+  .stamp strong { color: var(--masthead-ink); font-weight: 600; }
+
+  .tabs {
+    max-width: 1140px; margin: 0 auto; padding: 0 16px;
+    display: flex; gap: 2px; overflow-x: auto;
+  }
+  .tab {
+    appearance: none; border: none; background: transparent;
+    color: var(--masthead-dim); cursor: pointer;
+    font: inherit; font-size: 13.5px; font-weight: 600;
+    padding: 9px 14px 11px; border-radius: 6px 6px 0 0;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color 120ms ease;
+  }
+  .tab:hover { color: var(--masthead-ink); }
+  .tab[aria-selected="true"] {
+    color: var(--masthead-ink);
+    border-bottom-color: #7fd89e;
+  }
+  .tab .n {
+    font-size: 11px; font-weight: 700;
+    background: rgba(255,255,255,0.14); border-radius: 999px;
+    padding: 1px 7px; margin-left: 5px;
+  }
+
+  /* ---------- page scaffold ---------- */
+  .page { max-width: 1140px; margin: 0 auto; padding: 22px 24px 48px; }
+  .view { display: grid; gap: 26px; }
+  .view[hidden] { display: none; }
+  section { display: grid; gap: 10px; }
+  .sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+  .sec-head .tick { width: 10px; height: 10px; background: var(--brand); flex: none; align-self: center; }
+  .sec-head h2 {
+    margin: 0; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.13em; color: var(--ink);
+  }
+  .sec-head .hint { font-size: 12.5px; color: var(--ink-3); }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 6px; box-shadow: var(--shadow);
+  }
+
+  /* ---------- KPI strip ---------- */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .kpi {
+    padding: 14px 16px 12px; display: grid; gap: 2px; align-content: start;
+    text-align: left; cursor: pointer; font: inherit; color: inherit;
+    transition: border-color 120ms ease;
+  }
+  .kpi:hover { border-color: var(--brand); }
+  .kpi .label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink-2);
+  }
+  .kpi .value { font-size: 27px; font-weight: 700; line-height: 1.15; }
+  .kpi .value small { font-size: 15px; font-weight: 600; color: var(--ink-2); }
+  .kpi .note { font-size: 12.5px; color: var(--ink-2); }
+  .kpi .go { font-size: 11.5px; color: var(--link); font-weight: 600; }
+  .kpi.crit { border-left: 3px solid var(--crit); }
+  .kpi.crit .value { color: var(--crit); }
+  .kpi.brand { border-left: 3px solid var(--brand); }
+
+  /* ---------- alert panel ---------- */
+  .alert { border: 1px solid var(--crit); border-left-width: 4px; background: var(--surface); }
+  .alert-head {
+    padding: 12px 16px 10px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline;
+    border-bottom: 1px solid var(--line);
+  }
+  .alert-head .t { font-weight: 700; color: var(--crit); font-size: 15px; }
+  .alert-head .s { font-size: 13px; color: var(--ink-2); }
+  .alert-row {
+    display: grid; grid-template-columns: 150px 1fr; gap: 4px 16px;
+    padding: 10px 16px; border-bottom: 1px solid var(--line); font-size: 14px;
+  }
+  .alert-row:last-child { border-bottom: none; }
+  .alert-row .who { font-weight: 650; }
+  .alert-row .what strong { color: var(--crit); font-weight: 650; }
+  .alert-row .what .aside { color: var(--ink-2); font-size: 13px; }
+  @media (max-width: 560px) { .alert-row { grid-template-columns: 1fr; } }
+
+  /* ---------- day cards ---------- */
+  .days { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; }
+  .day { padding: 13px 16px 14px; display: grid; gap: 8px; align-content: start; }
+  .day.today { border-color: var(--brand); border-width: 1.5px; }
+  .day-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .day-head .dow { font-weight: 700; font-size: 14px; }
+  .day-head .badge {
+    font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--brand); background: var(--brand-soft); padding: 2px 8px; border-radius: 999px;
+  }
+  .day ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 13.5px; }
+  .day li::marker { color: var(--ink-3); }
+  .day .heavy { font-weight: 650; }
+
+  /* ---------- filter bar ---------- */
+  .filters {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    padding: 10px 12px;
+  }
+  .fchip {
+    appearance: none; cursor: pointer; font: inherit;
+    font-size: 12.5px; font-weight: 600;
+    color: var(--ink-2); background: var(--surface);
+    border: 1px solid var(--line-strong); border-radius: 999px;
+    padding: 3px 12px;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .fchip:hover { border-color: var(--brand); color: var(--ink); }
+  .fchip[aria-pressed="true"] {
+    background: var(--brand); border-color: var(--brand);
+    color: var(--surface);
+  }
+  .fchip .fc { font-weight: 700; opacity: 0.75; margin-left: 3px; }
+  .fsep { width: 1px; height: 20px; background: var(--line-strong); margin: 0 2px; flex: none; }
+  .fsel, .ftext {
+    font: inherit; font-size: 13px; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 6px; padding: 4px 8px;
+  }
+  .ftext { min-width: 150px; }
+  .fclear {
+    appearance: none; border: none; background: none; cursor: pointer;
+    font: inherit; font-size: 12.5px; font-weight: 600; color: var(--link);
+    padding: 3px 6px;
+  }
+
+  /* ---------- tables ---------- */
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  thead th {
+    text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.09em; color: var(--ink-2);
+    padding: 9px 12px; border-bottom: 1px solid var(--line-strong);
+    background: var(--surface-2); white-space: nowrap;
+  }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: var(--ink); }
+  th.sortable .arr { opacity: 0.9; }
+  tbody td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr.sev-crit td:first-child { box-shadow: inset 3px 0 0 var(--crit); }
+  tbody tr.sev-warn td:first-child { box-shadow: inset 3px 0 0 var(--warn); }
+  td.mgnum { white-space: nowrap; font-weight: 600; }
+  td.num { text-align: right; white-space: nowrap; }
+  th.num { text-align: right; }
+  td .dim { color: var(--ink-2); font-size: 12.5px; }
+  td .date-dow { color: var(--ink-2); font-size: 12px; margin-right: 4px; }
+  tfoot td {
+    padding: 9px 12px; font-weight: 700; border-top: 2px solid var(--line-strong);
+    background: var(--surface-2);
+  }
+  .empty { padding: 18px 16px; font-size: 13.5px; color: var(--ink-2); }
+
+  .chip {
+    display: inline-block; padding: 1.5px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .chip.out { background: var(--ok-bg); color: var(--ok); }
+  .chip.partial { background: var(--crit-bg); color: var(--crit); }
+  .chip.verify { background: var(--warn-bg); color: var(--warn); }
+  .chip.booked { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line-strong); }
+  .chip.signed { background: var(--ok-bg); color: var(--ok); }
+  .chip.tentative { background: var(--warn-bg); color: var(--warn); }
+  .chip.overdue { background: var(--crit-bg); color: var(--crit); }
+  .chip.today { background: var(--warn-bg); color: var(--warn); }
+  .chip.soon { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line-strong); }
+  .chip.ready { background: var(--ok-bg); color: var(--ok); }
+  .chip.hold { background: var(--crit-bg); color: var(--crit); }
+  .chip.check { background: var(--warn-bg); color: var(--warn); }
+  .chip.person { background: var(--brand-soft); color: var(--brand); text-transform: none; letter-spacing: 0; }
+
+  /* ---------- money grid ---------- */
+  .money { display: grid; grid-template-columns: minmax(0, 3fr) minmax(240px, 2fr); gap: 10px; align-items: start; }
+  @media (max-width: 820px) { .money { grid-template-columns: 1fr; } }
+  .sidecard { display: grid; gap: 0; }
+  .sidecard .block { padding: 13px 16px; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+  .sidecard .block:last-child { border-bottom: none; }
+  .sidecard h3 {
+    margin: 0; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink-2);
+  }
+  .pipe-row { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; align-items: baseline; }
+  .pipe-row .amt { font-weight: 650; white-space: nowrap; }
+  .pipe-row .st { font-size: 11.5px; color: var(--ink-3); }
+  .footnote { font-size: 12.5px; color: var(--ink-2); }
+  .ytd .big { font-size: 23px; font-weight: 700; color: var(--brand); }
+
+  /* ---------- review tab (print queue) ---------- */
+  .rev-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+  .rev-tile { padding: 13px 16px 11px; display: grid; gap: 2px; align-content: start; }
+  .rev-tile .label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink-2);
+  }
+  .rev-tile .value { font-size: 25px; font-weight: 700; line-height: 1.15; }
+  .rev-tile .note { font-size: 12.5px; color: var(--ink-2); }
+  .rev-tile.hold { border-left: 3px solid var(--warn); }
+  .rev-tile.hold .value { color: var(--warn); }
+  .rev-how { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 11px 16px; font-size: 13px; color: var(--ink-2); }
+  .rev-how .step { display: inline-flex; align-items: center; }
+  .rev-how .n {
+    display: inline-flex; width: 19px; height: 19px; border-radius: 50%; flex: none;
+    background: var(--brand); color: var(--ground);
+    align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; margin-right: 7px;
+  }
+  .rev-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 10px; align-items: start; }
+  @media (max-width: 700px) { .rev-cards { grid-template-columns: 1fr; } }
+  .rev-card { display: grid; gap: 10px; padding: 14px 16px; align-content: start; }
+  .rev-card.hold { border-left: 4px solid var(--warn); }
+  .rev-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .rev-cust { font-weight: 700; font-size: 15px; }
+  .rev-amt { font-size: 18px; font-weight: 700; white-space: nowrap; }
+  .rev-doc { font-weight: 650; font-size: 14px; color: var(--ink); }
+  .rev-check { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; font-size: 13.5px; }
+  .rev-check li { padding-left: 24px; position: relative; }
+  .rev-check li::before { content: "☐"; position: absolute; left: 2px; color: var(--ink-3); }
+  .rev-open {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--brand); color: var(--ground);
+    border-radius: 6px; padding: 9px 14px;
+    font-weight: 650; font-size: 13.5px; text-decoration: none;
+    transition: filter 120ms ease;
+  }
+  .rev-open:hover { filter: brightness(1.12); }
+  .rev-foot { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: var(--ink-3); }
+  .rev-banner {
+    appearance: none; width: 100%; cursor: pointer; font: inherit; color: inherit; text-align: left;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
+    padding: 12px 16px; border-left: 4px solid var(--brand);
+  }
+  .rev-banner:hover { border-color: var(--brand); }
+  .rev-banner .t { font-weight: 700; }
+  .rev-banner .s { color: var(--ink-2); font-size: 13.5px; }
+  .rev-banner .go { color: var(--link); font-weight: 650; margin-left: auto; white-space: nowrap; font-size: 13px; }
+
+  /* ---------- tasks ---------- */
+  .task-counts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .tc { padding: 12px 16px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .tc .who { font-weight: 650; }
+  .tc .n { font-size: 24px; font-weight: 700; color: var(--brand); }
+
+  /* ---------- activity feed ---------- */
+  .feed { padding: 4px 0; }
+  .feed-item {
+    display: grid; grid-template-columns: 118px 1fr; gap: 4px 14px;
+    padding: 9px 16px; border-bottom: 1px solid var(--line); font-size: 13.5px;
+  }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-item .when { color: var(--ink-3); white-space: nowrap; font-size: 12.5px; padding-top: 1px; }
+  .feed-item .what strong { font-weight: 650; }
+  @media (max-width: 560px) { .feed-item { grid-template-columns: 1fr; } }
+
+  /* ---------- links ---------- */
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .linkcard { padding: 12px 16px; display: grid; gap: 3px; text-decoration: none; }
+  .linkcard:hover { border-color: var(--brand); }
+  .linkcard .name { font-weight: 650; color: var(--ink); }
+  .linkcard .tabs2 { font-size: 12px; color: var(--ink-2); }
+  .linkcard .go { font-size: 12px; color: var(--link); font-weight: 600; }
+
+  .pagefoot {
+    border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px;
+    font-size: 12.5px; color: var(--ink-2); display: grid; gap: 4px;
+  }
+  .pagefoot .rule { color: var(--ink-3); }
+  /* ---------- rentals timeline (next 3 weeks) ---------- */
+  .tlwrap { overflow-x: auto; padding: 14px 16px 12px; }
+  .tl { display: grid; gap: 3px 0; min-width: 760px; }
+  .tl-hd {
+    text-align: center; font-size: 10.5px; font-weight: 600; color: var(--ink-3);
+    padding-bottom: 3px; white-space: nowrap;
+  }
+  .tl-hd.wknd { color: var(--ink-2); background: var(--surface-2); border-radius: 3px 3px 0 0; }
+  .tl-hd.tdy { color: var(--brand); font-weight: 700; }
+  .tl-lbl {
+    font-size: 12px; color: var(--ink-2); padding-right: 10px; align-self: center;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tl-bar {
+    border-radius: 4px; padding: 2px 8px; margin: 1px 1px;
+    font-size: 11px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tl-bar.b-out { background: var(--brand); color: var(--ground); }
+  .tl-bar.b-signed { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok); }
+  .tl-bar.b-booked { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line-strong); }
+  .tl-bar.b-tent { background: transparent; color: var(--ink-2); border: 1px dashed var(--line-strong); }
+  .tl-load {
+    text-align: center; font-size: 11px; font-weight: 600; color: var(--ink-3);
+    padding: 3px 0 1px; border-top: 1px solid var(--line);
+  }
+  .tl-load.wknd { background: var(--surface-2); border-radius: 0 0 3px 3px; }
+  .tl-load.ld-mid { color: var(--warn); }
+  .tl-load.ld-hi { color: var(--crit); }
+  .tl-leg { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 11.5px; color: var(--ink-2); padding-top: 10px; }
+  .tl-leg .sw { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+
+  /* =====================================================================
+     v5 THEME LAYER (7/22/2026) — domain color system + modern polish.
+     Overrides earlier rules by cascade order; engine markup contract
+     unchanged except KPI cards (icon + dom-* class, see renderer).
+     Domains: rent(green-teal) money(amber) sig(violet) task(blue)
+     rev(warm gray) alert(terracotta) — vars --d-*-bg/-fg/-ink per theme.
+     ===================================================================== */
+  .card { border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 2px 10px rgba(24,33,26,0.06); }
+  button.kpi, .linkcard, .rev-banner, .rev-card, .tc {
+    transition: transform 130ms ease, box-shadow 130ms ease, border-color 130ms ease;
+  }
+  button.kpi:hover, .linkcard:hover, .rev-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(24,33,26,0.13);
+  }
+  .sec-head .tick { width: 8px; height: 18px; border-radius: 4px; }
+
+  /* masthead + pill tabs */
+  .command { background: linear-gradient(130deg, var(--brand-deep), color-mix(in srgb, var(--brand-deep) 55%, var(--brand))); }
+  .tabs { padding: 4px 16px 10px; gap: 6px; }
+  .tab { border-radius: 999px; padding: 6px 14px; border-bottom: none; transition: background 120ms ease, color 120ms ease; }
+  .tab:hover { background: rgba(255,255,255,0.1); }
+  .tab[aria-selected="true"] { background: var(--masthead-ink); color: var(--brand-deep); font-weight: 700; border-bottom-color: transparent; }
+  .tab[aria-selected="true"] .n { background: var(--brand-soft); color: var(--brand); }
+
+  /* v6 gel-pen KPI ink tiles — saturated gradient cards, white text, colored glow */
+  .kpi { border: none; padding: 15px 17px 13px; border-radius: 14px; }
+  .kpi.brand, .kpi.crit { border-left: none; }
+  .kpi .value { font-size: 31px; }
+  .kpi .label svg { vertical-align: -3px; margin-right: 7px; }
+  .kpi .label, .kpi .note { color: rgba(255,255,255,0.9); }
+  .kpi .value, .kpi .value small, .kpi.crit .value, .kpi.crit .value small { color: #fff; }
+  .kpi .go { color: #fff; opacity: 0.95; }
+  .dom-rent { background: var(--d-rent-grad); box-shadow: 0 4px 14px rgba(16,185,129,0.35); }
+  .dom-money { background: var(--d-money-grad); box-shadow: 0 4px 14px rgba(245,158,11,0.35); }
+  .dom-sig { background: var(--d-sig-grad); box-shadow: 0 4px 14px rgba(139,92,246,0.35); }
+  .dom-task { background: var(--d-task-grad); box-shadow: 0 4px 14px rgba(59,130,246,0.35); }
+  .dom-rev { background: var(--d-rev-grad); box-shadow: 0 4px 14px rgba(236,72,153,0.35); }
+  .dom-alert { background: var(--d-alert-grad); box-shadow: 0 4px 14px rgba(239,68,68,0.42); }
+  button.kpi:hover { box-shadow: 0 8px 22px rgba(24,33,26,0.3); }
+
+  /* v6 hybrid per-view treatment — gradient headers + colored frames, WHITE reading surfaces */
+  #view-rentals .sec-head .tick { background: var(--d-rent-grad); }
+  #view-rentals .sec-head h2 { color: var(--d-rent-fg); }
+  #view-rentals thead th { background: var(--d-rent-grad); color: #fff; border-bottom: none; }
+  #view-money .sec-head .tick { background: var(--d-money-grad); }
+  #view-money .sec-head h2 { color: var(--d-money-fg); }
+  #view-money thead th { background: var(--d-money-grad); color: #fff; border-bottom: none; }
+  #view-money tfoot td { background: var(--d-money-bg); color: var(--d-money-ink); border-top: 2px solid var(--d-money-fg); }
+  #view-money .sidecard .block h3 { color: var(--d-money-fg); }
+  #view-money .sidecard .block:nth-child(2) h3 { color: var(--d-sig-fg); }
+  #view-tasks .sec-head .tick { background: var(--d-task-grad); }
+  #view-tasks .sec-head h2 { color: var(--d-task-fg); }
+  #view-tasks thead th { background: var(--d-task-grad); color: #fff; border-bottom: none; }
+  #view-tasks .tc { border-top: 3px solid var(--d-task-fg); }
+  #view-tasks .tc .n { color: var(--d-task-fg); }
+  #view-review .sec-head .tick { background: var(--d-rev-grad); }
+  #view-review .sec-head h2 { color: var(--d-rev-fg); }
+  #view-activity .sec-head .tick { background: var(--d-sig-grad); }
+  #view-activity .sec-head h2 { color: var(--d-sig-fg); }
+  th.sortable:hover { color: #fff; text-decoration: underline; }
+  .rev-card { border-top: 4px solid var(--d-rev-fg); }
+  .rev-card.hold { border-left: none; border-top-color: var(--warn); }
+  .rev-tile { border-top: 3px solid var(--d-rev-fg); }
+  .rev-open { background: var(--d-rev-grad); }
+  .rev-how .n { background: var(--d-rev-grad); color: #fff; }
+  .rev-banner { border-left: 4px solid var(--d-rev-fg); }
+  .tl-bar.b-out { background: var(--d-rent-grad); color: #fff; }
+  .tl-bar.b-signed { background: var(--surface); color: var(--d-rent-fg); border: 1.5px solid var(--d-rent-fg); }
+  .tl-hd.tdy { color: var(--d-rent-fg); }
+  .tl-load.ld-mid { color: var(--d-money-fg); }
+  .tl-load.ld-hi { color: var(--d-alert-fg); }
+
+  /* v6 gel-pen chips — solid saturated fills, white text */
+  .chip { padding: 2.5px 10px; }
+  .chip.out, .chip.signed, .chip.ready { background: #10b981; color: #fff; }
+  .chip.partial, .chip.overdue, .chip.hold { background: var(--d-alert-grad); color: #fff; }
+  .chip.today, .chip.check, .chip.verify, .chip.tentative { background: #f59e0b; color: #fff; }
+  .chip.booked, .chip.soon { background: #64748b; color: #fff; border: none; }
+  .chip.person { background: var(--d-task-bg); color: var(--d-task-fg); }
+  .day.today { background: var(--brand-soft); border-color: var(--brand); }
+  .day-head .badge { background: var(--d-rent-grad); color: #fff; }
+
+  /* activity feed → timeline with dots */
+  .feed-item { position: relative; padding: 9px 16px 9px 40px; }
+  .feed-item::before {
+    content: ""; position: absolute; left: 18px; top: 16px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--d-sig-grad);
+  }
+  .feed-item::after {
+    content: ""; position: absolute; left: 21.5px; top: 28px; bottom: -4px;
+    width: 1px; background: var(--line-strong);
+  }
+  .feed-item:last-child::after { display: none; }
+
+  @media (max-width: 560px) { .kpi .value { font-size: 26px; } }
+  @media (prefers-reduced-motion: reduce) {
+    button.kpi:hover, .linkcard:hover, .rev-banner:hover { transform: none; }
+  }
+
+  /* =====================================================================
+     v7 LAYOUT LAYER (7/23/2026) — collapsible left sidebar + Review regroup.
+     The sidebar rail replaces the pill tabs (fold state in localStorage;
+     an overlay drawer <=640px). Review tab: company → package grouping,
+     doc-type chips, needBy countdown + staged-age chips, time strip. All
+     derived in the engine — the BOARD contract is unchanged (needBy is an
+     OPTIONAL reviewQueue field; old rows render fine without it).
+     The old .tabs / .rev-cards CSS above is retired-but-inert.
+     ===================================================================== */
+
+  /* ---------- shell: full-height rail + page (v7.1 — no top header; the
+     brand + snapshot live in the rail, which runs edge to edge) ---------- */
+  .shell { display: flex; align-items: flex-start; }
+  .page { flex: 1; min-width: 0; }
+  .rail {
+    position: sticky; top: 0; height: 100vh; height: 100dvh;
+    flex: none; width: 236px;
+    display: flex; flex-direction: column;
+    padding: 14px 10px 12px; overflow-y: auto; overflow-x: hidden;
+    background: var(--surface); border-right: 1px solid var(--line);
+    transition: width 160ms ease;
+  }
+  .rail-brand { display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 4px 6px 12px; }
+  .rail-logo { display: block; width: 152px; max-width: 100%; height: auto; }
+  .rail-title { display: flex; align-items: center; gap: 7px; }
+  .rail-brand h1 {
+    margin: 0; font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
+    font-size: 11.5px; font-weight: 700; line-height: 1.3;
+    text-transform: uppercase; letter-spacing: 0.13em; color: var(--ink);
+  }
+  .rail-snap {
+    flex: 1 1 auto; min-height: 0; overflow-y: auto;
+    margin: 12px 2px 10px; padding-top: 10px; border-top: 1px solid var(--line);
+    font-size: 11.5px; line-height: 1.5; color: var(--ink-2);
+  }
+  .rail-snap strong { color: var(--ink); font-weight: 650; }
+  .rail-snap .snap-day { display: block; margin-bottom: 3px; font-size: 12px; }
+  /* the logo PNG is transparent; its black "Communications, Inc." line needs a
+     soft white halo to stay legible on the dark rail (all four theme blocks) */
+  @media (prefers-color-scheme: dark) {
+    .rail-logo { filter: drop-shadow(0 0 1.5px rgba(255,255,255,0.95)) drop-shadow(0 0 1.5px rgba(255,255,255,0.8)) drop-shadow(0 0 5px rgba(255,255,255,0.4)); }
+  }
+  :root[data-theme="dark"] .rail-logo { filter: drop-shadow(0 0 1.5px rgba(255,255,255,0.95)) drop-shadow(0 0 1.5px rgba(255,255,255,0.8)) drop-shadow(0 0 5px rgba(255,255,255,0.4)); }
+  :root[data-theme="light"] .rail-logo { filter: none; }
+  .rail-nav { display: flex; flex-direction: column; gap: 4px; }
+  .ritem {
+    position: relative; appearance: none; border: none; background: none;
+    font: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink-2);
+    cursor: pointer; width: 100%; text-align: left; white-space: nowrap;
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 10px; border-radius: 10px;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .ritem:hover { background: var(--surface-2); color: var(--ink); }
+  .ritem svg { flex: none; }
+  .ritem .rtick { width: 4px; height: 18px; border-radius: 2px; flex: none; }
+  .ritem .rn {
+    margin-left: auto; font-size: 11px; font-weight: 700;
+    background: var(--surface-2); color: var(--ink-2);
+    border-radius: 999px; padding: 1px 7px;
+  }
+  .ritem .rn.rev { background: var(--d-rev-grad); color: #fff; }
+  .ritem .rn.alert { background: var(--d-alert-grad); color: #fff; }
+  .dom-home .rtick { background: linear-gradient(150deg, var(--brand-deep), var(--brand)); }
+  .dom-rent .rtick { background: var(--d-rent-grad); }
+  .dom-money .rtick { background: var(--d-money-grad); }
+  .dom-sig .rtick { background: var(--d-sig-grad); }
+  .dom-task .rtick { background: var(--d-task-grad); }
+  .dom-rev .rtick { background: var(--d-rev-grad); }
+  .ritem.dom-home[aria-selected="true"] { background: var(--brand-soft); color: var(--brand); }
+  .ritem.dom-rent[aria-selected="true"] { background: var(--d-rent-bg); color: var(--d-rent-fg); }
+  .ritem.dom-money[aria-selected="true"] { background: var(--d-money-bg); color: var(--d-money-fg); }
+  .ritem.dom-sig[aria-selected="true"] { background: var(--d-sig-bg); color: var(--d-sig-fg); }
+  .ritem.dom-task[aria-selected="true"] { background: var(--d-task-bg); color: var(--d-task-fg); }
+  .ritem.dom-rev[aria-selected="true"] { background: var(--d-rev-bg); color: var(--d-rev-fg); }
+  .rail-fold {
+    margin-top: auto; appearance: none; cursor: pointer; font: inherit;
+    font-size: 12.5px; font-weight: 600; color: var(--ink-2);
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 7px; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .rail-fold:hover { border-color: var(--brand); color: var(--ink); }
+  .menu-btn {
+    display: none; position: fixed; top: 10px; left: 10px; z-index: 50;
+    appearance: none; border: none; cursor: pointer;
+    background: var(--brand-deep); color: #fff;
+    border-radius: 10px; padding: 9px 10px; line-height: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rail-scrim { display: none; }
+  @media (min-width: 641px) {
+    .shell.folded .rail { width: 56px; padding: 14px 6px 12px; }
+    .shell.folded .rlabel, .shell.folded .rtick { display: none; }
+    .shell.folded .ritem { justify-content: center; padding: 10px 0; }
+    .shell.folded .ritem .rn { position: absolute; top: 1px; right: 3px; margin: 0; padding: 0 5px; font-size: 9.5px; }
+    .shell.folded .rail-fold { padding: 7px 0; }
+    .shell.folded .rail-brand { align-items: center; padding: 2px 0 10px; }
+    .shell.folded .rail-title { display: none; }
+    .shell.folded .rail-logo { width: 42px; }
+    .shell.folded .rail-snap { display: none; }
+  }
+  @media (max-width: 640px) {
+    .menu-btn { display: inline-flex; }
+    .page { padding-top: 56px; }
+    .rail {
+      position: fixed; left: 0; top: 0; bottom: 0; height: 100vh; height: 100dvh;
+      width: 260px; z-index: 45; padding-top: 56px;
+      transform: translateX(-105%); transition: transform 190ms ease;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); border-right: 1px solid var(--line-strong);
+    }
+    .shell.drawer .rail { transform: none; }
+    .shell.drawer .rail-scrim {
+      display: block; position: fixed; inset: 0; z-index: 40;
+      background: rgba(10, 15, 10, 0.45);
+    }
+    .rail-fold { display: none; }
+  }
+
+  /* ---------- review tab v7: time strip + company/package grouping ---------- */
+  .rev-time {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px;
+    padding: 10px 16px; font-size: 13.5px; border-left: 4px solid var(--d-rev-fg);
+  }
+  .rev-time .td { font-weight: 700; }
+  .rev-time .nx { color: var(--ink-2); }
+  .rev-comp { display: flex; align-items: baseline; gap: 10px; }
+  .rev-comp-name { font-weight: 700; font-size: 14.5px; }
+  .rev-comp-n { font-size: 12px; color: var(--ink-3); }
+  .rev-groups { display: grid; gap: 16px; }
+  .rev-group { display: grid; gap: 8px; }
+  .rev-pkg { padding: 0; overflow: hidden; border-top: 4px solid var(--d-rev-fg); }
+  .rev-pkg.hold { border-top-color: var(--warn); }
+  .rev-pkg-cap {
+    padding: 6px 14px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--d-rev-fg); background: var(--d-rev-bg);
+  }
+  .rrow { border-bottom: 1px solid var(--line); }
+  .rrow:last-child { border-bottom: none; }
+  .rrow.hold { box-shadow: inset 3px 0 0 var(--warn); }
+  .rrow-hd { display: flex; align-items: stretch; }
+  .rrow-tgl {
+    appearance: none; border: none; background: none; font: inherit; color: inherit;
+    text-align: left; cursor: pointer; flex: 1; min-width: 0;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+    padding: 10px 12px;
+  }
+  .rrow-tgl:hover { background: var(--surface-2); }
+  .rrow-mg { font-weight: 700; white-space: nowrap; }
+  .rrow-doc { color: var(--ink-2); font-size: 13px; }
+  .rrow-amt { font-weight: 700; margin-left: auto; }
+  .rrow-staged { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+  .rrow-caret { color: var(--ink-3); font-size: 11px; transition: transform 140ms ease; }
+  .rrow.open .rrow-caret { transform: rotate(180deg); }
+  .rrow-drive {
+    display: inline-flex; align-items: center; align-self: center; flex: none;
+    background: var(--d-rev-grad); color: #fff; text-decoration: none;
+    font-weight: 650; font-size: 12.5px; white-space: nowrap;
+    border-radius: 8px; padding: 7px 12px; margin: 8px 12px 8px 4px;
+    transition: filter 120ms ease;
+  }
+  .rrow-drive:hover { filter: brightness(1.12); }
+  .rrow-check { display: none; padding: 0 14px 12px 40px; }
+  .rrow.open .rrow-check { display: grid; }
+  /* v7.5 archive strip — printed docs, links kept ~a month */
+  .rev-arch { border-top: 4px solid var(--line-strong); overflow: hidden; }
+  .arc-cap {
+    padding: 7px 14px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink-2); background: var(--surface-2);
+  }
+  .arc-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+    padding: 8px 12px; border-bottom: 1px solid var(--line);
+    font-size: 13px; color: var(--ink-2);
+  }
+  .arc-row:last-child { border-bottom: none; }
+  .arc-row .chip { opacity: 0.78; }
+  .arc-cust { font-weight: 650; color: var(--ink); }
+  .arc-mg { font-weight: 650; white-space: nowrap; }
+  .arc-when { margin-left: auto; font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+  .arc-open {
+    color: var(--link); font-weight: 650; font-size: 12.5px; text-decoration: none;
+    border: 1px solid var(--line-strong); border-radius: 8px; padding: 4px 10px; white-space: nowrap;
+  }
+  .arc-open:hover { border-color: var(--d-rev-fg); color: var(--d-rev-fg); }
+  @media (max-width: 640px) { .arc-when { margin-left: 0; } }
+
+  .chip.t-sale { background: var(--d-task-grad); color: #fff; }
+  .chip.t-rental { background: var(--d-rent-grad); color: #fff; }
+  .chip.t-repair { background: var(--d-money-grad); color: #fff; }
+  .chip.t-unit { background: #64748b; color: #fff; }
+  @media (max-width: 640px) { .rrow-amt { margin-left: 0; } }
+</style>
+
+<button class="menu-btn" id="menu-btn" type="button" aria-label="Open navigation" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+
+<div class="shell" id="shell">
+  <aside class="rail" id="rail" aria-label="Board navigation">
+    <div class="rail-brand">
+      <img class="rail-logo" alt="MGS Communications, Inc." src="data:image/png;base64,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">
+      <div class="rail-title"><span class="led" aria-hidden="true"></span><h1>Operations Board</h1></div>
+    </div>
+    <nav class="rail-nav" id="rail-nav" role="tablist" aria-label="Board views"></nav>
+    <div class="rail-snap"><strong id="stamp-day" class="snap-day"></strong><span>snapshot <strong id="stamp-time"></strong></span></div>
+    <button class="rail-fold" id="rail-fold" type="button"></button>
+  </aside>
+  <div class="rail-scrim" id="rail-scrim" aria-hidden="true"></div>
+
+  <main class="page">
+  <div class="view" id="view-overview" role="tabpanel"></div>
+  <div class="view" id="view-review" role="tabpanel" hidden></div>
+  <div class="view" id="view-rentals" role="tabpanel" hidden></div>
+  <div class="view" id="view-money" role="tabpanel" hidden></div>
+  <div class="view" id="view-tasks" role="tabpanel" hidden></div>
+  <div class="view" id="view-activity" role="tabpanel" hidden></div>
+
+  <footer class="pagefoot">
+    <span><strong>How this page stays fresh:</strong> it's a snapshot — the numbers were read from the live sheets at publish time (stamp in the sidebar). It republishes to this same address at every chief boot and every session close, so the board is current every morning, every close, and after every rental write.</span>
+    <span class="rule">This board is the view · the MG26 ledger and the task store are the truth. · engine v7</span>
+  </footer>
+  </main>
+</div>
+
+<script>
+/* =====================================================================
+   BOARD DATA — the ONLY block a republish session edits.
+   Everything below it is the rendering engine; don't touch per-refresh.
+   Dates are ISO (YYYY-MM-DD) for sorting; "disp" fields are what shows.
+   ===================================================================== */
+const BOARD = {
+  snapshot: { day: "Friday, July 24, 2026", time: "11:15 AM MST", label: "FRIDAY — ⚠️ OAK VIEW MG26-316 REPRINTED (internal notes had leaked onto the customer copy + You-Saved amounts were blank) — RECYCLE any print made before Fri 11:08 AM, the Review-tab link now opens the corrected copy · Manheim SIGNED 10:59 AM (41 min!) — repair proceeding · Rogelio picked up his power supply · Opera picked up Thu" },
+
+  kpis: [
+    { label: "Radios out now", value: "30", note: "Kenny's 10 + Blue River's 20 (picked up Thu PM, a day early) — both back Tue 7/28 · Oak View 40 out Tue · Fri 7/31 crunch: NM United 40 + Westside 14 + Alliance AV pickup", tone: "brand", go: "rentals", preset: null },
+    { label: "Missing gear", value: "9", suffix: "earpieces", note: "Kenny's 9 earpieces from the 7/21 return (10 of 19 back) — charge case-by-case at close-out; chase again at his 7/28 return · radio ~#704 is CLOSED (LOST-PAID via Schimmel)", tone: "crit", go: "rentals", preset: "PARTIAL" },
+    { label: "Owed on finished work", value: "$937.56", note: "Kenny week $449.88 (cards ready) + Route 66 $269 + Cochiti $195 + the Tue Plaza $23.68 skip question (ask Missy) · sales print queue is separate (~$17k paperwork, not card-ready)", tone: "brand", go: "money", preset: null, mono: true },
+    { label: "Out for signature", value: "6", note: "✅ Manheim repair estimate SIGNED Fri 10:59 AM — 41 minutes after send (new customer, repair proceeding) · Ghost Ranch $1,511.06 sent Thu 3:29 PM · SIGNED: Westside Summerfest — Steven signed Wed 2:52 PM, 32 minutes after send ($176 · MG# + booking writes pending Dustin OK) · still waiting: Boy Scouts (8d) + Sky City (7d) opened-not-signed · 3 older floating: Anzula (28d), Popejoy proposal (27d — likely superseded, void?), Freedom 4th corrected (27d never opened — void?) · Inspire Church + Atlas are NOT in DocuSign (FreshBooks-era) · Alliance Audio Visual CONFIRMED Wed 4:55 PM (RPO in, pickup Fri 7/31)", tone: "brand", go: "money", preset: null, mono: true },
+    { label: "Open tasks", value: "85", note: "Dustin ~49 · Angela ~26 · Missy 4 · Claude 2 · NEW: Manheim repair (do today) + Gotham radio recovery (High) · still open: TCNM state-contract answer · Squarespace bill · Ghost Ranch follow-through", tone: "brand", go: "tasks", preset: null }
+  ],
+
+  missing: [
+    { who: "Linq (Kenny)", what: "<strong>9 earpieces</strong> — didn't come back with Tue's 19-radio return · charge decision case-by-case at the week's close-out · chase again at his Tue 7/28 return", aside: "(MG26-317–322, week series)" }
+  ],
+
+  days: [
+    { dow: "Fri 7/24 (today)", badge: "Opera pickup AM", items: [
+      { t: "OAK VIEW MG26-316 REPRINTED (11:08 AM) — the earlier customer copy had INTERNAL NOTES leaked into Special Instructions + blank You-Saved amounts · fixed: You Saved $200.00, internal line removed · RECYCLE any earlier print — the Review-tab link now opens the corrected copy · print fresh for Tue 7/28 pickup", heavy: true },
+      { t: "MANHEIM SIGNED — Marwan signed the $72.65 PTT repair estimate at 10:59 AM, 41 minutes after Dustin sent it · repair proceeding (Dustin promised within-the-hour turnaround) · repair invoice on completion", heavy: true },
+      { t: "Rogelio (Metro Courts): DONE — invoice printed and he picked up the power supply late morning · paper rode the handover ($314.25, PO 11830)", heavy: false },
+      { t: "Santa Fe Opera: DONE — Brittney picked up the repaired radios THURSDAY (a day early) · task closed · payment due on completion, watch for it", heavy: false },
+      { t: "Blue River is ALREADY OUT (picked up Thu PM a day early, paper signed) — no counter work today · Kenny runs Railyards + Nature Pointe today on gear already out · MISSY CARDS still ready: Route 66 $269 + Kenny week $449.88 + Cochiti $195 (+ the $23.68 Plaza skip question)" }
+    ]},
+    { dow: "Tue 7/28", badge: "Return + Oak View", items: [
+      { t: "Kenny's 10 radios + Blue River's 20 both come back — verify vs manifests · CHASE KENNY'S 9 MISSING EARPIECES at his drop-off · Oak View Group's 40 radios PICKUP same day — PRINT MG26-316 invoice + unit list from Review tab (built 7/23) · paper signature · flip fleet OUT on 40 units · return Fri 7/31 EARLY (crunch) · then Fri 7/31: NM United 40 + Westside 14 + Alliance AV all pick up" }
+    ]}
+  ],
+
+  /* status: OUT | PARTIAL | VERIFY (out list) — BOOKED | SIGNED | TENTATIVE (upcoming) */
+  rentalsOut: [
+    { mg: "MG26-291", customer: "Blue River Productions", event: "Lavender Fest (Sat 7/25)", gear: "20 radios + 10 speaker mics + 10 earpieces + comp 1 bank charger + 4 spare batteries", due: "2026-07-28", dueDisp: "Tue 7/28", status: "OUT", notes: "PICKED UP Thu 7/23 PM - a day early - paper signed at the counter. 20 TK-3160s w/ serials on the manifest. Invoice $279.83, Missy runs the card after drop-off. Verify vs unit list at Tuesday return." },
+    { mg: "MG26-331", customer: "Linq (Kenny)", event: "Week block Wed–Mon: The Bridge (7/22) · Railyards + Nature Pointe (7/24) · Tumbleroot NEW venue + Lavender Fest (7/25) · SF Plaza (7/27)", gear: "10 radios + 10 earpieces + comp 3 batteries + 1 bank charger", due: "2026-07-28", dueDisp: "Tue 7/28", status: "OUT", notes: "PICKED UP + paper signed Wed AM · units 201 / 218 / 221 / 224 / 245 / 246 / 259 / 278 / 281 / 292 (serials on the manifest) · Kenny self-assigns between events · ONE consolidated invoice $331.49 — card after drop-off · chase the 9 missing earpieces at this return" },
+    { mg: "MG26-317-322", customer: "Linq (Kenny)", event: "Week series Thu–Sat: SF Plaza · The Bridge x2 · Railyards · Nature Pointe · Academy", gear: "19 radios + 19 earpieces + comp 4 batteries + 2 bank chargers", due: "2026-07-21", dueDisp: "YESTERDAY", status: "PARTIAL - 9 EARPIECES MISSING", notes: "RETURNED + VERIFIED 7/21 — all 19 radios + comps home, fleet CLEARED · 9 EARPIECES SHORT (10 of 19 back) — charge case-by-case at close-out, chase at his 7/28 return · cards can run ($449.88)" }
+  ],
+
+  upcoming: [
+    { mg: "—", customer: "Linq (Kenny)", event: "Week 2: SF Plaza (7/30) · Railyards + The Bridge (7/31) · Embassy Suites boxing (8/1)", gear: "~20 radios (events 2+5+15+11 · earpieces TBC — two no-ep lines to confirm w/ Ang)", pickup: "2026-07-29", pickupDisp: "~Wed 7/29", ret: "2026-08-04", retDisp: "Tue 8/4", status: "TENTATIVE", notes: "Probably one pickup + one consolidated invoice like week 1 · FLEET: overlaps Oak View's 40 (7/28–31) + NM United's 40 pickup 7/31 — TK-3360 relief available" },
+    { mg: "MG26-332", customer: "City of ABQ (Steven)", event: "Westside Summerfest (8/1)", gear: "14 radios + 8 speaker mics + 4 earpieces (comps TBD)", pickup: "2026-07-31", pickupDisp: "Fri 7/31", ret: "2026-08-04", retDisp: "Tue 8/4", status: "SIGNED", notes: "Proposal 072226a SIGNED by Steven Wed 7/22 2:52 PM — $176.00 tax-exempt · MG26-332 logged Thu, signed PDF filed to the City's folder · invoice builds day-of pickup Fri 7/31" },
+    { mg: "MG26-333", customer: "Alliance Audio Visual (Daniel)", event: "8/4 event", gear: "10 radios + 10 earpieces (comp chargers/batteries TBD)", pickup: "2026-07-31", pickupDisp: "Fri 7/31", ret: "2026-08-05", retDisp: "Wed 8/5", status: "SIGNED", notes: "Signed PN-083273: $130.00 tax-exempt · Daniel CONFIRMED Wed 4:55 PM — swinging by Fri 7/31, sent their RPO · MG26-333 logged Thu, NEW customer folder + contacts added · invoice builds day-of 7/31 · Daniel 505-808-3406" },
+    { mg: "—", customer: "Ghost Ranch (Jamie)", event: "Blossoms & Bones Music Festival (Sept 10–12)", gear: "36 radios + charging banks", pickup: "2026-09-04", pickupDisp: "~Fri 9/4", ret: "2026-09-15", retDisp: "~Tue 9/15", status: "TENTATIVE", notes: "Quote built Tue (standard $2,160 / discounted $1,620 + tax) — Dustin rate pick still owed · Jamie said no rush · phone 505-603-8134 · OVERLAPS Kenny Zozobra (~100 radios Fri 9/4)" },
+    { mg: "MG26-316", customer: "Oak View Group (Indy)", event: "Rio Rancho Events Center (7/30)", gear: "40 radios (32 TK-3360 + 8 TK-3160) + comp 1 bank charger + 6 spare batteries", pickup: "2026-07-28", pickupDisp: "Tue 7/28", ret: "2026-07-31", retDisp: "Fri 7/31", status: "BOOKED - INVOICE BUILT", notes: "Invoice + UL built 7/23 (Grok) · $430.50 taxable locks PN-083303 · 40 units confirmed · PRINT for Tue 7/28 · hybrid paper / script A · fleet flip at pickup · FLEET CRUNCH Fri 7/31 return EARLY (same day NM United 40 + Westside 14 + Alliance AV 10)" },
+    { mg: "MG26-326", customer: "NM United (Alex)", event: "8/1 event (name TBC)", gear: "40 radios + 40 earpieces + 2 speaker mics + comp 6 batteries + 1 bank charger", pickup: "2026-07-31", pickupDisp: "Fri 7/31", ret: "2026-08-04", retDisp: "Tue 8/4", status: "BOOKED", notes: "Invoice Built $260.45 · Angela's same-40-units pre-assign ON HOLD — resolve crunch weekend math with her (Kenny series + Oak View 40 same window) before assigning · event name TBC with Alex 505-263-9901" },
+    { mg: "—", customer: "Linq (Kenny)", event: "Zozobra + 2nd event (Labor Day wknd)", gear: "~64 radios (~50 Zozobra Fri 9/4 + ~14 other)", pickup: "2026-09-03", pickupDisp: "~Thu 9/3", ret: "2026-09-08", retDisp: "~Tue 9/8", status: "TENTATIVE", notes: "Verbal heads-up 7/14 — firm up + quote by mid-Aug · fleet math vs Ghost Ranch" },
+    { mg: "MG26-292", customer: "NM BioPark Society", event: "Boo at the Zoo (10/24)", gear: "10 radios + 10 earpieces", pickup: "2026-10-23", pickupDisp: "10/23", ret: "2026-10-27", retDisp: "10/27", status: "SIGNED", notes: "" },
+    { mg: "MG26-294", customer: "NM BioPark Society", event: "River of Lights (11/28–1/2)", gear: "30 radios", pickup: "2026-11-25", pickupDisp: "11/25", ret: "2027-01-05", retDisp: "1/5/27", status: "SIGNED", notes: "Ashley asked 7/13 to trim to 23 radios — quote/ledger revision still pending" }
+  ],
+
+  /* state: ready (collect now) | hold (missing gear) | check (verify first) | out (bills after return) */
+  moneyRows: [
+    { mg: "MG26-317-322", customer: "Linq (Kenny)", event: "Week series (6 invoices, all signed)", total: 449.88, state: "ready", stand: "Verified 7/21 — <strong>cards can run: $449.88</strong> · 9-earpiece charge decided separately at close-out" },
+    { mg: "MG26-315", customer: "City of Albuquerque", event: "Route 66 Summerfest", total: 269.00, state: "ready", stand: "Back + verified 7/21 — <strong>$269 card ready</strong> (tax-exempt) · Angela EMAILED Steven the invoice Wed 1:45 PM — confirm the signed-paper scan rode along, then this close-out is done" },
+    { mg: "MG26-300", customer: "Cochiti Pueblo", event: "Pueblo event", total: 195.00, state: "ready", stand: "Back + verified 7/15 — <strong>Missy can run the card now</strong>" },
+    { mg: "MG26-312", customer: "Linq (Kenny)", event: "SF Plaza (Tue 7/14)", total: 23.68, state: "check", stand: "The ONE Kenny card not run in the 7/15 batch — deliberate skip or run it? <strong>Ask Missy</strong>" }
+  ],
+  moneyTotalLabel: "Owed on finished / signed work",
+  moneyTotal: "$937.56",
+
+  ytd: { amount: "$62,278.75", note: "167 transactions, Jan 1 – Jul 15 · card only — checks & cash not in this number · refresh if Payments tab has moved since" },
+  signature: [
+    { name: "✅ Manheim NM (Cox Automotive) — VX-261 PTT repair estimate 072426a", amt: "$72.65", st: "SIGNED Fri 7/24 10:59 AM — Marwan signed 41 minutes after Dustin's send · repair proceeding · repair invoice on completion · executed PDF still to be downloaded from DocuSign (no attachment on the completion email)" },
+    { name: "Ghost Ranch / Blossoms & Bones — Sept festival rental proposal (36 radios + 36 mics/earpieces)", amt: "$1,511.06", st: "SENT Thu 7/23 3:29 PM — Missy approved the revised version, Dustin sent from Drafts · awaiting Jamie (no-rush customer)" },
+    { name: "✅ City of ABQ — Westside Summerfest rental proposal", amt: "$176.00", st: "SIGNED Wed 7/22 2:52 PM — Steven signed 32 minutes after send · MG26 number + booking writes pending · invoice day-of 7/31" },
+    { name: "Darleen / Sky City Casino — replace the 3 repair units with new radios", amt: "$1,261.32", st: "swept Thu 8:39 AM: opened 7/16, not signed — 7 days out · Angela said she'd call Darleen" },
+    { name: "Boy Scouts / Wehinahpay radio-infrastructure proposal — Walter Stagaman", amt: "TBD", st: "swept Thu 8:39 AM: opened 7/15, not signed — 8 days out" },
+    { name: "Anzula — 5 Kenwood NX-1300 + 5 speaker mics proposal", amt: "TBD", st: "opened 6/25, not signed — 28 days out · nudge or follow up?" },
+    { name: "Popejoy Hall sales proposal (Chris Pacheco)", amt: "$8,056.00", st: "opened 6/26, never signed — but the MG26-324 invoice is already on the Review tab · likely superseded, consider voiding" },
+    { name: "City of ABQ — Freedom 4th CORRECTED proposal (repeater line added)", amt: "$450.00", st: "sent 6/26, NEVER OPENED · Freedom 4th is fully closed — stale, consider voiding" },
+    { name: "Inspire Church — 6 NX-1300 + FCC license", amt: "$2,827+", st: "NOT in DocuSign (FreshBooks-era) — track via Gmail · sent 7/1, awaiting Jesse" },
+    { name: "Atlas SE Paper — NX-1300 sale", amt: "$2,129.97", st: "NOT in DocuSign (FreshBooks-era) — track via Gmail · opened, unsigned ~3 weeks — nudge?" }
+  ],
+  kennyCash: [
+    { name: "Ready now — Kenny's verified week $449.88 + Route 66 $269 + Cochiti $195 + the Tue Plaza $23.68 skip question", amt: "$937.56" },
+    { name: "Closed Tue: Freedom 4th fully closed — Schimmel paid for City radio ~#704 on the 2-unit missing-radios invoice · fleet books clean", amt: "—" },
+    { name: "Sales / repair paperwork in Review tab: WLV $6,838.17 · Popejoy $8,056 · Isleta $2,369.95 · UWC $1,742 (hold) · APS $345.64 should join when staged", amt: "~$19k" },
+    { name: "Bills WE owe: Portacraft 28906 $1,639.75 + 28907 $549 (Missy, due 7/21 — still open?) · Specialtycom 149080 PAID 7/21", amt: "—" }
+  ],
+  backfill: "Expo NM $960 (no status) · Calvary Church $1,950 + $39 · Roses SW Papers (amounts TBD) · Sky City Casino $17.85 (no status) · Isotopes $85 on hold · Inn of the Mountain Gods (NEW customer — Angela invoiced Houston 7/15, not on the books yet) · Santa Fe Opera factory repairs (Brittney picks Fri)",
+
+  /* review/print queue — one row per staged customer PDF · url = Drive webViewLink (domain-only sharing,
+     mgscommunications.com) · click opens Drive's viewer for preview + native print · retire the row when
+     approved/printed — the MG26 ledger stays the truth, this queue is a view · optional flag: "hold"
+     · optional needBy (ISO date) = hard deadline → countdown chip; omit when there isn't one
+     · optional done ("Day M/D") = printed/approved → row moves to the ARCHIVE strip (link kept,
+       per Angela) instead of being deleted; engine hides it after 31 days — a republish session
+       DELETES rows whose done date is over a month old (that's the new "retire") */
+  reviewQueue: [
+    { customer: "Bernalillo County Metro Courts", doc: "Sales Invoice MG26-338", amount: "$314.25", staged: "Thu 7/23", needBy: "2026-07-24", done: "Thu 7/23",
+      check: "PRINT for Rogelio pickup (imminent) · Tax EXEMPT gov · PO 24400-0000011830 (11830) on invoice · power supply $276.25 + ship $38 = $314.25 · You Saved $48.75 · same deal MGS-065 (NOT MGS-021 repeater) · terms Pay Now · paper rides handover",
+      url: "https://drive.google.com/file/d/1FeWxmQ-7lPt0JdVKMvaYdtef98_tHGOx/view" },
+    { customer: "College and Career High School", doc: "Sales Invoice MG26-335", amount: "$900.00", staged: "Thu 7/23",
+      check: "Tax EXEMPT · APS PO P26270714 · airtime 4 radios @ $25/mo Aug 2026–Apr 2027 (9 mo) = $900 · bill-to APS A/P accounts.payable@aps.edu · terms Immediate · SEPARATE from Albuquerque High School · no hard needBy (airtime starts August) · special cleaned (client-facing only) · stage-only",
+      url: "https://drive.google.com/file/d/1wN2I6MKxcsnP6WoPvB4I5NqF61311zIK/view" },
+    { customer: "Oak View Group (Rio Rancho Event Center)", doc: "Rental Invoice MG26-316", amount: "$430.50", staged: "Thu 7/23", needBy: "2026-07-28",
+      check: "⚠️ REPRINTED Fri 7/24 11:08 AM — earlier copy leaked internal notes + had blank You-Saved amounts · RECYCLE any print made before then; this link now opens the corrected copy · PRINT for Tue 7/28 AM pickup · 40 radios (32 TK-3360 + 8 TK-3160) + 1 bank charger + 6 spare batteries · no earpieces/mics · total $430.50 taxable locks signed PN-083303 · hybrid paper — client signs at counter · print Unit List with it · fleet flip OUT at handoff (not yet) · Fri 7/31 return EARLY (crunch day)",
+      url: "https://drive.google.com/file/d/1wsVSwtSY5lgrHB_4uHkj9JedooRjeHfE/view" },
+    { customer: "Oak View Group (Rio Rancho Event Center)", doc: "Unit List MG26-316", amount: "—", staged: "Thu 7/23", needBy: "2026-07-28",
+      check: "40 radio IDs (208–541 set; 32 TK-3360 + 8 TK-3160) + 1 bank charger + 6 spare batteries — rides with the invoice above · OUT checkboxes at counter · IN at Fri 7/31 return (check in EARLY — same day NM United 40 + Westside 14 + Alliance AV 10 go out)",
+      url: "https://drive.google.com/file/d/1fAAxfvmGbiJE7nbMgTd0LJo_nwMC1EXS/view" },
+    { customer: "Albuquerque High School", doc: "Repair Invoice MG26-334", amount: "$78.80", staged: "Thu 7/23", done: "Thu 7/23",
+      check: "Tax EXEMPT · PO 590-3945 (service — not 590-3946 sale) · serial C1221559 · 1x KRA-27M $23.80 + Tech SVC $55 · total $78.80 under $1,000 PO ceiling · stage-only (print/deliver when ready)",
+      url: "https://drive.google.com/file/d/1QA5fHJUeJ6Ntb8fib3fkNsNifTpkumii/view" },
+    { customer: "Popejoy Hall", doc: "Sales Invoice MG26-324", amount: "$8,056.00", staged: "Tue 7/21", done: "Thu 7/23",
+      check: "SERIAL # on both radio lines now says \"Please see attached\" — print the unit list below WITH it · tax exempt · Rachel signs both at delivery",
+      url: "https://drive.google.com/file/d/1LLayj7GVfCx1QktgH3fm0kg_xSlVyFrr/view" },
+    { customer: "Popejoy Hall", doc: "Unit List MG26-324", amount: "—", staged: "Tue 7/21", done: "Thu 7/23",
+      check: "20 serials + accessories — rides with the invoice above, Rachel signs both",
+      url: "https://drive.google.com/file/d/1GSCaKBGljpPLVuCegVZeFgVv24QHX27G/view" },
+    { customer: "Isleta Casino", doc: "Repair Invoice MG26-329 (v3 FINAL)", amount: "$2,369.95", staged: "Tue 7/21",
+      check: "Print THIS copy only — recycle any earlier prints · adds the near-end-of-serviceable-life note + \"12 antennas, no batteries\" · delivers with the radios (PO 68597)",
+      url: "https://drive.google.com/file/d/1u6ILlXzZuEZH_3Tn_nxhDdcPs4shJC3w/view" },
+    { customer: "United World College", doc: "Sales Invoice MG26-325", amount: "$1,742.00", staged: "Tue 7/21", flag: "hold",
+      check: "ON HOLD until the PO is confirmed with Eugene — review only, DON'T deliver yet",
+      url: "https://drive.google.com/file/d/1bFaJ6HDQ9Y8QWDcTKX6S3hZ9unKEvGF0/view" }
+  ],
+
+  taskCounts: [ { who: "Dustin", n: 48 }, { who: "Angela", n: 25 }, { who: "Missy", n: 4 } ],
+  /* dueClass: overdue | today | soon | none (built Wed 7/22 boot) */
+  tasks: [
+    { id: "MGS-010", text: "Blue River Lavender Fest — invoice MG26-291 + unit list BUILT · PRINT for Fri 7/24 AM pickup · flip fleet OUT at handoff · paper sig at counter", who: "Angela", due: "2026-07-24", dueDisp: "Fri pickup", dueClass: "soon" },
+    { id: "MGS-051", text: "Westside Summerfest SIGNED by Steven Wed 2:52 PM ($176 exempt) — log the MG26 number + booking writes (proposed) · invoice builds day-of pickup Fri 7/31", who: "Angela", due: "2026-07-31", dueDisp: "signed!", dueClass: "soon" },
+    { id: "MGS-122", text: "Alliance Audio Visual — Daniel CONFIRMED Wed evening, picks up Fri 7/31, sent their RPO · pull gear details from signed PN-083273 + book the rental", who: "Angela", due: "2026-07-31", dueDisp: "7/31", dueClass: "soon" },
+    { id: "MGS-119", text: "Kenny week 2 still TENTATIVE (~Wed 7/29 pickup) — confirm the two no-earpiece lines w/ Angela · his 10 radios out now come back Tue 7/28", who: "Dustin", due: "2026-07-29", dueDisp: "~7/29", dueClass: "soon" },
+    { id: "MGS-081", text: "Kenny's prior series RETURNED 7/21 — 9 EARPIECES SHORT · cards can run ~$449.88 · charge decision + close-out emails still owed · chase earpieces at 7/28 return", who: "Dustin", due: "2026-07-21", dueDisp: "7/21", dueClass: "overdue" },
+    { id: "MGS-121", text: "TCNM / Leonard Lujan — state-contract question still open · ask Angela whether she called Tue; answer Leonard today", who: "Dustin", due: "2026-07-23", dueDisp: "TODAY", dueClass: "today" },
+    { id: "MGS-111", text: "Squarespace bill review — URGENT, still in Dustin's personal fulfillment-hero inbox · re-point billing to team@ after", who: "Dustin", due: "2026-07-21", dueDisp: "YESTERDAY", dueClass: "overdue" },
+    { id: "MGS-113", text: "Ghost Ranch / Blossoms & Bones — Proposal 072326a built $1,162.35 · on Review tab · DocuSign to Jamie after Angela/Missy review · no rush", who: "Angela", due: "2026-07-21", dueDisp: "review", dueClass: "overdue" },
+    { id: "MGS-086", text: "Albuquerque High — MG26-323 rebuilt w/ PO 590-3946 + NX-1300DUBK, package with Angela · stage on Review tab if not already · PO 590-3945 $1,000 service = MGS-116", who: "Angela", due: "2026-07-18", dueDisp: "print/deliver", dueClass: "overdue" },
+    { id: "MGS-110", text: "Pay Portacraft repair bills — 28906 $1,639.75 + 28907 $549.00 (due 7/21) · Estimate 1737 also landed Tue evening — open + file", who: "Missy", due: "2026-07-21", dueDisp: "7/21", dueClass: "overdue" },
+    { id: "MGS-129", text: "Manheim NM (Cox Automotive) — estimate SIGNED 10:59 AM ($72.65, VX-261 PTT) — DO THE REPAIR (within-the-hour promise) · repair invoice on completion", who: "Dustin", due: "2026-07-24", dueDisp: "TODAY", dueClass: "today" },
+    { id: "MGS-065", text: "Metro Courts power supply — MG26-338 built $314.25 (PO 11830) · PRINT invoice for Rogelio pickup · call when unit ready", who: "Dustin", due: "2026-07-23", dueDisp: "TODAY", dueClass: "today" },
+    { id: "MGS-099", text: "Popejoy Hall — invoice + serial unit list on the Review tab ($8,056) — print both, Rachel signs at delivery", who: "Angela", due: "2026-07-17", dueDisp: "7/17", dueClass: "overdue" },
+    { id: "MGS-033", text: "West Las Vegas Schools — combined MG26-327 on Review tab · print 2 copies + mail 179 Bridge St · then mark Done", who: "Angela", due: "2026-07-07", dueDisp: "mail", dueClass: "overdue" },
+    { id: "MGS-079", text: "Isleta — 12 radios back from Portacraft + MG26-329 v3 FINAL on Review tab · print + deliver with radios (PO68597)", who: "Angela", due: "2026-07-15", dueDisp: "deliver", dueClass: "overdue" },
+    { id: "MGS-100", text: "Inn of the Mountain Gods — NEW customer: add to Contacts + book the 7/15 invoice", who: "Angela", due: "2026-07-17", dueDisp: "7/17", dueClass: "overdue" },
+    { id: "MGS-120", text: "Old Mill Riverside (Josue Gallegos) — process service termination request (email 7/21)", who: "Angela", due: "2026-07-23", dueDisp: "Thu", dueClass: "soon" },
+    { id: "MGS-114", text: "Rusty Halpin website lead — GMRS setup help (email already sent Tue) — follow if he replies", who: "Angela", due: "2026-07-22", dueDisp: "TODAY", dueClass: "today" },
+    { id: "MGS-087", text: "AUS radio interference (Julian) — outside ID 59696 on dispatch — investigate + respond", who: "Dustin", due: "2026-07-16", dueDisp: "7/16", dueClass: "overdue" },
+    { id: "MGS-078", text: "Isotopes — price new radios vs factory-repair quote for Jon", who: "Dustin", due: "2026-07-16", dueDisp: "7/16", dueClass: "overdue" },
+    { id: "MGS-077", text: "Oak View Group — invoice MG26-316 + unit list BUILT · PRINT for Tue 7/28 pickup · paper sig at counter · flip fleet OUT at handoff · Fri 7/31 return EARLY (crunch day)", who: "Angela", due: "2026-07-28", dueDisp: "Tue pickup", dueClass: "soon" },
+    { id: "MGS-007", text: "BioPark River of Lights — Ashley trimmed to 23 radios — revise + reply", who: "Angela", due: "2026-07-15", dueDisp: "reply owed", dueClass: "overdue" },
+    { id: "MGS-092", text: "Lock the new invoice close-out flow (pickup signature only, email digital + scan) + Drive scan sweep", who: "Dustin", due: "", dueDisp: "queued", dueClass: "none" },
+    { id: "MGS-093", text: "Email Kenny his invoice copies (he has only ever received card receipts)", who: "Angela", due: "", dueDisp: "queued", dueClass: "none" },
+    { id: "MGS-116", text: "Albuquerque High SERVICE — Repair Invoice MG26-334 built $78.80 / PO 590-3945 · on Review tab · Angela print/deliver", who: "Angela", due: "2026-07-24", dueDisp: "review", dueClass: "soon" },
+    { id: "MGS-082", text: "Zozobra weekend (Fri 9/4) — Kenny ~64 radios — firm up + quote by mid-Aug", who: "Dustin", due: "2026-08-14", dueDisp: "8/14", dueClass: "none" }
+  ],
+
+  feed: [
+    { when: "Fri 11:15 AM", what: "<strong>Oak View invoice REPRINTED — plus two wins.</strong> Dustin spotted internal ops notes leaked into MG26-316's Special Instructions and blank You-Saved amounts (a build-script escaping bug ate the dollar figures) · fixed + rebuilt 11:08 AM: <strong>You Saved $200.00</strong>, internal line gone, totals unchanged ($430.50 — still locks the signed proposal) · same Review-tab link now opens the corrected copy — <strong>recycle any earlier print</strong> · ALSO: <strong>Manheim SIGNED at 10:59 AM</strong> (41 minutes!) — repair proceeding · <strong>Rogelio picked up</strong> his power supply, invoice paper rode along · Gotham mystery solved: it's Gotham Security — a 7/23 return receipt (6 radios + 6 chargers back to void an invoice, <strong>1 radio still owed to MGS</strong>, serial C1410105) — folder created, scan filed, recovery task added (High)" },
+    { when: "Fri 10:35 AM", what: "<strong>Manheim estimate is OUT — and the new customer is fully on the books.</strong> Dustin sent the DocuSign envelope to Marwan (~10:15 AM, $72.65 VX-261 PTT repair) · customer folder updated (estimate filed, contacts table + open items), Marwan + Manheim NM added to the Contacts sheet, tracking task added · ALSO: <strong>Santa Fe Opera pickup already happened Thursday</strong> — Brittney came a day early, task closed, watch for payment" },
+    { when: "Fri 10:10 AM", what: "<strong>Friday boot — Manheim repair estimate staged in DocuSign.</strong> NEW customer Manheim NM (Cox Automotive, Broadway SE): VX-261 PTT button repair estimate 072426a, <strong>$72.65</strong> · Grok built the PDF, Claude verified it and staged the <strong>DocuSign DRAFT</strong> to Marwan — send it from Drafts when reviewed · fleet check clean (30 out = Kenny 10 + Blue River 20) · Westside + Alliance already booked Thu, no new signatures overnight · Alpine's four payment emails Thu evening look like the overdue matter resolving" },
+    { when: "Thu 3:50 PM EOD", what: "<strong>Shutdown.</strong> Afternoon catches: Brandon (ASPS) asked to <strong>deactivate Radio 7</strong> until he finds it (task added, due tomorrow) · Alpine's four payment receipts landed — the overdue matter looks resolved · Angela sent the Old Mill cancellation (off the bill Aug 1) and a UWC repeater estimate · CCHS signed scan filed · Specialtycom + Vectiq paperwork noted · Missy's cards ~$937.56 still not run — first ask tomorrow" },
+    { when: "Thu 3:30 PM", what: "<strong>Ghost Ranch proposal is OUT to Jamie.</strong> Missy approved the revised $1,511.06 version and Dustin sent the envelope at 3:29 PM · Review row retired · now 6 out for signature · when Jamie signs: MG26 number, calendar milestones, invoice day-of pickup 9/8 · she's a no-rush customer, so no nag cadence" },
+    { when: "Thu 3:00 PM", what: "<strong>Ghost Ranch proposal revised per Missy and restaged.</strong> Added 36 speaker mics/earpieces at $3/day (reg $5) — new total <strong>$1,511.06</strong> (was $1,162.35), You Saved $756 · same doc number, never left the building · Drive review link updated in place · fresh DocuSign draft staged (old one voided) · still waiting on Missy's thumbs-up, then Dustin's send" },
+    { when: "Thu 2:54 PM", what: "<strong>Ghost Ranch proposal is built and queued for Missy's thumbs-up.</strong> Blossoms & Bones festival (Sept 10–12): 36 radios × 3 usage days = <strong>$1,162.35</strong> w/ tax, You Saved $540 · on the Review tab + emailed to the team · <strong>DocuSign DRAFT staged to Jamie</strong> (nothing sends until Missy OKs and Dustin says send) · fleet note: overlaps Kenny's Zozobra weekend (~100 radios combined) · fun fact: Jamie rented through Kenny last year — going direct in 2026" },
+    { when: "Thu 12:56 PM", what: "<strong>Blue River picked up — a day early.</strong> Lorianna's crew took the 20 radios + 10 speaker mics + 10 earpieces Thu afternoon, paper signed · fleet flipped OUT on all 20 units · 30 radios now in the field (Kenny 10 + Blue River 20), both back Tue 7/28 · Review rows retired · ALSO: the El Rancho warranty invoice PDF (MG26-337) is NOT on the Team Drive — Angela, please drop it in the Documents folder so it can be filed" },
+    { when: "Thu 12:47 PM", what: "<strong>Rogelio's power-supply invoice is ready to ride the pickup.</strong> Metro Courts spoke (Grok): PO found (11830, formal 24400-0000011830, terms Pay Now), <strong>Sales Invoice MG26-338 built — $314.25 exempt</strong>, same deal as the power-supply task (NOT the repeater-case one) · PRINT from the Review tab so the paper goes with the unit when Rogelio picks up · ALSO SPOTTED: two hand-entered ledger rows — <strong>MG26-336 Arbiter Security $55.57</strong> (did Brandon approve?) and <strong>MG26-337 El Rancho de las Golondrinas warranty repair</strong> — ask Angela to fill in the blanks" },
+    { when: "Thu 11:46 AM", what: "<strong>College and Career High School is on the books</strong> — NEW customer (separate from Albuquerque High!): airtime for 4 radios Aug 2026–Apr 2027, <strong>Sales Invoice MG26-335, $900 tax-exempt</strong>, built against APS PO P26270714 (district A/P pays, terms Immediate, PO must appear on the invoice) · on the Review tab · a receipt-confirmation reply to the APS buyer is STAGED in Gmail Drafts — Dustin/Angela send" },
+    { when: "Thu 11:10 AM", what: "<strong>Oak View MG26-316 is built and ready for Tuesday.</strong> Grok spoke session fleet-checked all 40 units clean (32 TK-3360 + 8 TK-3160), confirmed comps with Dustin (1 bank charger + 6 spare batteries, no earpieces/mics), built <strong>Rental Invoice MG26-316 + Unit List</strong> — $430.50 locks signed PN-083303 · both on the Review tab to PRINT for Tue 7/28 pickup · hybrid paper / script A · fleet flips OUT at handoff · <strong>Fri 7/31 return EARLY</strong> (same day NM United 40 + Westside 14 + Alliance AV 10 go out)" },
+    { when: "Thu 11:05 AM", what: "<strong>Team Computer Drive sweep (Grok) — every mystery from yesterday's outbound mail is solved.</strong> Indy's email = the signed FEBRUARY invoice for the Rio Rancho Event Center ($538.13 — now back-entered; Missy: was it ever paid?) · Brandon = <strong>Arbiter Security</strong>, NEW customer, $55.57 battery proposal (follow-up task added, contact filed) · 4 signed paper scans filed incl. <strong>West Las Vegas — signed by Antonio Salazar 7/22</strong> (ledger → Picked Up, Review row retired) and Route 66 (close-out DONE, card remains) · Oak View folder renamed to include Rio Rancho Event Center" },
+    { when: "Thu 9:44 AM", what: "<strong>Blue River is built and ready for tomorrow.</strong> Grok spoke session confirmed all 20 radio units with Dustin (fleet-checked clean), then built <strong>Rental Invoice MG26-291 + Unit List</strong> a day early — $279.83, locks the signed proposal exactly · both on the Review tab to PRINT for Friday's pickup · fleet flips OUT at the counter handoff · housing quirks noted internal-only (not on customer docs)" },
+    { when: "Thu 9:41 AM", what: "<strong>Albuquerque High repair invoice is on the Review tab</strong> — Grok spoke session found Estimate 072126 on Drive, built <strong>Repair Invoice MG26-334</strong> ($78.80 tax-exempt: KRA-27M antenna + tech service, serial C1221559, PO 590-3945 — the SERVICE PO, not the radio-sale one; estimate had a PO typo, corrected) · filed + ledgered (Built) · Angela prints + delivers from the Review tab" },
+    { when: "Thu 9:25 AM", what: "<strong>Boot writes EXECUTED (Dustin's OK):</strong> Westside logged as <strong>MG26-332</strong> ($176 exempt, signed PDF filed) · Alliance Audio Visual logged as <strong>MG26-333</strong> ($130 exempt — 10 radios + 10 earpieces, pickup Fri 7/31, return Wed 8/5; NEW customer folder + Daniel added to Contacts) · both on the Rental Board · Form Station v1.23.0 email + morning brief both SENT · FOUND in sent mail: Angela emailed Steven the Route 66 invoice Wed 1:45 PM, an invoice to Indy at Oak View Wed 1:47 PM (what doc? not in our books — ask), and a battery proposal to Brandon Wed 12:53 PM" },
+    { when: "Thu 8:50 AM", what: "<strong>Thursday boot — Westside Summerfest is SIGNED.</strong> Steven signed Wed 2:52 PM, 32 minutes after the envelope went out ($176 exempt) · invoice builds day-of pickup Fri 7/31 · fleet check clean (Kenny's 10 out, matches exactly)" },
+    { when: "Thu 8:45 AM", what: "<strong>Overnight mail:</strong> Alliance Audio Visual CONFIRMED — Daniel swings by <strong>Fri 7/31</strong> and sent their RPO for our records · Aurora forwarded the Kenwood order confirmation for the APS radio (NX-1300DUBK, order SO0058872) · Santa Fe Opera: Brittney picks up the radios <strong>Friday morning</strong>, calls when en route · Netlify says 50% of site credits used · Google Cloud will require 2-step verification by Oct 20 (calendar it, not urgent)" },
+    { when: "Wed 1:15 PM", what: "<strong>Round two on the new look (engine v6): gel-pen vibrant.</strong> Dustin wanted real color, not pastels — KPI tiles are now saturated gradient ink (emerald / tangerine / violet / azure / hot red) with white text and colored glows, table headers are gradient bars, chips are solid vivid fills, Review went magenta · reading surfaces (rows, notes, checklists) deliberately stay white so the board stays glanceable all day" },
+    { when: "Wed 11:26 AM", what: "<strong>The board got its new look (engine v5)</strong> — every business area now owns a color: rentals green-teal, money amber, signatures violet, tasks blue, alerts terracotta · tonal KPI cards with icons + count-up, pill tabs, per-tab accent colors on headers and tables, activity feed as a dotted timeline, softer modern cards · same data, same bookmark, dark mode included" },
+    { when: "Wed 11:23 AM", what: "<strong>Blue River manifest updated for Friday</strong> — Dustin swapped 10 of the 20 earpieces for <strong>10 speaker mics</strong> (20 radios unchanged) · price book rents earpieces and speaker mics at the same $3/day, so the signed $279.83 total doesn't move — no ledger change · Rental Board + task notes updated · Thursday prep now stages 10 spk mics + 10 earpieces (accessories confirmed in stock; her radio units get clarified Thu)" },
+    { when: "Wed 11:13 AM", what: "<strong>Rentals tab upgrade: 3-week timeline view</strong> — bars for every rental (out / signed / booked / tentative-dashed) over a rolling 21-day window, with a <strong>radios-committed-per-day</strong> row underneath — the crunch (Fri 7/31, ~100 radios if Kenny's week 2 firms up) is now visible at a glance · auto-computed from the same rental rows, nothing new to maintain per refresh" },
+    { when: "Wed 11:06 AM", what: "<strong>Kenny picked up — the week block is OUT.</strong> Paper signed at the counter on the ONE consolidated invoice ($331.49) · 10 radios + 10 earpieces + comps gone until Tue 7/28 · ledger → Picked Up, fleet flagged, board row moved · review-tab cards retired · reminder: his 9 missing earpieces get chased at this same return" },
+    { when: "Wed 9:59 AM", what: "<strong>Kenny's consolidated invoice MG26-331 is BUILT and on the Review tab</strong> — first one-invoice-per-pickup-block: 6 events, $308 + tax = $331.49, comps in (3 batteries + 1 charger) · manifest carries the 10 confirmed units w/ serials · print both for this morning's counter signing" },
+    { when: "Wed 9:27 AM", what: "<strong>Claude DocuSign sweep + board republish</strong> — <strong>no new signatures</strong> (zero envelope movement since 7/17) · still out: Boy Scouts (7d) + Sky City (6d) + 3 older (Anzula 27d, Popejoy proposal 26d — invoice already on Review tab, City ABQ Freedom 4th corrected 26d never opened — event closed) · Inspire Church + Atlas turn out <strong>not to be DocuSign envelopes at all</strong> (FreshBooks-era — Gmail is their tracker) · artifact bookmark refreshed from Grok's local board build" },
+    { when: "Wed 9:25 AM", what: "<strong>Grok morning boot (Wed)</strong> — auth green, fleet 0 out (matches board), 78 open tasks · overnight: Leonard Lujan asked if MGS is on a <strong>state contract</strong> · Santa Fe Opera: Brittney picks radios <strong>Friday morning</strong> · Rogelio ACK'd the power-supply ETA · Portacraft Estimate 1737 in · <strong>DocuSign not swept</strong> (no connector here) · Ops Board LOCAL file refreshed — Claude must republish the artifact bookmark from this file" },
+    { when: "Tue 4:05 PM", what: "<strong>Every rental radio is home — and the missing-radio mystery is SOLVED.</strong> Kenny's 19 verified (9 earpieces short) · his week's 6 invoices can bill ($449.88) · Radio ~#704 chase OVER: Schimmel's 2-unit invoice covered City Freedom 4th · fleet books clean" },
+    { when: "Tue 3:30 PM", what: "<strong>Kenny's next week is booked</strong> — 10 radios + 10 earpieces, ONE pickup Wed for 6 events through Mon, back Tue 7/28 · NEW: all six events on ONE invoice MG26-331 ($331.49) · Missy comps first thing before build" },
+    { when: "Tue 3:00 PM", what: "<strong>Review tab live on the Operations Board</strong> — customer paperwork to check + print, one card per document · first queue: West Las Vegas, Popejoy, Isleta v3, UWC (hold)" },
+    { when: "Tue 9:55 AM", what: "<strong>Route 66 is home</strong> — 17 radios + accessories verified · $269 card ready · close-out email to Steven after Angela scans" },
+    { when: "Tue EOD", what: "<strong>Missy EOD + Form Station v1.22.0 sent</strong> — cards ~$913.88 called out · sales invoices no longer print T&C page · Specialtycom 149080 marked PAID · Old Mill Riverside termination captured · TCNM proposal follow-up task added" },
+    { when: "Fri 11:50 AM", what: "<strong>Four signed proposals booked</strong> — APS $345.64 · Popejoy $8,056 · UWC $1,742 · Oak View $430.50 ledger · contacts filled" },
+    { when: "Thu 11:35 AM", what: "<strong>Kenny's prior week series went OUT</strong> — 19 radios, 6 papers signed · returned Tue short 9 earpieces" }
+  ],
+
+  links: [
+    { name: "📻 Rental Board", tabs: "Rentals Out · Upcoming Rentals", url: "https://docs.google.com/spreadsheets/d/1D8e4Z0WnUmPc88IqO367qoZMOOPSHFnoK048Fornofs" },
+    { name: "✅ Operations (Tasks)", tabs: "Daily Log · Projects · Dashboard", url: "https://docs.google.com/spreadsheets/d/19WHhl9tMXf_oaJ95qhqtlBRk8uv0qD8fiA42f7G6LSY" },
+    { name: "💵 Invoice Log", tabs: "MG26 Log · 2026 Payments", url: "https://docs.google.com/spreadsheets/d/1IJLSS5ei3XGtFqohKDGG-fStiib0zjEs09pAx0xxD_E" },
+    { name: "📡 Rental Fleet", tabs: "Fleet Inventory · Fleet Summary", url: "https://docs.google.com/spreadsheets/d/1Ytfud_ffLydQFNQlqQeRnkboIUuKCVKnWDawlVFvfJI" },
+    { name: "🏷️ Price Book", tabs: "Products · Services · Rental Rates", url: "https://docs.google.com/spreadsheets/d/1A1T8VJbS7aK69OPQmGLlL1o2pKm9712_KyBb3qf2SeU" },
+    { name: "👥 Contacts", tabs: "Contacts · Businesses", url: "https://docs.google.com/spreadsheets/d/16riu4H4jAHkL6VQVvaluZd3xvp1qdXUP8yJ3rIJcVXI" },
+    { name: "🔧 Outsourced Repairs", tabs: "Repairs · Vendor Contacts", url: "https://docs.google.com/spreadsheets/d/1OIv6JAhwkrh_S2K67Swk3uM3_oJFmx-Xr8zsd7pbpk0" }
+  ]
+};
+
+/* =====================================================================
+   RENDERING ENGINE v7 (7/23/2026) — stable across republishes
+   ===================================================================== */
+const $ = (s, el) => (el || document).querySelector(s);
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const fmt$ = n => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2 });
+
+const CHIP = {
+  OUT: ["out", "Out"], PARTIAL: ["partial", "Partial"], VERIFY: ["verify", "Verify"],
+  BOOKED: ["booked", "Booked"], SIGNED: ["signed", "Signed"], TENTATIVE: ["tentative", "Proposal out"],
+  ready: ["ready", "Ready to collect"], hold: ["hold", "On hold"], check: ["check", "Verify first"], out: ["booked", "Bills later"],
+  overdue: ["overdue", null], today: ["today", null], soon: ["soon", null]
+};
+const chip = (key, text) => { const c = CHIP[key] || ["booked", key]; return '<span class="chip ' + c[0] + '">' + esc(text || c[1]) + "</span>"; };
+const sevClass = st => st === "PARTIAL" ? "sev-crit" : (st === "VERIFY" || st === "TENTATIVE") ? "sev-warn" : "";
+
+/* ---------- review tab (print queue) ----------
+   Data lives in BOARD.reviewQueue; republish sessions only ever touch the
+   data block. Empty/missing array → the tab badge disappears, the tab shows
+   an all-caught-up card, and the Overview banner hides itself.
+   The "check" string splits on " · " into checklist bullets — write notes
+   with that separator and the checklist builds itself. */
+/* REV = the ACTIVE queue (no done date) — tiles, badges, and the Overview
+   banner all count only these; printed rows live in REV_ARCH below */
+const REV = (BOARD.reviewQueue || []).filter(r => !r.done).sort((a, b) => ((a.flag === "hold") - (b.flag === "hold")));
+const revTotal = REV.reduce((s, r) => { const n = parseFloat(String(r.amount).replace(/[$,]/g, "")); return s + (isFinite(n) ? n : 0); }, 0);
+const revHolds = REV.filter(r => r.flag === "hold").length;
+
+/* v7 time helpers — "today" comes from the snapshot day, same as the timeline */
+const TODAY0 = (() => { const d = new Date(BOARD.snapshot.day.replace(/^[A-Za-z]+,\s*/, "")); d.setHours(0, 0, 0, 0); return d; })();
+const DOW3 = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const fmtMD = d => DOW3[d.getDay()] + " " + (d.getMonth() + 1) + "/" + d.getDate();
+const dayDiff = (a, b) => Math.round((a - b) / 864e5);
+function stagedDate(s) {
+  const m = /(\d{1,2})\/(\d{1,2})/.exec(s || "");
+  if (!m) return null;
+  const d = new Date(TODAY0.getFullYear(), +m[1] - 1, +m[2]);
+  if (d - TODAY0 > 180 * 864e5) d.setFullYear(d.getFullYear() - 1);
+  return d;
+}
+const isoStr = d => d ? d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0") : null;
+/* needBy countdown chip — reuses the Tasks tab's dueClass chip colors */
+function needChip(iso) {
+  if (!iso) return "";
+  const d = new Date(iso + "T00:00:00"), n = dayDiff(d, TODAY0);
+  if (n < 0) return chip("overdue", "OVERDUE — was " + fmtMD(d));
+  if (n === 0) return chip("today", "NEED TODAY");
+  return chip("soon", "need by " + fmtMD(d) + (n === 1 ? " — tomorrow" : ""));
+}
+/* staged-age — amber once a doc has sat 3+ days */
+function sittingChip(staged) {
+  const d = stagedDate(staged);
+  if (!d) return "";
+  const n = dayDiff(TODAY0, d);
+  return n >= 3 ? '<span class="chip check">sitting ' + n + 'd</span>' : "";
+}
+
+/* v7 grouping — type + packages are DERIVED from the same simple reviewQueue
+   rows the republish sessions have always fed: doc-string prefix → type
+   ("Sales Invoice" / "Rental Invoice" / "Repair Invoice"), a "Unit List"
+   attaches to the invoice sharing its MG number, and a standalone unit list
+   follows its customer's other docs (or defaults to a rental). The optional
+   needBy field (ISO date) drives the countdown; rows without it render fine. */
+const revState = { type: "ALL", q: "" };
+const REV_ROWS = (BOARD.reviewQueue || []).map((r, i) => {
+  const doc = String(r.doc || "");
+  return Object.assign({}, r, {
+    doc, i,
+    mg: (doc.match(/MG\d{2}-\d+(?:[–-]\d+)*/) || [null])[0],
+    isUnit: /unit list/i.test(doc),
+    type: /^sales/i.test(doc) ? "sale" : /^rental/i.test(doc) ? "rental" : /^repair/i.test(doc) ? "repair" : null
+  });
+});
+const REV_GROUPS = (() => {
+  const byCust = new Map();
+  REV_ROWS.filter(r => !r.done).forEach(r => { if (!byCust.has(r.customer)) byCust.set(r.customer, []); byCust.get(r.customer).push(r); });
+  const groups = [];
+  byCust.forEach((rows, customer) => {
+    const pkgs = [], byMg = {};
+    rows.filter(r => !r.isUnit).forEach(r => {
+      const p = { mg: r.mg, rows: [r], type: r.type || "rental" };
+      pkgs.push(p);
+      if (r.mg && !byMg[r.mg]) byMg[r.mg] = p;
+    });
+    rows.filter(r => r.isUnit).forEach(r => {
+      const p = r.mg && byMg[r.mg];
+      if (p) p.rows.push(r);
+      else {
+        const sib = rows.find(x => !x.isUnit);
+        pkgs.push({ mg: r.mg, rows: [r], type: sib ? (sib.type || "rental") : "rental" });
+      }
+    });
+    pkgs.forEach(p => {
+      p.rows.sort((a, b) => (a.isUnit - b.isUnit) || (a.i - b.i));
+      p.rows.forEach(r => r.ptype = p.type);
+      p.hold = p.rows.some(r => r.flag === "hold");
+      p.needBy = p.rows.map(r => r.needBy).filter(Boolean).sort()[0] || null;
+      p.key = (p.hold ? "1" : "0") + "|" + (p.needBy || "9999-99-99") + "|" +
+        (p.rows.map(r => isoStr(stagedDate(r.staged))).filter(Boolean).sort()[0] || "9999");
+    });
+    pkgs.sort((a, b) => a.key.localeCompare(b.key));
+    groups.push({ customer, pkgs, key: pkgs[0].key });
+  });
+  groups.sort((a, b) => a.key.localeCompare(b.key));
+  return groups;
+})();
+
+/* archive (v7.5) — printed/approved docs keep their Drive link for ~a month
+   (Angela's ask). Rows older than 31 days stop rendering; republish sessions
+   delete those rows for real. Newest prints first. */
+const REV_ARCH = REV_ROWS.filter(r => r.done).map(r => {
+  const d = stagedDate(r.done);
+  return Object.assign(r, {
+    doneAge: d ? dayDiff(TODAY0, d) : 0,
+    doneISO: (d && isoStr(d)) || "",
+    ptype: r.type || ((REV_ROWS.find(x => !x.isUnit && x.mg && x.mg === r.mg) || {}).type) || "rental"
+  });
+}).filter(r => r.doneAge <= 31).sort((a, b) => b.doneISO.localeCompare(a.doneISO));
+
+function revTypeChip(r) {
+  return r.isUnit ? '<span class="chip t-unit">Unit list</span>' :
+    ({ sale: '<span class="chip t-sale">Sale</span>', rental: '<span class="chip t-rental">Rental</span>', repair: '<span class="chip t-repair">Repair</span>' })[r.ptype] || "";
+}
+
+function revArchHTML(list) {
+  if (!list.length) return "";
+  return '<section aria-label="Recently printed"><div class="card rev-arch">' +
+    '<div class="arc-cap">🗄 Recently printed — link' + (list.length === 1 ? "" : "s") + ' kept just in case · a row drops off a month after printing</div>' +
+    list.map(r => {
+      let label = r.mg ? r.doc.replace(r.mg, "").replace(/\s{2,}/g, " ").trim() : r.doc;
+      if (r.isUnit && /^unit list$/i.test(label)) label = "";
+      return '<div class="arc-row">' + revTypeChip(r) +
+        '<span class="arc-cust">' + esc(r.customer) + "</span>" +
+        (r.mg ? '<span class="mono arc-mg">' + esc(r.mg) + "</span>" : "") +
+        (label ? '<span class="arc-doc">' + esc(label) + "</span>" : "") +
+        (r.amount && r.amount !== "—" ? '<span class="mono">' + esc(r.amount) + "</span>" : "") +
+        '<span class="arc-when">printed ' + esc(r.done) + (r.doneAge > 0 ? " · " + r.doneAge + "d ago" : " · today") + "</span>" +
+        '<a class="arc-open" href="' + esc(r.url) + '" target="_blank" rel="noopener">Drive ↗</a>' +
+        "</div>";
+    }).join("") + "</div></section>";
+}
+
+function revRow(r, open) {
+  let label = r.mg ? r.doc.replace(r.mg, "").replace(/\s{2,}/g, " ").trim() : r.doc;
+  if (r.isUnit && /^unit list$/i.test(label)) label = "";
+  const tchip = revTypeChip(r);
+  return '<div class="rrow' + (r.flag === "hold" ? " hold" : "") + (open ? " open" : "") + '">' +
+    '<div class="rrow-hd">' +
+    '<button class="rrow-tgl" type="button" aria-expanded="' + String(!!open) + '" title="Show the check notes">' +
+    tchip +
+    (r.mg ? '<span class="rrow-mg mono">' + esc(r.mg) + "</span>" : "") +
+    (label ? '<span class="rrow-doc">' + esc(label) + "</span>" : "") +
+    '<span class="rrow-amt mono">' + (r.amount && r.amount !== "—" ? esc(r.amount) : "") + "</span>" +
+    (r.flag === "hold" ? chip("hold") : "") +
+    needChip(r.needBy) + sittingChip(r.staged) +
+    '<span class="rrow-staged">staged ' + esc(r.staged) + "</span>" +
+    '<span class="rrow-caret" aria-hidden="true">▼</span>' +
+    "</button>" +
+    '<a class="rrow-drive" href="' + esc(r.url) + '" target="_blank" rel="noopener" title="Open in Drive — review &amp; print">Drive ↗</a>' +
+    "</div>" +
+    '<ul class="rev-check rrow-check">' + String(r.check).split(" · ").map(c => "<li>" + esc(c) + "</li>").join("") + "</ul>" +
+    "</div>";
+}
+
+const REV_TYPES = [["ALL", "All"], ["sale", "Sales"], ["rental", "Rentals"], ["repair", "Repairs"]];
+function renderReview() {
+  const el = $("#view-review");
+  if (!REV.length) {
+    el.innerHTML = '<section aria-label="Awaiting review"><div class="card empty">Nothing is waiting on review — all caught up. New paperwork lands here the moment it\'s built.</div></section>' +
+      revArchHTML(REV_ARCH);
+    return;
+  }
+  const withNeed = REV_ROWS.filter(r => r.needBy && !r.done).sort((a, b) => a.needBy.localeCompare(b.needBy));
+  const nb = withNeed[0];
+  const strip = '<section aria-label="Time"><div class="card rev-time">' +
+    '<span class="td">📅 ' + esc(BOARD.snapshot.day) + '</span>' +
+    (nb ? '<span class="nx">Next hard deadline: <strong>' + esc(nb.customer) + '</strong></span>' + needChip(nb.needBy)
+        : '<span class="nx">No hard deadlines on the queue — work it oldest-first.</span>') +
+    "</div></section>";
+  const tiles = '<section aria-label="Review summary"><div class="rev-tiles">' +
+    '<div class="card rev-tile"><span class="label">Documents waiting</span><span class="value">' + REV.length + '</span><span class="note">for Angela / Missy to review + print</span></div>' +
+    '<div class="card rev-tile"><span class="label">On the paperwork</span><span class="value mono">' + fmt$(revTotal) + '</span><span class="note">across the queue</span></div>' +
+    '<div class="card rev-tile' + (revHolds ? " hold" : "") + '"><span class="label">On hold</span><span class="value">' + revHolds + '</span><span class="note">review only — don\'t deliver yet</span></div>' +
+    "</div></section>";
+  const how = '<section aria-label="How it works"><div class="card rev-how">' +
+    '<span class="step"><span class="n">1</span>Open the document in Drive</span>' +
+    '<span class="step"><span class="n">2</span>Review it — print if approved (Ctrl+P)</span>' +
+    '<span class="step"><span class="n">✓</span>Tell the hub and the row comes off</span>' +
+    "</div></section>";
+  const counts = {};
+  REV_ROWS.filter(r => !r.done).forEach(r => counts[r.ptype] = (counts[r.ptype] || 0) + 1);
+  const pills = '<section aria-label="Filter the queue"><div class="card filters">' +
+    REV_TYPES.map(([k, lbl]) =>
+      '<button class="fchip" data-rtype="' + k + '" aria-pressed="' + String(revState.type === k) + '">' + lbl +
+      (k !== "ALL" && counts[k] ? '<span class="fc">' + counts[k] + "</span>" : "") + "</button>").join("") +
+    '<span class="fsep"></span>' +
+    '<input class="ftext" id="rev-q" type="search" placeholder="Search customer, MG#, notes…" value="' + esc(revState.q) + '" aria-label="Search the review queue">' +
+    ((revState.type !== "ALL" || revState.q) ? '<button class="fclear" id="rev-clear">Clear</button>' : "") +
+    "</div></section>";
+  el.innerHTML = strip + tiles + how + pills +
+    '<section aria-label="Documents"><div class="sec-head"><span class="tick"></span><h2>The documents</h2>' +
+    '<span class="hint">grouped by company · an invoice + its unit list print together · links are private to mgscommunications.com · click a row for the check notes</span></div>' +
+    '<div id="rev-body"></div></section>';
+  renderRevBody();
+  el.querySelectorAll("[data-rtype]").forEach(b => b.addEventListener("click", () => { revState.type = b.dataset.rtype; renderReview(); }));
+  $("#rev-q").addEventListener("input", e => { revState.q = e.target.value; renderRevBody(); });
+  const rc = $("#rev-clear");
+  if (rc) rc.addEventListener("click", () => { revState.type = "ALL"; revState.q = ""; renderReview(); });
+}
+
+/* search matches the row header (customer / doc / MG# / amount / staged) OR the
+   check notes — a notes-only hit renders the row pre-expanded to show why.
+   Only the body re-renders on keystrokes so the search box keeps focus. */
+function revHay(r) { return (r.customer + " " + r.doc + " " + (r.mg || "") + " " + (r.amount || "") + " " + (r.staged || "")).toLowerCase(); }
+function renderRevBody() {
+  const q = revState.q.trim().toLowerCase();
+  const match = r => !q || revHay(r).includes(q) || String(r.check || "").toLowerCase().includes(q);
+  const groups = REV_GROUPS
+    .map(g => ({ customer: g.customer, pkgs: g.pkgs.filter(p =>
+      (revState.type === "ALL" || p.type === revState.type) && p.rows.some(match)) }))
+    .filter(g => g.pkgs.length);
+  const arch = REV_ARCH.filter(r => (revState.type === "ALL" || r.ptype === revState.type) && match(r));
+  const groupsHTML = groups.length ?
+    '<div class="rev-groups">' + groups.map(g => {
+      const nDocs = g.pkgs.reduce((s, p) => s + p.rows.length, 0);
+      return '<div class="rev-group"><div class="rev-comp"><span class="rev-comp-name">' + esc(g.customer) + '</span>' +
+        '<span class="rev-comp-n">' + nDocs + " document" + (nDocs === 1 ? "" : "s") + "</span></div>" +
+        g.pkgs.map(p =>
+          '<div class="card rev-pkg' + (p.hold ? " hold" : "") + '">' +
+          (p.rows.length > 1 ? '<div class="rev-pkg-cap">' + esc(p.mg || "") + " package — these print together</div>" : "") +
+          p.rows.map(r => revRow(r, q && !revHay(r).includes(q) && String(r.check || "").toLowerCase().includes(q))).join("") +
+          "</div>").join("") +
+        "</div>";
+    }).join("") + "</div>" :
+    (arch.length ? "" :
+      '<div class="card empty">' + (q ? 'Nothing in the queue matches "' + esc(revState.q) + '".' : "Nothing of that type is waiting on review.") + "</div>");
+  $("#rev-body").innerHTML = groupsHTML + revArchHTML(arch);
+  document.querySelectorAll("#rev-body .rrow-tgl").forEach(b => b.addEventListener("click", () => {
+    const open = b.closest(".rrow").classList.toggle("open");
+    b.setAttribute("aria-expanded", String(open));
+  }));
+}
+
+function reviewBanner() {
+  if (!REV.length) return "";
+  return '<section aria-label="Awaiting review"><button class="card rev-banner" id="rev-go">' +
+    '<span class="t">📋 Awaiting review — ' + REV.length + " document" + (REV.length === 1 ? "" : "s") + " to check + print</span>" +
+    '<span class="s mono">' + fmt$(revTotal) + " on the paperwork" + (revHolds ? " · " + revHolds + " on hold" : "") + "</span>" +
+    '<span class="go">Open the Review tab →</span></button></section>';
+}
+
+/* ---------- snapshot stamp (lives in the rail as of v7.1) ---------- */
+$("#stamp-day").textContent = BOARD.snapshot.day;
+$("#stamp-time").textContent = BOARD.snapshot.time + " · " + BOARD.snapshot.label;
+
+/* ---------- sidebar rail (v7 — replaces the pill tabs) ----------
+   One item per view: domain color tick + inline SVG icon + label + count
+   badges (Review = docs waiting, Rentals = missing-gear items). Folds to a
+   56px icon rail (state per device in localStorage); <=640px it becomes an
+   overlay drawer behind the masthead hamburger. */
+const ICO_ATTRS = 'width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+const ICO = {
+  home: '<svg ' + ICO_ATTRS + '><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
+  rent: '<svg ' + ICO_ATTRS + '><circle cx="12" cy="12" r="2"/><path d="M16.5 7.5a6.4 6.4 0 0 1 0 9M7.5 16.5a6.4 6.4 0 0 1 0-9"/></svg>',
+  money: '<svg ' + ICO_ATTRS + '><rect x="3" y="7" width="18" height="11" rx="2"/><circle cx="12" cy="12.5" r="2.5"/></svg>',
+  sig: '<svg ' + ICO_ATTRS + '><path d="M4 17c3-6 4.5-8 5.7-7.2S8 16 10 16s2.6-3.4 3.8-3.4S14 16 16 16s2.6-1.6 4-2.6"/><path d="M4 20h16"/></svg>',
+  task: '<svg ' + ICO_ATTRS + '><path d="M4.5 7l1.8 1.8L9.5 5.5M4.5 15l1.8 1.8 3.2-3.3"/><path d="M13 8h7M13 16h7"/></svg>',
+  rev: '<svg ' + ICO_ATTRS + '><rect x="6" y="10" width="12" height="6" rx="1"/><path d="M8 10V4h8v6M8 16v4h8v-4"/></svg>',
+  alert: '<svg ' + ICO_ATTRS + '><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.5v4M12 17v.4"/></svg>'
+};
+const VIEWS = [
+  { id: "overview", label: "Overview", dom: "home" },
+  { id: "review", label: "Review", dom: "rev", n: REV.length, ncls: "rev", ntitle: "documents waiting on review" },
+  { id: "rentals", label: "Rentals", dom: "rent", n: (BOARD.missing || []).length, ncls: "alert", ntitle: "missing-gear items" },
+  { id: "money", label: "Money", dom: "money" },
+  { id: "tasks", label: "Tasks", dom: "task" },
+  { id: "activity", label: "Activity", dom: "sig" }
+];
+$("#rail-nav").innerHTML = VIEWS.map(v =>
+  '<button class="ritem dom-' + v.dom + '" role="tab" id="tab-' + v.id + '" aria-controls="view-' + v.id + '" aria-selected="false" title="' + esc(v.label) + '">' +
+  '<span class="rtick" aria-hidden="true"></span>' + ICO[v.dom] +
+  '<span class="rlabel">' + esc(v.label) + "</span>" +
+  (v.n ? '<span class="rn mono ' + (v.ncls || "") + '"' + (v.ntitle ? ' title="' + esc(v.ntitle) + '"' : "") + ">" + v.n + "</span>" : "") +
+  "</button>").join("");
+
+const shellEl = $("#shell"), menuBtn = $("#menu-btn");
+const closeDrawer = () => { shellEl.classList.remove("drawer"); menuBtn.setAttribute("aria-expanded", "false"); };
+let activeView = "overview";
+function show(viewId) {
+  activeView = viewId;
+  VIEWS.forEach(v => {
+    $("#view-" + v.id).hidden = v.id !== viewId;
+    $("#tab-" + v.id).setAttribute("aria-selected", String(v.id === viewId));
+  });
+  closeDrawer();
+  if (history.replaceState) history.replaceState(null, "", "#" + viewId);
+  window.scrollTo({ top: 0 });
+}
+VIEWS.forEach(v => $("#tab-" + v.id).addEventListener("click", () => show(v.id)));
+
+/* fold state — per device via localStorage; the <=640px drawer ignores it */
+const foldBtn = $("#rail-fold");
+let railFolded = false;
+try { railFolded = localStorage.getItem("mgsRailFolded") === "1"; } catch (e) {}
+function applyFold() {
+  shellEl.classList.toggle("folded", railFolded);
+  foldBtn.setAttribute("aria-expanded", String(!railFolded));
+  foldBtn.title = railFolded ? "Expand the sidebar" : "Collapse the sidebar";
+  foldBtn.innerHTML = railFolded ? '<span aria-hidden="true">»</span>' : '<span aria-hidden="true">«</span><span class="rlabel">Collapse</span>';
+}
+applyFold();
+foldBtn.addEventListener("click", () => {
+  railFolded = !railFolded;
+  try { localStorage.setItem("mgsRailFolded", railFolded ? "1" : "0"); } catch (e) {}
+  applyFold();
+});
+
+/* mobile drawer */
+menuBtn.addEventListener("click", () => {
+  const open = shellEl.classList.toggle("drawer");
+  menuBtn.setAttribute("aria-expanded", String(open));
+});
+$("#rail-scrim").addEventListener("click", closeDrawer);
+addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+
+/* ---------- overview ---------- */
+/* v5: each KPI is mapped to a business domain (color + icon) — derived from
+   its go-target/tone/label so republish sessions still edit data only. */
+const kpiDom = k =>
+  k.tone === "crit" ? "alert" :
+  k.go === "rentals" ? "rent" :
+  k.go === "tasks" ? "task" :
+  k.go === "review" ? "rev" :
+  /signature/i.test(k.label) ? "sig" : "money";
+/* (ICO icon set is defined up at the rail block — shared with the KPI cards) */
+$("#view-overview").innerHTML =
+  '<section aria-label="At a glance"><div class="kpis">' +
+  BOARD.kpis.map((k, i) =>
+    '<button class="card kpi ' + k.tone + ' dom-' + kpiDom(k) + '" data-kpi="' + i + '">' +
+    '<span class="label">' + ICO[kpiDom(k)] + esc(k.label) + "</span>" +
+    '<span class="value' + (k.mono ? " mono" : "") + '">' + esc(k.value) + (k.suffix ? " <small>" + esc(k.suffix) + "</small>" : "") + "</span>" +
+    '<span class="note">' + esc(k.note) + "</span>" +
+    '<span class="go">Open ' + esc(k.go) + " →</span></button>").join("") +
+  "</div></section>" +
+
+  reviewBanner() +
+
+  '<section aria-label="Missing gear"><div class="alert card"><div class="alert-head">' +
+  '<span class="t">Missing gear from the 7/7 returns</span>' +
+  '<span class="s">3 final invoices are on hold until these come back (or get charged)</span></div>' +
+  BOARD.missing.map(m =>
+    '<div class="alert-row"><span class="who">' + esc(m.who) + '</span>' +
+    '<span class="what">' + m.what + ' <span class="aside">' + esc(m.aside) + "</span></span></div>").join("") +
+  "</div></section>" +
+
+  '<section aria-label="This week"><div class="sec-head"><span class="tick"></span><h2>The next three days</h2></div><div class="days">' +
+  BOARD.days.map(d =>
+    '<div class="card day' + (d.today ? " today" : "") + '"><div class="day-head"><span class="dow">' + esc(d.dow) + "</span>" +
+    (d.badge ? '<span class="badge">' + esc(d.badge) + "</span>" : "") + "</div><ul>" +
+    d.items.map(it => "<li" + (it.heavy ? ' class="heavy"' : "") + ">" + esc(it.t) + "</li>").join("") +
+    "</ul></div>").join("") +
+  "</div></section>" +
+
+  '<section aria-label="Open the sheets"><div class="sec-head"><span class="tick"></span><h2>Open the sheets</h2></div><div class="links">' +
+  BOARD.links.map(l =>
+    '<a class="card linkcard" href="' + l.url + '" target="_blank" rel="noopener"><span class="name">' + l.name +
+    '</span><span class="tabs2">' + esc(l.tabs) + '</span><span class="go">Open in Google Sheets →</span></a>').join("") +
+  '</div><p class="footnote">Customer folders live on the shop machine: <span class="mono">Desktop\\MGS Hub\\Customers\\&lt;name&gt;</span> — a hosted page can\'t open local folders.</p></section>';
+
+document.querySelectorAll("[data-kpi]").forEach(btn => btn.addEventListener("click", () => {
+  const k = BOARD.kpis[+btn.dataset.kpi];
+  show(k.go);
+  if (k.go === "rentals" && k.preset) { rState.status = k.preset; renderRentals(); }
+}));
+const revGo = $("#rev-go");
+if (revGo) revGo.addEventListener("click", () => show("review"));
+
+/* v5: KPI numbers count up on load (skipped for reduced-motion). Only the
+   leading numeric text node animates — suffixes like <small> stay put. */
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.querySelectorAll(".kpi .value").forEach(el => {
+    const tn = el.firstChild;
+    if (!tn || tn.nodeType !== 3) return;
+    const m = /^(\$?)([\d,]+(?:\.(\d+))?)(\+?)(\s*)$/.exec(tn.textContent);
+    if (!m) return;
+    const target = parseFloat(m[2].replace(/,/g, ""));
+    if (!isFinite(target)) return;
+    const dec = m[3] ? m[3].length : 0, t0 = performance.now(), dur = 550;
+    const step = t => {
+      const p = Math.min(1, (t - t0) / dur), v = target * (1 - Math.pow(1 - p, 3));
+      tn.textContent = m[1] + v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[4] + m[5];
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ---------- rentals view ---------- */
+const rState = { status: "ALL", customer: "ALL", q: "", outSort: 1, upSort: 1 };
+const customers = [...new Set(BOARD.rentalsOut.concat(BOARD.upcoming).map(r => r.customer))].sort();
+
+$("#view-rentals").innerHTML =
+  '<section aria-label="Rental timeline"><div class="sec-head"><span class="tick"></span><h2>Next three weeks</h2>' +
+  '<span class="hint">built from the rentals below · bottom row = radios committed each day · far-out bookings stay in the table</span></div>' +
+  '<div class="card tlwrap" id="tl"></div></section>' +
+  '<section aria-label="Rental filters"><div class="card filters" id="rental-filters"></div></section>' +
+  '<section aria-label="Rentals out"><div class="sec-head"><span class="tick"></span><h2>Rentals out</h2>' +
+  '<span class="hint">mirrors the Rental Board sheet · board is the view, ledger is the truth</span></div>' +
+  '<div class="card tablewrap"><table><thead><tr><th>MG #</th><th>Customer</th><th>Event</th><th>Gear out</th>' +
+  '<th class="sortable" id="sort-out">Back due <span class="arr">↑</span></th><th>Status</th><th>Notes</th></tr></thead>' +
+  '<tbody id="out-body"></tbody></table><div class="empty" id="out-empty" hidden>No rentals out match this filter.</div></div></section>' +
+  '<section aria-label="Upcoming rentals"><div class="sec-head"><span class="tick"></span><h2>Upcoming rentals</h2>' +
+  '<span class="hint">sorted by pickup date</span></div>' +
+  '<div class="card tablewrap"><table><thead><tr><th>MG #</th><th>Customer</th><th>Event</th><th>Gear</th>' +
+  '<th class="sortable" id="sort-up">Pickup <span class="arr">↑</span></th><th>Return</th><th>Status</th></tr></thead>' +
+  '<tbody id="up-body"></tbody></table><div class="empty" id="up-empty" hidden>No upcoming rentals match this filter.</div></div></section>';
+
+const R_STATUSES = ["ALL", "OUT", "PARTIAL", "VERIFY", "BOOKED", "SIGNED", "TENTATIVE"];
+function renderRentalFilters() {
+  const counts = {};
+  BOARD.rentalsOut.concat(BOARD.upcoming).forEach(r => counts[r.status] = (counts[r.status] || 0) + 1);
+  $("#rental-filters").innerHTML =
+    R_STATUSES.map(s =>
+      '<button class="fchip" data-status="' + s + '" aria-pressed="' + String(rState.status === s) + '">' +
+      (s === "ALL" ? "All" : (CHIP[s] ? CHIP[s][1] : s)) +
+      (s !== "ALL" && counts[s] ? '<span class="fc">' + counts[s] + "</span>" : "") + "</button>").join("") +
+    '<span class="fsep"></span>' +
+    '<select class="fsel" id="cust-sel" aria-label="Filter by customer"><option value="ALL">All customers</option>' +
+    customers.map(c => '<option value="' + esc(c) + '"' + (rState.customer === c ? " selected" : "") + ">" + esc(c) + "</option>").join("") + "</select>" +
+    '<input class="ftext" id="rq" type="search" placeholder="Search event, MG#, gear…" value="' + esc(rState.q) + '" aria-label="Search rentals">' +
+    ((rState.status !== "ALL" || rState.customer !== "ALL" || rState.q) ? '<button class="fclear" id="rclear">Clear</button>' : "");
+  document.querySelectorAll("#rental-filters [data-status]").forEach(b =>
+    b.addEventListener("click", () => { rState.status = b.dataset.status; renderRentals(); }));
+  $("#cust-sel").addEventListener("change", e => { rState.customer = e.target.value; renderRentals(); });
+  $("#rq").addEventListener("input", e => { rState.q = e.target.value; renderRentalRows(); });
+  const rc = $("#rclear");
+  if (rc) rc.addEventListener("click", () => { rState.status = "ALL"; rState.customer = "ALL"; rState.q = ""; renderRentals(); });
+}
+function rMatch(r) {
+  if (rState.status !== "ALL" && r.status !== rState.status) return false;
+  if (rState.customer !== "ALL" && r.customer !== rState.customer) return false;
+  if (rState.q) {
+    const q = rState.q.toLowerCase();
+    const hay = (r.mg + " " + r.customer + " " + r.event + " " + r.gear + " " + (r.notes || "")).toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  return true;
+}
+function renderRentalRows() {
+  const out = BOARD.rentalsOut.filter(rMatch).sort((a, b) => rState.outSort * a.due.localeCompare(b.due));
+  $("#out-body").innerHTML = out.map(r =>
+    '<tr class="' + sevClass(r.status) + '"><td class="mgnum mono">' + esc(r.mg) + "</td><td>" + esc(r.customer) + "</td><td>" + esc(r.event) +
+    '</td><td>' + esc(r.gear) + '</td><td class="mono">' + esc(r.dueDisp) + "</td><td>" + chip(r.status) + "</td><td>" + esc(r.notes) + "</td></tr>").join("");
+  $("#out-empty").hidden = out.length > 0;
+  const up = BOARD.upcoming.filter(rMatch).sort((a, b) => rState.upSort * a.pickup.localeCompare(b.pickup));
+  $("#up-body").innerHTML = up.map(r =>
+    '<tr class="' + sevClass(r.status) + '"><td class="mgnum mono">' + esc(r.mg) + "</td><td>" + esc(r.customer) + "</td><td>" + esc(r.event) +
+    '</td><td>' + esc(r.gear) + '</td><td class="mono">' + esc(r.pickupDisp) + '</td><td class="mono">' + esc(r.retDisp) + "</td><td>" + chip(r.status) +
+    (r.notes ? '<div class="dim">' + esc(r.notes) + "</div>" : "") + "</td></tr>").join("");
+  $("#up-empty").hidden = up.length > 0;
+  $("#sort-out").querySelector(".arr").textContent = rState.outSort === 1 ? "↑" : "↓";
+  $("#sort-up").querySelector(".arr").textContent = rState.upSort === 1 ? "↑" : "↓";
+}
+function renderRentals() { renderRentalFilters(); renderRentalRows(); }
+$("#sort-out").addEventListener("click", () => { rState.outSort *= -1; renderRentalRows(); });
+$("#sort-up").addEventListener("click", () => { rState.upSort *= -1; renderRentalRows(); });
+
+/* ---------- rentals timeline (next 3 weeks) ----------
+   Derived entirely from BOARD.rentalsOut / BOARD.upcoming ISO dates and the
+   snapshot day — republish sessions never feed it separately. Out rentals
+   bar from today to their due date; upcoming bar pickup→return, clipped to
+   the window. "Radios committed" sums the first "N radios" found in each
+   bar's gear string, per day (return day still counts — gear isn't verified
+   home until it's checked in). */
+function renderTimeline() {
+  const el = $("#tl");
+  const DAY = 86400000, N = 21;
+  const today = new Date(BOARD.snapshot.day.replace(/^[A-Za-z]+,\s*/, ""));
+  today.setHours(0, 0, 0, 0);
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const days = Array.from({ length: N }, (_, i) => new Date(today.getTime() + i * DAY));
+  const isoDays = days.map(iso);
+  const t0 = isoDays[0], tEnd = isoDays[N - 1];
+  const radios = g => { const m = /(\d+)\s*radios/.exec(g || ""); return m ? +m[1] : 0; };
+
+  const spans = [];
+  BOARD.rentalsOut.forEach(r => {
+    if (r.due && r.due >= t0) spans.push({ r, s: t0, e: r.due > tEnd ? tEnd : r.due, cls: "b-out", clip: r.due > tEnd });
+  });
+  BOARD.upcoming.forEach(r => {
+    if (!r.pickup || !r.ret || r.ret < t0 || r.pickup > tEnd) return;
+    spans.push({
+      r, s: r.pickup < t0 ? t0 : r.pickup, e: r.ret > tEnd ? tEnd : r.ret,
+      cls: r.status === "TENTATIVE" ? "b-tent" : r.status === "SIGNED" ? "b-signed" : "b-booked",
+      clip: r.ret > tEnd
+    });
+  });
+  spans.sort((a, b) => a.s.localeCompare(b.s) || a.e.localeCompare(b.e));
+
+  if (!spans.length) {
+    el.innerHTML = '<div class="empty">Nothing on the calendar for the next three weeks.</div>';
+    return;
+  }
+
+  const load = isoDays.map(d => spans.reduce((s, sp) => s + ((sp.s <= d && d <= sp.e) ? radios(sp.r.gear) : 0), 0));
+  const DOW = ["Su", "M", "Tu", "W", "Th", "F", "Sa"];
+  const wknd = d => d.getDay() % 6 === 0;
+
+  let h = '<div class="tl" style="grid-template-columns: 172px repeat(' + N + ', minmax(26px, 1fr))">';
+  h += '<div class="tl-lbl" style="grid-row:1;grid-column:1"></div>';
+  days.forEach((d, i) => {
+    h += '<div class="tl-hd' + (i === 0 ? " tdy" : wknd(d) ? " wknd" : "") + '" style="grid-row:1;grid-column:' + (i + 2) + '">' +
+      (i === 0 ? "TODAY" : DOW[d.getDay()] + " " + d.getDate()) + "</div>";
+  });
+  spans.forEach((sp, k) => {
+    const row = k + 2, s = isoDays.indexOf(sp.s), e = isoDays.indexOf(sp.e), n = radios(sp.r.gear);
+    h += '<div class="tl-lbl" style="grid-row:' + row + ';grid-column:1">' + esc(sp.r.customer) +
+      (sp.r.mg && sp.r.mg !== "—" ? ' <span class="mono" style="opacity:.65;font-size:10.5px">' + esc(sp.r.mg) + "</span>" : "") + "</div>";
+    h += '<div class="tl-bar ' + sp.cls + '" style="grid-row:' + row + ';grid-column:' + (s + 2) + " / " + (e + 3) + '">' +
+      (n ? n + " radios" : esc(sp.r.gear)) + (sp.cls === "b-tent" ? " · tentative" : "") + (sp.clip ? " →" : "") + "</div>";
+  });
+  const lr = spans.length + 2;
+  h += '<div class="tl-lbl" style="grid-row:' + lr + ';grid-column:1;font-weight:600;color:var(--ink)">Radios committed</div>';
+  load.forEach((n, i) => {
+    h += '<div class="tl-load' + (n >= 90 ? " ld-hi" : n >= 60 ? " ld-mid" : "") + (wknd(days[i]) ? " wknd" : "") +
+      '" style="grid-row:' + lr + ';grid-column:' + (i + 2) + '">' + (n || "·") + "</div>";
+  });
+  h += "</div>";
+  h += '<div class="tl-leg">' +
+    '<span><span class="sw" style="background:var(--d-rent-grad)"></span>out now</span>' +
+    '<span><span class="sw" style="background:var(--surface);border:1.5px solid var(--d-rent-fg)"></span>signed</span>' +
+    '<span><span class="sw" style="background:var(--surface-2);border:1px solid var(--line-strong)"></span>booked</span>' +
+    '<span><span class="sw" style="border:1px dashed var(--line-strong)"></span>tentative</span>' +
+    '<span style="color:var(--ink-3)">committed row: <span style="color:var(--warn);font-weight:600">60+</span> tight · <span style="color:var(--crit);font-weight:600">90+</span> crunch (259-unit fleet, but model mix bites first)</span>' +
+    "</div>";
+  el.innerHTML = h;
+}
+
+/* ---------- money view ---------- */
+const mState = { state: "ALL" };
+$("#view-money").innerHTML =
+  '<section aria-label="Money filters"><div class="card filters" id="money-filters"></div></section>' +
+  '<section aria-label="Money"><div class="sec-head"><span class="tick"></span><h2>Money</h2>' +
+  '<span class="hint">from the MG26 ledger + 2026 Payments register</span></div>' +
+  '<div class="money"><div class="card tablewrap"><table><thead><tr><th>MG #</th><th>Customer</th><th>Event</th>' +
+  '<th class="num">Total</th><th>State</th><th>Where it stands</th></tr></thead><tbody id="money-body"></tbody>' +
+  '<tfoot><tr><td colspan="3">' + esc(BOARD.moneyTotalLabel) + '</td><td class="num mono">' + esc(BOARD.moneyTotal) + "</td><td></td><td></td></tr></tfoot>" +
+  '</table><div class="empty" id="money-empty" hidden>No invoices match this filter.</div></div>' +
+  '<div class="card sidecard">' +
+  '<div class="block ytd"><h3>2026 card payments YTD</h3><span class="big mono">' + esc(BOARD.ytd.amount) + '</span>' +
+  '<span class="footnote">' + esc(BOARD.ytd.note) + "</span></div>" +
+  '<div class="block"><h3>Out for signature</h3>' +
+  BOARD.signature.map(s => '<div class="pipe-row"><span>' + esc(s.name) + '</span><span class="amt mono">' + esc(s.amt) + '</span></div>' +
+    '<div class="pipe-row"><span class="st">' + esc(s.st) + "</span></div>").join("") + "</div>" +
+  '<div class="block"><h3>Kenny cash timing</h3>' +
+  BOARD.kennyCash.map(s => '<div class="pipe-row"><span>' + esc(s.name) + '</span><span class="amt mono">' + esc(s.amt) + "</span></div>").join("") + "</div>" +
+  '<div class="block"><h3>Ledger rows needing back-fill</h3><span class="footnote">' + esc(BOARD.backfill) + "</span></div>" +
+  "</div></div></section>";
+
+const M_STATES = [["ALL", "All"], ["ready", "Ready to collect"], ["hold", "On hold"], ["check", "Verify first"], ["out", "Bills later"]];
+function renderMoney() {
+  const counts = {};
+  BOARD.moneyRows.forEach(r => counts[r.state] = (counts[r.state] || 0) + 1);
+  $("#money-filters").innerHTML = M_STATES.map(([k, lbl]) =>
+    '<button class="fchip" data-mstate="' + k + '" aria-pressed="' + String(mState.state === k) + '">' + lbl +
+    (k !== "ALL" && counts[k] ? '<span class="fc">' + counts[k] + "</span>" : "") + "</button>").join("");
+  document.querySelectorAll("[data-mstate]").forEach(b =>
+    b.addEventListener("click", () => { mState.state = b.dataset.mstate; renderMoney(); }));
+  const rows = BOARD.moneyRows.filter(r => mState.state === "ALL" || r.state === mState.state);
+  $("#money-body").innerHTML = rows.map(r =>
+    '<tr class="' + (r.state === "hold" ? "sev-crit" : r.state === "check" ? "sev-warn" : "") + '">' +
+    '<td class="mgnum mono">' + esc(r.mg) + "</td><td>" + esc(r.customer) + "</td><td>" + esc(r.event) +
+    '</td><td class="num mono">' + fmt$(r.total) + "</td><td>" + chip(r.state) + "</td><td>" + r.stand + "</td></tr>").join("");
+  $("#money-empty").hidden = rows.length > 0;
+}
+
+/* ---------- tasks view ---------- */
+const tState = { who: "ALL", overdueOnly: false };
+$("#view-tasks").innerHTML =
+  '<section aria-label="Task counts"><div class="task-counts">' +
+  BOARD.taskCounts.map(c => '<div class="card tc"><span class="who">' + esc(c.who) + '</span><span class="n mono">' + c.n + "</span></div>").join("") +
+  "</div></section>" +
+  '<section aria-label="Tasks"><div class="sec-head"><span class="tick"></span><h2>Needs attention</h2>' +
+  '<span class="hint">curated from 55 open tasks — overdue and this week first</span></div>' +
+  '<div class="card filters" id="task-filters"></div>' +
+  '<div class="card tablewrap"><table><thead><tr><th>ID</th><th>Needs attention</th><th>Who</th><th>Due</th></tr></thead>' +
+  '<tbody id="task-body"></tbody></table><div class="empty" id="task-empty" hidden>No tasks match this filter.</div></div></section>';
+
+function renderTasks() {
+  const whoCounts = {};
+  BOARD.tasks.forEach(t => whoCounts[t.who] = (whoCounts[t.who] || 0) + 1);
+  const overdueN = BOARD.tasks.filter(t => t.dueClass === "overdue").length;
+  $("#task-filters").innerHTML =
+    ["ALL", "Dustin", "Angela", "Missy"].map(w =>
+      '<button class="fchip" data-who="' + w + '" aria-pressed="' + String(tState.who === w) + '">' + (w === "ALL" ? "Everyone" : w) +
+      (w !== "ALL" && whoCounts[w] ? '<span class="fc">' + whoCounts[w] + "</span>" : "") + "</button>").join("") +
+    '<span class="fsep"></span>' +
+    '<button class="fchip" id="t-over" aria-pressed="' + String(tState.overdueOnly) + '">Overdue only<span class="fc">' + overdueN + "</span></button>";
+  document.querySelectorAll("[data-who]").forEach(b =>
+    b.addEventListener("click", () => { tState.who = b.dataset.who; renderTasks(); }));
+  $("#t-over").addEventListener("click", () => { tState.overdueOnly = !tState.overdueOnly; renderTasks(); });
+
+  const order = { overdue: 0, today: 1, soon: 2, none: 3 };
+  const rows = BOARD.tasks
+    .filter(t => (tState.who === "ALL" || t.who === tState.who) && (!tState.overdueOnly || t.dueClass === "overdue"))
+    .sort((a, b) => (order[a.dueClass] - order[b.dueClass]) || (a.due || "9999").localeCompare(b.due || "9999"));
+  $("#task-body").innerHTML = rows.map(t =>
+    '<tr class="' + (t.dueClass === "overdue" ? "sev-crit" : t.dueClass === "today" ? "sev-warn" : "") + '">' +
+    '<td class="mono">' + esc(t.id) + "</td><td>" + esc(t.text) + '</td><td><span class="chip person">' + esc(t.who) + "</span></td><td>" +
+    (t.dueClass === "none" ? '<span class="dim">no date</span>' : chip(t.dueClass, t.dueDisp)) + "</td></tr>").join("");
+  $("#task-empty").hidden = rows.length > 0;
+}
+
+/* ---------- activity view ---------- */
+$("#view-activity").innerHTML =
+  '<section aria-label="Recent activity"><div class="sec-head"><span class="tick"></span><h2>Recent activity</h2>' +
+  '<span class="hint">condensed from the hub activity log</span></div><div class="card feed">' +
+  BOARD.feed.map(f => '<div class="feed-item"><span class="when mono">' + esc(f.when) + '</span><span class="what">' + f.what + "</span></div>").join("") +
+  "</div></section>";
+
+/* ---------- boot ---------- */
+renderReview(); renderRentals(); renderTimeline(); renderMoney(); renderTasks();
+const hash = (location.hash || "").replace("#", "");
+show(VIEWS.some(v => v.id === hash) ? hash : "overview");
+</script>
