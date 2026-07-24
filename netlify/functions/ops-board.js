@@ -43,21 +43,15 @@ const SITE_ID =
  * set as a Netlify env var — then Grok can still POST snapshots with no git.
  */
 function openStore() {
-  try {
-    return getStore("mgs-ops");
-  } catch (_) {
-    /* fall through to explicit config */
-  }
   const token =
     process.env.NETLIFY_AUTH_TOKEN ||
     process.env.NETLIFY_BLOBS_TOKEN ||
     process.env.BLOBS_TOKEN;
-  if (!token) {
-    throw new Error(
-      "Blobs not auto-configured. Set NETLIFY_AUTH_TOKEN in Netlify env (CLI login token or personal access token) and redeploy."
-    );
+  // Prefer explicit credentials (reliable on this site); else auto context.
+  if (token) {
+    return getStore({ name: "mgs-ops", siteID: SITE_ID, token });
   }
-  return getStore({ name: "mgs-ops", siteID: SITE_ID, token });
+  return getStore("mgs-ops");
 }
 
 function json(status, body, extra) {
