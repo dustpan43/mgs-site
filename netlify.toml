@@ -90,6 +90,8 @@
   [headers.values]
     Cache-Control = "no-store"
     X-Robots-Tag = "noindex, nofollow"
+    # Allow live board fetch + Drive PDF preview iframes (P1/P4)
+    Content-Security-Policy = "frame-ancestors 'none'; frame-src https://drive.google.com https://docs.google.com; connect-src 'self'"
 
 # Netlify Forms settings
 [build.processing]

@@ -187,7 +187,13 @@
       <div class="err" id="err" role="alert"></div>
       <div class="ok" id="ok" role="status">Signed in — opening tools…</div>
     </form>
-    <p class="hint">Shared team password · session 30 days on this browser</p>
+    <p class="hint" style="margin-top:12px">— or —</p>
+    <p style="text-align:center;margin:0">
+      <a id="googleBtn" href="/.netlify/functions/ops-google-start?next=/ops/board/" style="display:inline-block;padding:9px 14px;border-radius:8px;background:#fff;border:1.5px solid #dadce0;color:#3c4043;font-weight:600;font-size:0.88rem;text-decoration:none">
+        Continue with Google
+      </a>
+    </p>
+    <p class="hint">Password always works. Google = @mgscommunications.com only (enable in Netlify env when ready).</p>
   </main>
   <script>
     (function () {

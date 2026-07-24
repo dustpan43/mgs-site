@@ -11,14 +11,16 @@ Private tools for Missy / Angela / Dustin. **Not** linked from the public nav. *
 | `/ops/board/` | **Operations Board** (live snapshot dashboard) |
 | `/ops/forms/` | **Form Station** (v1.23.0 master copy) |
 
-### Operations Board refresh (Grok master)
-1. Edit **only** the `const BOARD = {…}` block in either:
-   - Master: `MGS Hub\Operations Hub\Hub Dashboard\mgs-hub-dashboard.html`
-   - Site publish copy: `website\ops\board\index.html`
-2. Copy master → `website/ops/board/index.html` (keep noindex meta).
-3. `git add ops/board/index.html` → commit → `git push origin main` → Netlify ~60s.
-4. Live URL: **https://mgscommunications.com/ops/board/** (same team password as Form Station).
-5. Do **not** edit below the `RENDERING ENGINE` banner. Recipe: Hub Dashboard README.
+### Operations Board refresh (LIVE — no git for data)
+
+See **`TEACHING-LIVE-BOARD.md`** (Blobs explained in plain English).
+
+1. Build `BOARD` JSON from sheets (same fields as always).
+2. `python ~/.claude/mgs-hub/helpers/publish_ops_board.py board.json`  
+   with `OPS_BOARD_PUBLISH_SECRET` set (Netlify env + local shell).
+3. Page at `/ops/board/` **fetches** `/.netlify/functions/ops-board` (cookie required).
+4. **Git** only when changing the board *engine* or Form Station *app*.
+5. **P0:** publish at boot + shutdown (not every PDF).
 
 ## Security model
 
