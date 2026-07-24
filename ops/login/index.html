@@ -23,68 +23,81 @@
       align-items: center;
       justify-content: center;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: linear-gradient(160deg, #1b2e1b 0%, #2e7d32 55%, #1b2e1b 100%);
+      background: linear-gradient(145deg, #1b2e1b 0%, #2e7d32 60%, #1b2e1b 100%);
       color: var(--gray-900);
-      padding: 24px;
+      padding: 16px;
     }
     .card {
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       background: #fff;
-      border-radius: 16px;
-      padding: 28px 28px 26px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.28);
-      text-align: center;
+      border-radius: 12px;
+      padding: 16px 18px 14px;
+      box-shadow: 0 12px 36px rgba(0,0,0,.25);
+    }
+    .head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      text-align: left;
     }
     .logo {
-      display: block;
-      width: min(220px, 70%);
+      flex: 0 0 auto;
+      width: 88px;
       height: auto;
-      margin: 0 auto 14px;
+      display: block;
     }
+    .head-text { min-width: 0; }
     .badge {
       display: inline-block;
       background: var(--yellow);
       color: #212121;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 2px 7px;
       border-radius: 999px;
-      margin-bottom: 10px;
       letter-spacing: .04em;
+      margin-bottom: 4px;
     }
     .brand {
       font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       color: var(--navy);
       letter-spacing: -0.02em;
+      line-height: 1.15;
     }
     .sub {
-      margin: 6px 0 20px;
+      margin: 3px 0 0;
       color: var(--gray-600);
-      font-size: 0.92rem;
-      line-height: 1.45;
+      font-size: 0.8rem;
+      line-height: 1.3;
     }
-    form { text-align: left; }
+    form { margin: 0; }
     label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       color: var(--navy);
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
     }
     .pw-wrap {
       position: relative;
-      display: flex;
-      align-items: stretch;
+      flex: 1 1 auto;
+      min-width: 0;
     }
     .pw-wrap input {
       width: 100%;
-      padding: 12px 88px 12px 14px;
+      padding: 9px 72px 9px 11px;
       border: 1.5px solid var(--gray-200);
-      border-radius: 10px;
-      font-size: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
       outline: none;
       font-family: inherit;
     }
@@ -94,16 +107,16 @@
     }
     .toggle {
       position: absolute;
-      right: 6px;
+      right: 5px;
       top: 50%;
       transform: translateY(-50%);
       border: 0;
       background: #f3f5f3;
       color: var(--navy);
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 7px 10px;
-      border-radius: 8px;
+      padding: 5px 8px;
+      border-radius: 6px;
       cursor: pointer;
       line-height: 1;
     }
@@ -113,68 +126,68 @@
       outline-offset: 1px;
     }
     button.submit {
-      width: 100%;
-      margin-top: 16px;
-      padding: 12px 16px;
+      flex: 0 0 auto;
+      padding: 9px 16px;
       border: 0;
-      border-radius: 10px;
+      border-radius: 8px;
       background: var(--green);
       color: #fff;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.9rem;
       cursor: pointer;
       font-family: inherit;
+      white-space: nowrap;
     }
     button.submit:hover { background: var(--green-light); }
     button.submit:disabled { opacity: .65; cursor: wait; }
-    .err {
+    .err, .ok {
       display: none;
-      margin-top: 12px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      background: #ffebee;
-      color: #b71c1c;
-      font-size: 0.88rem;
+      margin-top: 8px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
       text-align: left;
     }
-    .err.show { display: block; }
-    .ok {
-      display: none;
-      margin-top: 12px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      background: #e8f5e9;
-      color: #1b5e20;
-      font-size: 0.88rem;
-      text-align: left;
-    }
-    .ok.show { display: block; }
+    .err { background: #ffebee; color: #b71c1c; }
+    .ok { background: #e8f5e9; color: #1b5e20; }
+    .err.show, .ok.show { display: block; }
     .hint {
-      margin-top: 18px;
-      font-size: 0.78rem;
+      margin: 8px 0 0;
+      font-size: 0.72rem;
       color: var(--gray-600);
-      line-height: 1.4;
+      line-height: 1.3;
       text-align: center;
+    }
+    @media (max-width: 420px) {
+      .row { flex-direction: column; }
+      button.submit { width: 100%; }
+      .logo { width: 72px; }
     }
   </style>
 </head>
 <body>
   <main class="card">
-    <img class="logo" src="/images/mgs-logo.png" width="220" height="auto" alt="MGS Communications">
-    <div class="badge">TEAM ONLY</div>
-    <div class="brand">MGS Operations</div>
-    <p class="sub">Sign in to open Form Station and other team tools. Not for customers.</p>
+    <div class="head">
+      <img class="logo" src="/images/mgs-logo.png" width="88" height="auto" alt="MGS Communications">
+      <div class="head-text">
+        <div class="badge">TEAM ONLY</div>
+        <div class="brand">MGS Operations</div>
+        <p class="sub">Form Station &amp; team tools — not for customers.</p>
+      </div>
+    </div>
     <form id="loginForm" autocomplete="current-password" method="post" action="/.netlify/functions/ops-login">
       <label for="password">Team password</label>
-      <div class="pw-wrap">
-        <input id="password" name="password" type="password" required autofocus placeholder="••••••••" autocomplete="current-password">
-        <button type="button" class="toggle" id="togglePw" aria-pressed="false" aria-controls="password">Show</button>
+      <div class="row">
+        <div class="pw-wrap">
+          <input id="password" name="password" type="password" required autofocus placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="toggle" id="togglePw" aria-pressed="false" aria-controls="password">Show</button>
+        </div>
+        <button type="submit" class="submit" id="btn">Sign in</button>
       </div>
-      <button type="submit" class="submit" id="btn">Sign in</button>
       <div class="err" id="err" role="alert"></div>
       <div class="ok" id="ok" role="status">Signed in — opening tools…</div>
     </form>
-    <p class="hint">Shared team password. Session lasts 30 days on this browser.</p>
+    <p class="hint">Shared team password · session 30 days on this browser</p>
   </main>
   <script>
     (function () {
@@ -187,7 +200,6 @@
 
       var params = new URLSearchParams(location.search);
       var next = params.get('next') || '/ops/forms/';
-      // Only allow relative next paths under /ops
       if (next.indexOf('//') !== -1 || next.charAt(0) !== '/') next = '/ops/forms/';
       if (next !== '/ops' && next.indexOf('/ops/') !== 0) next = '/ops/forms/';
 
@@ -212,7 +224,7 @@
         err.classList.remove('show');
         ok.classList.remove('show');
         btn.disabled = true;
-        btn.textContent = 'Signing in…';
+        btn.textContent = '…';
 
         var password = pw.value;
         if (!password) {
@@ -230,7 +242,7 @@
             return res.text().then(function (text) {
               var data = {};
               try { data = text ? JSON.parse(text) : {}; } catch (_) {}
-              return { res: res, data: data, text: text };
+              return { res: res, data: data };
             });
           })
           .then(function (r) {
@@ -238,10 +250,7 @@
               throw new Error((r.data && r.data.error) || ('Sign-in failed (' + r.res.status + ')'));
             }
             ok.classList.add('show');
-            // Short beat so the cookie is committed, then go
-            setTimeout(function () {
-              window.location.assign(next);
-            }, 80);
+            setTimeout(function () { window.location.assign(next); }, 80);
           })
           .catch(function (ex) {
             showErr((ex && ex.message) ? ex.message : 'Sign-in failed. Check your connection and try again.');
