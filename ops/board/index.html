@@ -1670,65 +1670,63 @@ function bootBoard(live) {
   }
 }
 
-/* ---------- P4: Drive PDF preview drawer ---------- */
+/* ---------- P4: Document open (Drive is source of truth) ----------
+   Domain-only PDFs usually show a BLANK white iframe (Google blocks embed /
+   wants Workspace login). So "Preview" opens Drive in a new tab — reliable —
+   and shows a small toast instead of a full-screen empty modal.
+*/
+function toast(msg) {
+  let el = document.getElementById("ops-toast");
+  if (!el) {
+    el = document.createElement("div");
+    el.id = "ops-toast";
+    el.setAttribute("role", "status");
+    el.style.cssText = "position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:10000;background:#1b2e1b;color:#fff;padding:12px 18px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:min(420px,92vw);text-align:center";
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.hidden = false;
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { el.hidden = true; }, 3200);
+}
 function openDrivePreview(fileUrl, title) {
-  let id = "";
-  const m = String(fileUrl || "").match(/\/d\/([a-zA-Z0-9_-]+)/) || String(fileUrl || "").match(/[?&]id=([a-zA-Z0-9_-]+)/);
-  if (m) id = m[1];
-  const overlay = document.getElementById("drv-prev");
-  const frame = document.getElementById("drv-prev-frame");
-  const ttl = document.getElementById("drv-prev-title");
-  const open = document.getElementById("drv-prev-open");
-  if (!overlay || !frame) {
-    window.open(fileUrl, "_blank", "noopener");
+  const url = fileUrl || "";
+  if (!url) { toast("No Drive link on this row."); return; }
+  // Always open Drive — works with domain sharing when signed into Google as MGS.
+  const w = window.open(url, "_blank", "noopener");
+  if (!w) {
+    toast("Pop-up blocked — use the magenta Drive button, or allow pop-ups for this site.");
     return;
   }
-  ttl.textContent = title || "Document preview";
-  open.href = fileUrl || "#";
-  // Domain-shared files often need the viewer signed into Google Workspace.
-  frame.src = id
-    ? ("https://drive.google.com/file/d/" + id + "/preview")
-    : (fileUrl || "about:blank");
-  overlay.hidden = false;
-  document.body.style.overflow = "hidden";
+  toast((title ? title + " — " : "") + "Opened in Google Drive (print from there).");
 }
 function closeDrivePreview() {
   const overlay = document.getElementById("drv-prev");
   const frame = document.getElementById("drv-prev-frame");
   if (frame) frame.src = "about:blank";
-  if (overlay) overlay.hidden = true;
+  if (overlay) { overlay.hidden = true; overlay.style.display = "none"; }
   document.body.style.overflow = "";
 }
 
-// Enhance Review cards: Preview button next to Drive links (P3/P4)
-const _origRenderRevBody = typeof renderRevBody === "function" ? renderRevBody : null;
-// Wire preview after first paint via event delegation
 document.addEventListener("click", (ev) => {
   const t = ev.target;
   if (!t || !t.closest) return;
   const prev = t.closest("[data-drv-preview]");
   if (prev) {
     ev.preventDefault();
-    openDrivePreview(prev.getAttribute("data-drv-preview"), prev.getAttribute("data-drv-title") || "Preview");
+    openDrivePreview(prev.getAttribute("data-drv-preview"), prev.getAttribute("data-drv-title") || "Document");
     return;
   }
-  if (t.id === "drv-prev-close" || (t.id === "drv-prev" && t === ev.target)) {
-    closeDrivePreview();
-  }
+  if (t.id === "drv-prev-close" || t.id === "drv-prev") closeDrivePreview();
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape") closeDrivePreview();
 });
 
 loadLiveBoard().then(bootBoard);
 </script>
 
-<div id="drv-prev" hidden style="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px" onclick="if(event.target===this)closeDrivePreview()">
-  <div style="background:#fff;border-radius:12px;width:min(960px,100%);height:min(90vh,900px);display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35)" onclick="event.stopPropagation()">
-    <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #e0e0e0">
-      <strong id="drv-prev-title" style="flex:1;font-size:14px">Preview</strong>
-      <a id="drv-prev-open" href="#" target="_blank" rel="noopener" style="font-size:13px;font-weight:700;color:#2e7d32">Open in Drive ↗</a>
-      <button type="button" id="drv-prev-close" onclick="closeDrivePreview()" style="border:0;background:#eee;border-radius:8px;padding:6px 10px;font-weight:700;cursor:pointer">Close</button>
-    </div>
-    <iframe id="drv-prev-frame" title="Drive preview" style="flex:1;width:100%;border:0;border-radius:0 0 12px 12px;background:#f5f5f5"></iframe>
-    <p style="margin:0;padding:8px 14px;font-size:11px;color:#666">If the preview is blank, sign into Google as an @mgscommunications.com account, or use <strong>Open in Drive</strong>. Embeds need domain access.</p>
-  </div>
-</div>
+<!-- Legacy drawer kept hidden; Preview now opens Drive in a new tab (domain PDFs blank iframes). -->
+<div id="drv-prev" hidden style="display:none"></div>
+<iframe id="drv-prev-frame" hidden title="" style="display:none"></iframe>
 
