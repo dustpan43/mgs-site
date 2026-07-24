@@ -31,3 +31,8 @@ mgs-30th-birthday-original.jpg
 ops/.gate-token*
 ops/*SECRET*
 
+
+# Allow Netlify function deps
+!package.json
+!package-lock.json
+
