@@ -76,3 +76,29 @@ POST same URL
 ## Fallback
 
 If Blobs is empty or offline, the board HTML still has an **embedded** `BOARD` so the page never goes blank. Live data wins when available.
+
+---
+
+## Blank board / broken engine (P2 guard)
+
+If `/ops/board/` shows only the logo + empty “snapshot” label and no KPIs/nav, the **engine JavaScript failed to parse** (not Blobs). Republishing BOARD data will not fix it — you need a git deploy of `ops/board/index.html`.
+
+**Before committing board engine changes:**
+
+```powershell
+cd C:\Users\team\Projects\MGS-Hub\website
+node scripts/check-ops-board.js
+```
+
+Exit `0` = safe to push. Exit `1` = SyntaxError (do not deploy).
+
+**Live data after boot (P1):** Overview, Review, Money, Tasks, and rail badges re-paint from Blobs when the fetch succeeds. Stamp shows `· LIVE`. If stamp is LIVE but Overview still looks like an old embedded day, the re-bind is broken — check console.
+
+**Quick triage**
+
+| Symptom | Cause | Fix |
+|---------|--------|-----|
+| Empty shell, console SyntaxError | Broken `index.html` script | Fix strings, `node scripts/check-ops-board.js`, git push |
+| 401 on live fetch | Not logged in | Sign in at `/ops/login/` (team password) |
+| 404 no snapshot | Blobs empty | Chief POST via `publish_ops_board.py` |
+| LIVE stamp, wrong Overview | P1 re-bind regression | Rebuild derived + `renderOverview` in boot path |
