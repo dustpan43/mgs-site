@@ -1118,8 +1118,7 @@ function revArchHTML(list) {
         (label ? '<span class="arc-doc">' + esc(label) + "</span>" : "") +
         (r.amount && r.amount !== "—" ? '<span class="mono">' + esc(r.amount) + "</span>" : "") +
         '<span class="arc-when">printed ' + esc(r.done) + (r.doneAge > 0 ? " · " + r.doneAge + "d ago" : " · today") + "</span>" +
-        '<a class="arc-open" href="' + esc(r.url) + '" target="_blank" rel="noopener">Drive ↗</a>
-        "</div>";
+        '<a class="arc-open" href="' + esc(r.url) + '" target="_blank" rel="noopener">Drive ↗</a></div>';
     }).join("") + "</div></section>";
 }
 
@@ -1139,8 +1138,7 @@ function revRow(r, open) {
     '<span class="rrow-staged">staged ' + esc(r.staged) + "</span>" +
     '<span class="rrow-caret" aria-hidden="true">▼</span>' +
     "</button>" +
-    '<a class="rrow-drive" href="' + esc(r.url) + '" target="_blank" rel="noopener" title="Open in Drive — review &amp; print">Drive ↗</a>
-    "</div>" +
+    '<a class="rrow-drive" href="' + esc(r.url) + '" target="_blank" rel="noopener" title="Open in Drive — review &amp; print">Drive ↗</a></div>' +
     '<ul class="rev-check rrow-check">' + String(r.check).split(" · ").map(c => "<li>" + esc(c) + "</li>").join("") + "</ul>" +
     "</div>";
 }
