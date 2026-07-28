@@ -57,19 +57,39 @@ When Chief finishes a morning reconcile:
 ## Commands
 
 ```powershell
-# Publish BOARD JSON (after building the object to a file)
-$env:OPS_BOARD_PUBLISH_SECRET = "…"   # from Netlify env
+# Full BOARD publish (boot / shutdown — after building the object to a file)
+$env:OPS_BOARD_PUBLISH_SECRET = "…"   # from Netlify env or .gate-token-GENERATED.txt
 python $env:USERPROFILE\.claude\mgs-hub\helpers\publish_ops_board.py C:\path\board.json
+```
+
+```powershell
+# Mid-day: stage ONE Review-queue doc (no git, no full rebuild)
+python $env:USERPROFILE\.claude\mgs-hub\helpers\stage_review_doc.py `
+  --customer "Acme Co" `
+  --doc "Sales Invoice MG26-###" `
+  --amount '$100.00' `
+  --file-id "DRIVE_FILE_ID" `
+  --check "What Angela should verify" `
+  --staged "Tue 7/28"
+# Already printed at counter → add:  --done "Tue 7/28"
 ```
 
 ```text
 GET  https://mgscommunications.com/.netlify/functions/ops-board
-     (browser already signed in — cookie sent automatically)
+     Cookie: mgs_ops_session=<OPS_GATE_TOKEN>  (browser after login, or helper)
 
 POST same URL
      Authorization: Bearer <OPS_BOARD_PUBLISH_SECRET>
      body: { … full BOARD … }
 ```
+
+### Stage a Review doc (print queue)
+
+1. PDF filed + Drive domain-only share.  
+2. `stage_review_doc.py` (above) → hard-refresh `/ops/board/` → **Review** tab.  
+3. Optional one-line team@ heads-up.  
+
+**Never** edit HTML / git-push for a new invoice. **Counter:** print first (open PDF); board stage second (`--done` if already printed).
 
 ---
 
