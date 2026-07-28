@@ -2,6 +2,9 @@
   "name": "mgs-site",
   "private": true,
   "description": "MGS Communications website — Netlify host",
+  "scripts": {
+    "check:ops-board": "node scripts/check-ops-board.js"
+  },
   "dependencies": {
     "@netlify/blobs": "^8.1.0"
   }
