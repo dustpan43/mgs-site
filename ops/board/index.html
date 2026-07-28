@@ -1006,13 +1006,17 @@ const sevClass = st => st === "PARTIAL" ? "sev-crit" : (st === "VERIFY" || st ==
    The "check" string splits on " · " into checklist bullets — write notes
    with that separator and the checklist builds itself. */
 /* REV = the ACTIVE queue (no done date) — tiles, badges, and the Overview
-   banner all count only these; printed rows live in REV_ARCH below */
-const REV = (BOARD.reviewQueue || []).filter(r => !r.done).sort((a, b) => ((a.flag === "hold") - (b.flag === "hold")));
-const revTotal = REV.reduce((s, r) => { const n = parseFloat(String(r.amount).replace(/[$,]/g, "")); return s + (isFinite(n) ? n : 0); }, 0);
-const revHolds = REV.filter(r => r.flag === "hold").length;
+   banner all count only these; printed rows live in REV_ARCH below.
+   P1: these are rebuilt from live BOARD after Blobs fetch (rebuildDerived). */
+let REV = [];
+let revTotal = 0;
+let revHolds = 0;
+let TODAY0 = new Date();
+let REV_ROWS = [];
+let REV_GROUPS = [];
+let REV_ARCH = [];
+const revState = { type: "ALL", q: "" };
 
-/* v7 time helpers — "today" comes from the snapshot day, same as the timeline */
-const TODAY0 = (() => { const d = new Date(BOARD.snapshot.day.replace(/^[A-Za-z]+,\s*/, "")); d.setHours(0, 0, 0, 0); return d; })();
 const DOW3 = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const fmtMD = d => DOW3[d.getDay()] + " " + (d.getMonth() + 1) + "/" + d.getDate();
 const dayDiff = (a, b) => Math.round((a - b) / 864e5);
@@ -1040,23 +1044,28 @@ function sittingChip(staged) {
   return n >= 3 ? '<span class="chip check">sitting ' + n + 'd</span>' : "";
 }
 
-/* v7 grouping — type + packages are DERIVED from the same simple reviewQueue
-   rows the republish sessions have always fed: doc-string prefix → type
-   ("Sales Invoice" / "Rental Invoice" / "Repair Invoice"), a "Unit List"
-   attaches to the invoice sharing its MG number, and a standalone unit list
-   follows its customer's other docs (or defaults to a rental). The optional
-   needBy field (ISO date) drives the countdown; rows without it render fine. */
-const revState = { type: "ALL", q: "" };
-const REV_ROWS = (BOARD.reviewQueue || []).map((r, i) => {
-  const doc = String(r.doc || "");
-  return Object.assign({}, r, {
-    doc, i,
-    mg: (doc.match(/MG\d{2}-\d+(?:[–-]\d+)*/) || [null])[0],
-    isUnit: /unit list/i.test(doc),
-    type: /^sales/i.test(doc) ? "sale" : /^rental/i.test(doc) ? "rental" : /^repair/i.test(doc) ? "repair" : null
+/** Recompute Review-derived structures + snapshot "today" from current BOARD. */
+function rebuildDerived() {
+  const snapDay = (BOARD.snapshot && BOARD.snapshot.day) || "";
+  const d0 = new Date(String(snapDay).replace(/^[A-Za-z]+,\s*/, ""));
+  d0.setHours(0, 0, 0, 0);
+  TODAY0 = isNaN(d0.getTime()) ? new Date() : d0;
+  TODAY0.setHours(0, 0, 0, 0);
+
+  REV = (BOARD.reviewQueue || []).filter(r => !r.done).sort((a, b) => ((a.flag === "hold") - (b.flag === "hold")));
+  revTotal = REV.reduce((s, r) => { const n = parseFloat(String(r.amount).replace(/[$,]/g, "")); return s + (isFinite(n) ? n : 0); }, 0);
+  revHolds = REV.filter(r => r.flag === "hold").length;
+
+  REV_ROWS = (BOARD.reviewQueue || []).map((r, i) => {
+    const doc = String(r.doc || "");
+    return Object.assign({}, r, {
+      doc, i,
+      mg: (doc.match(/MG\d{2}-\d+(?:[–-]\d+)*/) || [null])[0],
+      isUnit: /unit list/i.test(doc),
+      type: /^sales/i.test(doc) ? "sale" : /^rental/i.test(doc) ? "rental" : /^repair/i.test(doc) ? "repair" : null
+    });
   });
-});
-const REV_GROUPS = (() => {
+
   const byCust = new Map();
   REV_ROWS.filter(r => !r.done).forEach(r => { if (!byCust.has(r.customer)) byCust.set(r.customer, []); byCust.get(r.customer).push(r); });
   const groups = [];
@@ -1087,20 +1096,17 @@ const REV_GROUPS = (() => {
     groups.push({ customer, pkgs, key: pkgs[0].key });
   });
   groups.sort((a, b) => a.key.localeCompare(b.key));
-  return groups;
-})();
+  REV_GROUPS = groups;
 
-/* archive (v7.5) — printed/approved docs keep their Drive link for ~a month
-   (Angela's ask). Rows older than 31 days stop rendering; republish sessions
-   delete those rows for real. Newest prints first. */
-const REV_ARCH = REV_ROWS.filter(r => r.done).map(r => {
-  const d = stagedDate(r.done);
-  return Object.assign(r, {
-    doneAge: d ? dayDiff(TODAY0, d) : 0,
-    doneISO: (d && isoStr(d)) || "",
-    ptype: r.type || ((REV_ROWS.find(x => !x.isUnit && x.mg && x.mg === r.mg) || {}).type) || "rental"
-  });
-}).filter(r => r.doneAge <= 31).sort((a, b) => b.doneISO.localeCompare(a.doneISO));
+  REV_ARCH = REV_ROWS.filter(r => r.done).map(r => {
+    const d = stagedDate(r.done);
+    return Object.assign(r, {
+      doneAge: d ? dayDiff(TODAY0, d) : 0,
+      doneISO: (d && isoStr(d)) || "",
+      ptype: r.type || ((REV_ROWS.find(x => !x.isUnit && x.mg && x.mg === r.mg) || {}).type) || "rental"
+    });
+  }).filter(r => r.doneAge <= 31).sort((a, b) => b.doneISO.localeCompare(a.doneISO));
+}
 
 function revTypeChip(r) {
   return r.isUnit ? '<span class="chip t-unit">Unit list</span>' :
@@ -1232,11 +1238,7 @@ function reviewBanner() {
     '<span class="go">Open the Review tab →</span></button></section>';
 }
 
-/* ---------- snapshot stamp (lives in the rail as of v7.1) ---------- */
-$("#stamp-day").textContent = BOARD.snapshot.day;
-$("#stamp-time").textContent = BOARD.snapshot.time + " · " + BOARD.snapshot.label;
-
-/* ---------- sidebar rail (v7 — replaces the pill tabs) ----------
+/* ---------- snapshot stamp + sidebar rail (v7; P1 re-bindable) ----------
    One item per view: domain color tick + inline SVG icon + label + count
    badges (Review = docs waiting, Rentals = missing-gear items). Folds to a
    56px icon rail (state per device in localStorage); <=640px it becomes an
@@ -1253,18 +1255,12 @@ const ICO = {
 };
 const VIEWS = [
   { id: "overview", label: "Overview", dom: "home" },
-  { id: "review", label: "Review", dom: "rev", n: REV.length, ncls: "rev", ntitle: "documents waiting on review" },
-  { id: "rentals", label: "Rentals", dom: "rent", n: (BOARD.missing || []).length, ncls: "alert", ntitle: "missing-gear items" },
+  { id: "review", label: "Review", dom: "rev", ncls: "rev", ntitle: "documents waiting on review" },
+  { id: "rentals", label: "Rentals", dom: "rent", ncls: "alert", ntitle: "missing-gear items" },
   { id: "money", label: "Money", dom: "money" },
   { id: "tasks", label: "Tasks", dom: "task" },
   { id: "activity", label: "Activity", dom: "sig" }
 ];
-$("#rail-nav").innerHTML = VIEWS.map(v =>
-  '<button class="ritem dom-' + v.dom + '" role="tab" id="tab-' + v.id + '" aria-controls="view-' + v.id + '" aria-selected="false" title="' + esc(v.label) + '">' +
-  '<span class="rtick" aria-hidden="true"></span>' + ICO[v.dom] +
-  '<span class="rlabel">' + esc(v.label) + "</span>" +
-  (v.n ? '<span class="rn mono ' + (v.ncls || "") + '"' + (v.ntitle ? ' title="' + esc(v.ntitle) + '"' : "") + ">" + v.n + "</span>" : "") +
-  "</button>").join("");
 
 const shellEl = $("#shell"), menuBtn = $("#menu-btn");
 const closeDrawer = () => { shellEl.classList.remove("drawer"); menuBtn.setAttribute("aria-expanded", "false"); };
@@ -1272,14 +1268,34 @@ let activeView = "overview";
 function show(viewId) {
   activeView = viewId;
   VIEWS.forEach(v => {
-    $("#view-" + v.id).hidden = v.id !== viewId;
-    $("#tab-" + v.id).setAttribute("aria-selected", String(v.id === viewId));
+    const panel = $("#view-" + v.id);
+    const tab = $("#tab-" + v.id);
+    if (panel) panel.hidden = v.id !== viewId;
+    if (tab) tab.setAttribute("aria-selected", String(v.id === viewId));
   });
   closeDrawer();
   if (history.replaceState) history.replaceState(null, "", "#" + viewId);
   window.scrollTo({ top: 0 });
 }
-VIEWS.forEach(v => $("#tab-" + v.id).addEventListener("click", () => show(v.id)));
+
+function renderRailNav() {
+  const counts = {
+    review: REV.length,
+    rentals: (BOARD.missing || []).length
+  };
+  $("#rail-nav").innerHTML = VIEWS.map(v => {
+    const n = counts[v.id];
+    return '<button class="ritem dom-' + v.dom + '" role="tab" id="tab-' + v.id + '" aria-controls="view-' + v.id + '" aria-selected="' + String(v.id === activeView) + '" title="' + esc(v.label) + '">' +
+      '<span class="rtick" aria-hidden="true"></span>' + ICO[v.dom] +
+      '<span class="rlabel">' + esc(v.label) + "</span>" +
+      (n ? '<span class="rn mono ' + (v.ncls || "") + '"' + (v.ntitle ? ' title="' + esc(v.ntitle) + '"' : "") + ">" + n + "</span>" : "") +
+      "</button>";
+  }).join("");
+  VIEWS.forEach(v => {
+    const tab = $("#tab-" + v.id);
+    if (tab) tab.addEventListener("click", () => show(v.id));
+  });
+}
 
 /* fold state — per device via localStorage; the <=640px drawer ignores it */
 const foldBtn = $("#rail-fold");
@@ -1306,7 +1322,7 @@ menuBtn.addEventListener("click", () => {
 $("#rail-scrim").addEventListener("click", closeDrawer);
 addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
 
-/* ---------- overview ---------- */
+/* ---------- overview (P1: re-renderable from live BOARD) ---------- */
 /* v5: each KPI is mapped to a business domain (color + icon) — derived from
    its go-target/tone/label so republish sessions still edit data only. */
 const kpiDom = k =>
@@ -1315,72 +1331,79 @@ const kpiDom = k =>
   k.go === "tasks" ? "task" :
   k.go === "review" ? "rev" :
   /signature/i.test(k.label) ? "sig" : "money";
-/* (ICO icon set is defined up at the rail block — shared with the KPI cards) */
-$("#view-overview").innerHTML =
-  '<section aria-label="At a glance"><div class="kpis">' +
-  BOARD.kpis.map((k, i) =>
-    '<button class="card kpi ' + k.tone + ' dom-' + kpiDom(k) + '" data-kpi="' + i + '">' +
-    '<span class="label">' + ICO[kpiDom(k)] + esc(k.label) + "</span>" +
-    '<span class="value' + (k.mono ? " mono" : "") + '">' + esc(k.value) + (k.suffix ? " <small>" + esc(k.suffix) + "</small>" : "") + "</span>" +
-    '<span class="note">' + esc(k.note) + "</span>" +
-    '<span class="go">Open ' + esc(k.go) + " →</span></button>").join("") +
-  "</div></section>" +
 
-  reviewBanner() +
+function renderOverview() {
+  const missing = BOARD.missing || [];
+  const days = BOARD.days || [];
+  const links = BOARD.links || [];
+  const kpis = BOARD.kpis || [];
+  $("#view-overview").innerHTML =
+    '<section aria-label="At a glance"><div class="kpis">' +
+    kpis.map((k, i) =>
+      '<button class="card kpi ' + k.tone + ' dom-' + kpiDom(k) + '" data-kpi="' + i + '">' +
+      '<span class="label">' + ICO[kpiDom(k)] + esc(k.label) + "</span>" +
+      '<span class="value' + (k.mono ? " mono" : "") + '">' + esc(k.value) + (k.suffix ? " <small>" + esc(k.suffix) + "</small>" : "") + "</span>" +
+      '<span class="note">' + esc(k.note) + "</span>" +
+      '<span class="go">Open ' + esc(k.go) + " →</span></button>").join("") +
+    "</div></section>" +
 
-  '<section aria-label="Missing gear"><div class="alert card"><div class="alert-head">' +
-  '<span class="t">Missing gear from the 7/7 returns</span>' +
-  '<span class="s">3 final invoices are on hold until these come back (or get charged)</span></div>' +
-  BOARD.missing.map(m =>
-    '<div class="alert-row"><span class="who">' + esc(m.who) + '</span>' +
-    '<span class="what">' + m.what + ' <span class="aside">' + esc(m.aside) + "</span></span></div>").join("") +
-  "</div></section>" +
+    reviewBanner() +
 
-  '<section aria-label="This week"><div class="sec-head"><span class="tick"></span><h2>The next three days</h2></div><div class="days">' +
-  BOARD.days.map(d =>
-    '<div class="card day' + (d.today ? " today" : "") + '"><div class="day-head"><span class="dow">' + esc(d.dow) + "</span>" +
-    (d.badge ? '<span class="badge">' + esc(d.badge) + "</span>" : "") + "</div><ul>" +
-    d.items.map(it => "<li" + (it.heavy ? ' class="heavy"' : "") + ">" + esc(it.t) + "</li>").join("") +
-    "</ul></div>").join("") +
-  "</div></section>" +
+    (missing.length
+      ? '<section aria-label="Missing gear"><div class="alert card"><div class="alert-head">' +
+        '<span class="t">Missing gear</span>' +
+        '<span class="s">chase at return / charge at close-out</span></div>' +
+        missing.map(m =>
+          '<div class="alert-row"><span class="who">' + esc(m.who) + '</span>' +
+          '<span class="what">' + m.what + ' <span class="aside">' + esc(m.aside || "") + "</span></span></div>").join("") +
+        "</div></section>"
+      : "") +
 
-  '<section aria-label="Open the sheets"><div class="sec-head"><span class="tick"></span><h2>Open the sheets</h2></div><div class="links">' +
-  BOARD.links.map(l =>
-    '<a class="card linkcard" href="' + l.url + '" target="_blank" rel="noopener"><span class="name">' + l.name +
-    '</span><span class="tabs2">' + esc(l.tabs) + '</span><span class="go">Open in Google Sheets →</span></a>').join("") +
-  '</div><p class="footnote">Customer folders live on the shop machine: <span class="mono">Desktop\\MGS Hub\\Customers\\&lt;name&gt;</span> — a hosted page can\'t open local folders.</p></section>';
+    '<section aria-label="This week"><div class="sec-head"><span class="tick"></span><h2>The next three days</h2></div><div class="days">' +
+    days.map(d =>
+      '<div class="card day' + (d.today ? " today" : "") + '"><div class="day-head"><span class="dow">' + esc(d.dow) + "</span>" +
+      (d.badge ? '<span class="badge">' + esc(d.badge) + "</span>" : "") + "</div><ul>" +
+      (d.items || []).map(it => "<li" + (it.heavy ? ' class="heavy"' : "") + ">" + esc(it.t) + "</li>").join("") +
+      "</ul></div>").join("") +
+    "</div></section>" +
 
-document.querySelectorAll("[data-kpi]").forEach(btn => btn.addEventListener("click", () => {
-  const k = BOARD.kpis[+btn.dataset.kpi];
-  show(k.go);
-  if (k.go === "rentals" && k.preset) { rState.status = k.preset; renderRentals(); }
-}));
-const revGo = $("#rev-go");
-if (revGo) revGo.addEventListener("click", () => show("review"));
+    '<section aria-label="Open the sheets"><div class="sec-head"><span class="tick"></span><h2>Open the sheets</h2></div><div class="links">' +
+    links.map(l =>
+      '<a class="card linkcard" href="' + l.url + '" target="_blank" rel="noopener"><span class="name">' + l.name +
+      '</span><span class="tabs2">' + esc(l.tabs) + '</span><span class="go">Open in Google Sheets →</span></a>').join("") +
+    '</div><p class="footnote">Customer folders live on the shop machine: <span class="mono">Desktop\\MGS Hub\\Customers\\&lt;name&gt;</span> — a hosted page can\'t open local folders.</p></section>';
 
-/* v5: KPI numbers count up on load (skipped for reduced-motion). Only the
-   leading numeric text node animates — suffixes like <small> stay put. */
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  document.querySelectorAll(".kpi .value").forEach(el => {
-    const tn = el.firstChild;
-    if (!tn || tn.nodeType !== 3) return;
-    const m = /^(\$?)([\d,]+(?:\.(\d+))?)(\+?)(\s*)$/.exec(tn.textContent);
-    if (!m) return;
-    const target = parseFloat(m[2].replace(/,/g, ""));
-    if (!isFinite(target)) return;
-    const dec = m[3] ? m[3].length : 0, t0 = performance.now(), dur = 550;
-    const step = t => {
-      const p = Math.min(1, (t - t0) / dur), v = target * (1 - Math.pow(1 - p, 3));
-      tn.textContent = m[1] + v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[4] + m[5];
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  });
+  document.querySelectorAll("[data-kpi]").forEach(btn => btn.addEventListener("click", () => {
+    const k = BOARD.kpis[+btn.dataset.kpi];
+    if (!k) return;
+    show(k.go);
+    if (k.go === "rentals" && k.preset) { rState.status = k.preset; renderRentals(); }
+  }));
+  const revGo = $("#rev-go");
+  if (revGo) revGo.addEventListener("click", () => show("review"));
+
+  /* KPI count-up (skipped for reduced-motion) */
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll(".kpi .value").forEach(el => {
+      const tn = el.firstChild;
+      if (!tn || tn.nodeType !== 3) return;
+      const m = /^(\$?)([\d,]+(?:\.(\d+))?)(\+?)(\s*)$/.exec(tn.textContent);
+      if (!m) return;
+      const target = parseFloat(m[2].replace(/,/g, ""));
+      if (!isFinite(target)) return;
+      const dec = m[3] ? m[3].length : 0, t0 = performance.now(), dur = 550;
+      const step = t => {
+        const p = Math.min(1, (t - t0) / dur), v = target * (1 - Math.pow(1 - p, 3));
+        tn.textContent = m[1] + v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[4] + m[5];
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
 }
 
 /* ---------- rentals view ---------- */
 const rState = { status: "ALL", customer: "ALL", q: "", outSort: 1, upSort: 1 };
-const customers = [...new Set(BOARD.rentalsOut.concat(BOARD.upcoming).map(r => r.customer))].sort();
 
 $("#view-rentals").innerHTML =
   '<section aria-label="Rental timeline"><div class="sec-head"><span class="tick"></span><h2>Next three weeks</h2>' +
@@ -1409,7 +1432,7 @@ function renderRentalFilters() {
       (s !== "ALL" && counts[s] ? '<span class="fc">' + counts[s] + "</span>" : "") + "</button>").join("") +
     '<span class="fsep"></span>' +
     '<select class="fsel" id="cust-sel" aria-label="Filter by customer"><option value="ALL">All customers</option>' +
-    customers.map(c => '<option value="' + esc(c) + '"' + (rState.customer === c ? " selected" : "") + ">" + esc(c) + "</option>").join("") + "</select>" +
+    [...new Set((BOARD.rentalsOut || []).concat(BOARD.upcoming || []).map(r => r.customer))].sort().map(c => '<option value="' + esc(c) + '"' + (rState.customer === c ? " selected" : "") + ">" + esc(c) + "</option>").join("") + "</select>" +
     '<input class="ftext" id="rq" type="search" placeholder="Search event, MG#, gear…" value="' + esc(rState.q) + '" aria-label="Search rentals">' +
     ((rState.status !== "ALL" || rState.customer !== "ALL" || rState.q) ? '<button class="fclear" id="rclear">Clear</button>' : "");
   document.querySelectorAll("#rental-filters [data-status]").forEach(b =>
@@ -1519,37 +1542,40 @@ function renderTimeline() {
   el.innerHTML = h;
 }
 
-/* ---------- money view ---------- */
+/* ---------- money view (P1: full shell from live BOARD) ---------- */
 const mState = { state: "ALL" };
-$("#view-money").innerHTML =
-  '<section aria-label="Money filters"><div class="card filters" id="money-filters"></div></section>' +
-  '<section aria-label="Money"><div class="sec-head"><span class="tick"></span><h2>Money</h2>' +
-  '<span class="hint">from the MG26 ledger + 2026 Payments register</span></div>' +
-  '<div class="money"><div class="card tablewrap"><table><thead><tr><th>MG #</th><th>Customer</th><th>Event</th>' +
-  '<th class="num">Total</th><th>State</th><th>Where it stands</th></tr></thead><tbody id="money-body"></tbody>' +
-  '<tfoot><tr><td colspan="3">' + esc(BOARD.moneyTotalLabel) + '</td><td class="num mono">' + esc(BOARD.moneyTotal) + "</td><td></td><td></td></tr></tfoot>" +
-  '</table><div class="empty" id="money-empty" hidden>No invoices match this filter.</div></div>' +
-  '<div class="card sidecard">' +
-  '<div class="block ytd"><h3>2026 card payments YTD</h3><span class="big mono">' + esc(BOARD.ytd.amount) + '</span>' +
-  '<span class="footnote">' + esc(BOARD.ytd.note) + "</span></div>" +
-  '<div class="block"><h3>Out for signature</h3>' +
-  BOARD.signature.map(s => '<div class="pipe-row"><span>' + esc(s.name) + '</span><span class="amt mono">' + esc(s.amt) + '</span></div>' +
-    '<div class="pipe-row"><span class="st">' + esc(s.st) + "</span></div>").join("") + "</div>" +
-  '<div class="block"><h3>Kenny cash timing</h3>' +
-  BOARD.kennyCash.map(s => '<div class="pipe-row"><span>' + esc(s.name) + '</span><span class="amt mono">' + esc(s.amt) + "</span></div>").join("") + "</div>" +
-  '<div class="block"><h3>Ledger rows needing back-fill</h3><span class="footnote">' + esc(BOARD.backfill) + "</span></div>" +
-  "</div></div></section>";
-
 const M_STATES = [["ALL", "All"], ["ready", "Ready to collect"], ["hold", "On hold"], ["check", "Verify first"], ["out", "Bills later"]];
 function renderMoney() {
+  const ytd = BOARD.ytd || { amount: "—", note: "" };
+  const signature = BOARD.signature || [];
+  const kennyCash = BOARD.kennyCash || [];
+  $("#view-money").innerHTML =
+    '<section aria-label="Money filters"><div class="card filters" id="money-filters"></div></section>' +
+    '<section aria-label="Money"><div class="sec-head"><span class="tick"></span><h2>Money</h2>' +
+    '<span class="hint">from the MG26 ledger + 2026 Payments register</span></div>' +
+    '<div class="money"><div class="card tablewrap"><table><thead><tr><th>MG #</th><th>Customer</th><th>Event</th>' +
+    '<th class="num">Total</th><th>State</th><th>Where it stands</th></tr></thead><tbody id="money-body"></tbody>' +
+    '<tfoot><tr><td colspan="3">' + esc(BOARD.moneyTotalLabel || "Total") + '</td><td class="num mono">' + esc(BOARD.moneyTotal || "") + "</td><td></td><td></td></tr></tfoot>" +
+    '</table><div class="empty" id="money-empty" hidden>No invoices match this filter.</div></div>' +
+    '<div class="card sidecard">' +
+    '<div class="block ytd"><h3>2026 card payments YTD</h3><span class="big mono">' + esc(ytd.amount) + '</span>' +
+    '<span class="footnote">' + esc(ytd.note) + "</span></div>" +
+    '<div class="block"><h3>Out for signature</h3>' +
+    signature.map(s => '<div class="pipe-row"><span>' + esc(s.name) + '</span><span class="amt mono">' + esc(s.amt) + '</span></div>' +
+      '<div class="pipe-row"><span class="st">' + esc(s.st) + "</span></div>").join("") + "</div>" +
+    '<div class="block"><h3>Kenny cash timing</h3>' +
+    kennyCash.map(s => '<div class="pipe-row"><span>' + esc(s.name) + '</span><span class="amt mono">' + esc(s.amt) + "</span></div>").join("") + "</div>" +
+    '<div class="block"><h3>Ledger rows needing back-fill</h3><span class="footnote">' + esc(BOARD.backfill || "") + "</span></div>" +
+    "</div></div></section>";
+
   const counts = {};
-  BOARD.moneyRows.forEach(r => counts[r.state] = (counts[r.state] || 0) + 1);
+  (BOARD.moneyRows || []).forEach(r => counts[r.state] = (counts[r.state] || 0) + 1);
   $("#money-filters").innerHTML = M_STATES.map(([k, lbl]) =>
     '<button class="fchip" data-mstate="' + k + '" aria-pressed="' + String(mState.state === k) + '">' + lbl +
     (k !== "ALL" && counts[k] ? '<span class="fc">' + counts[k] + "</span>" : "") + "</button>").join("");
   document.querySelectorAll("[data-mstate]").forEach(b =>
     b.addEventListener("click", () => { mState.state = b.dataset.mstate; renderMoney(); }));
-  const rows = BOARD.moneyRows.filter(r => mState.state === "ALL" || r.state === mState.state);
+  const rows = (BOARD.moneyRows || []).filter(r => mState.state === "ALL" || r.state === mState.state);
   $("#money-body").innerHTML = rows.map(r =>
     '<tr class="' + (r.state === "hold" ? "sev-crit" : r.state === "check" ? "sev-warn" : "") + '">' +
     '<td class="mgnum mono">' + esc(r.mg) + "</td><td>" + esc(r.customer) + "</td><td>" + esc(r.event) +
@@ -1557,22 +1583,23 @@ function renderMoney() {
   $("#money-empty").hidden = rows.length > 0;
 }
 
-/* ---------- tasks view ---------- */
+/* ---------- tasks view (P1: shell + rows from live BOARD) ---------- */
 const tState = { who: "ALL", overdueOnly: false };
-$("#view-tasks").innerHTML =
-  '<section aria-label="Task counts"><div class="task-counts">' +
-  BOARD.taskCounts.map(c => '<div class="card tc"><span class="who">' + esc(c.who) + '</span><span class="n mono">' + c.n + "</span></div>").join("") +
-  "</div></section>" +
-  '<section aria-label="Tasks"><div class="sec-head"><span class="tick"></span><h2>Needs attention</h2>' +
-  '<span class="hint">curated from 55 open tasks — overdue and this week first</span></div>' +
-  '<div class="card filters" id="task-filters"></div>' +
-  '<div class="card tablewrap"><table><thead><tr><th>ID</th><th>Needs attention</th><th>Who</th><th>Due</th></tr></thead>' +
-  '<tbody id="task-body"></tbody></table><div class="empty" id="task-empty" hidden>No tasks match this filter.</div></div></section>';
-
 function renderTasks() {
+  const counts = BOARD.taskCounts || [];
+  $("#view-tasks").innerHTML =
+    '<section aria-label="Task counts"><div class="task-counts">' +
+    counts.map(c => '<div class="card tc"><span class="who">' + esc(c.who) + '</span><span class="n mono">' + c.n + "</span></div>").join("") +
+    "</div></section>" +
+    '<section aria-label="Tasks"><div class="sec-head"><span class="tick"></span><h2>Needs attention</h2>' +
+    '<span class="hint">curated open tasks — overdue and this week first</span></div>' +
+    '<div class="card filters" id="task-filters"></div>' +
+    '<div class="card tablewrap"><table><thead><tr><th>ID</th><th>Needs attention</th><th>Who</th><th>Due</th></tr></thead>' +
+    '<tbody id="task-body"></tbody></table><div class="empty" id="task-empty" hidden>No tasks match this filter.</div></div></section>';
+
   const whoCounts = {};
-  BOARD.tasks.forEach(t => whoCounts[t.who] = (whoCounts[t.who] || 0) + 1);
-  const overdueN = BOARD.tasks.filter(t => t.dueClass === "overdue").length;
+  (BOARD.tasks || []).forEach(t => whoCounts[t.who] = (whoCounts[t.who] || 0) + 1);
+  const overdueN = (BOARD.tasks || []).filter(t => t.dueClass === "overdue").length;
   $("#task-filters").innerHTML =
     ["ALL", "Dustin", "Angela", "Missy"].map(w =>
       '<button class="fchip" data-who="' + w + '" aria-pressed="' + String(tState.who === w) + '">' + (w === "ALL" ? "Everyone" : w) +
@@ -1581,10 +1608,11 @@ function renderTasks() {
     '<button class="fchip" id="t-over" aria-pressed="' + String(tState.overdueOnly) + '">Overdue only<span class="fc">' + overdueN + "</span></button>";
   document.querySelectorAll("[data-who]").forEach(b =>
     b.addEventListener("click", () => { tState.who = b.dataset.who; renderTasks(); }));
-  $("#t-over").addEventListener("click", () => { tState.overdueOnly = !tState.overdueOnly; renderTasks(); });
+  const tover = $("#t-over");
+  if (tover) tover.addEventListener("click", () => { tState.overdueOnly = !tState.overdueOnly; renderTasks(); });
 
   const order = { overdue: 0, today: 1, soon: 2, none: 3 };
-  const rows = BOARD.tasks
+  const rows = (BOARD.tasks || [])
     .filter(t => (tState.who === "ALL" || t.who === tState.who) && (!tState.overdueOnly || t.dueClass === "overdue"))
     .sort((a, b) => (order[a.dueClass] - order[b.dueClass]) || (a.due || "9999").localeCompare(b.due || "9999"));
   $("#task-body").innerHTML = rows.map(t =>
@@ -1634,12 +1662,20 @@ async function loadLiveBoard() {
 
 function bootBoard(live) {
   try {
-    renderReview(); renderRentals(); renderTimeline(); renderMoney(); renderTasks(); renderActivity();
+    rebuildDerived();
+    renderRailNav();
+    renderOverview();
+    renderReview();
+    renderRentals();
+    renderTimeline();
+    renderMoney();
+    renderTasks();
+    renderActivity();
   } catch (e) {
     console.error("[ops-board] render error", e);
   }
   const hash = (location.hash || "").replace("#", "");
-  show(VIEWS.some(v => v.id === hash) ? hash : "overview");
+  show(VIEWS.some(v => v.id === hash) ? hash : (activeView || "overview"));
   // Stamp sidebar if elements exist
   try {
     if (BOARD.snapshot) {
@@ -1721,7 +1757,10 @@ document.addEventListener("keydown", (ev) => {
   if (ev.key === "Escape") closeDrivePreview();
 });
 
-loadLiveBoard().then(bootBoard);
+/* Paint embedded BOARD immediately, then re-paint fully if live Blobs load succeeds. */
+rebuildDerived();
+bootBoard(false);
+loadLiveBoard().then(ok => { if (ok) bootBoard(true); });
 </script>
 
 <!-- Legacy drawer kept hidden; Preview now opens Drive in a new tab (domain PDFs blank iframes). -->
