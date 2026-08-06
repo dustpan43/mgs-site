@@ -9,7 +9,8 @@ Private tools for Missy / Angela / Dustin. **Not** linked from the public nav. *
 | `/ops/` | Hub landing |
 | `/ops/login/` | Password gate |
 | `/ops/board/` | **Operations Board** (live snapshot dashboard) |
-| `/ops/forms/` | **Form Station** (v1.23.0 master copy) |
+| `/ops/forms/` | **Form Station moved notice** (F5 flip 8/6 — Hub app is the document creator) |
+| `/ops/forms/classic/` | **Old Form Station** v1.23.0 (bedding-in escape hatch only) |
 
 ### Operations Board refresh (LIVE — no git for data)
 
@@ -47,13 +48,13 @@ netlify env:set OPS_GATE_PASSWORD "your-shared-password"
 netlify env:set OPS_GATE_TOKEN "the-long-random-token"
 ```
 
-## Updating Form Station
+## Updating Form Station (classic)
 
 1. Edit master: `MGS Hub\Operations Hub\Form Station\mgs-form-station.html`
-2. Copy to `website/ops/forms/index.html` (keep noindex meta)
+2. Copy to `website/ops/forms/classic/index.html` (keep noindex meta) — **not** the notice page
 3. Commit + push `main` → Netlify ~60s
-4. Still email/file master for offline use if needed; site becomes the official always-current copy (MGS-085)
+4. Prefer Hub app Documents for real work after F5 (8/6). Classic is bedding-in only.
 
 ## Local file open
 
-Opening `ops/forms/index.html` as a `file://` path bypasses the gate (edge only runs on Netlify). That’s fine for Dustin’s offline edits.
+Opening `ops/forms/classic/index.html` as a `file://` path bypasses the gate (edge only runs on Netlify). That’s fine for Dustin’s offline edits.
